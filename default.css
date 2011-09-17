@@ -285,6 +285,7 @@ a:hover
 /* local */
 .camera
 {
+    display: inline-block;
     width: 320px;
     height: 245px;
 }

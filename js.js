@@ -120,11 +120,11 @@ var cameras = [
     new camera("94", 'Norte', "Lgo.S.Cristovao")
 ];
 
-//var zonas = ['Norte','Sul','Centro','Oeste'];
-var zonas = ['Centro'];
+var zonas = ['Sul','Norte','Centro','Oeste'];
 
-var prefixoURL = "http://transito.rio.rj.gov.br/vdo/LiveVideoStreaming.swf?camera=";
 var sufixoURL = ".stream";
+var streamerURL = "rtmp://200.141.78.68/cet-rio/";
+var flashPlayer = "/jwplayer/player.swf";
 
 $(function() {
     // preapare tab headers
@@ -142,28 +142,21 @@ $(function() {
             var camera = cameras[i];
             if (camera.zona === zona) {
                 var title = 'camera cet-rio(' + (1+i) + ') ' + zona + ': ' + camera.label;
-                var url = camera.label;
-                var src = prefixoURL + (1+i) + sufixoURL; //cameraURL + (1+i) + "&caption=" + escape(url);
-                //tabBody += '<iframe class="camera" src="'+src+'" title="'+title+'" />';
-                tabBody += '<embed class="camera" allowscriptaccess="always" src="'+src+'" title="'+title+'" type="application/x-shockwave-flash" />';
-/*
-tabBody += '<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" width="320" height="240" id="'+src+'" align="middle">'+
-'    <param name="movie" value="'+src+'"/>'+
-'    <!--[if !IE]>-->'+
-'    <object type="application/x-shockwave-flash" data="'+src+'" width="320" height="245">'+
-'        <param name="movie" value="'+src+'"/>'+
-'    <!--<![endif]-->'+
-'        <a href="http://www.adobe.com/go/getflash">'+
-'            <img src="http://www.adobe.com/images/shared/download_buttons/get_flash_player.gif" alt="Get Adobe Flash player"/>'+
-'        </a>'+
-'    <!--[if !IE]>-->'+
-'    </object>'+
-'    <!--<![endif]-->'+
-'</object>';
-*/
+                tabBody += '<div id="c'+(1+i)+'" title="'+title+'">'+title+'</div>';
             }
         }
         $('#tabs').append("<div style='border:0' id='tabs-" + (1+j) + "'>" + tabBody + "</div>");
     }
     $('#tabs').tabs();
+    for (var i = 0; i < cameras.length; ++i) {
+        jwplayer('c'+(1+i)).setup({
+            flashplayer: flashPlayer,
+            file: (1+i)+sufixoURL,
+            streamer: streamerURL,
+            autostart: true, 
+            'logo.hide': true
+        });
+        $('#c'+(1+i)+'_wrapper').attr('style','');
+        $('#c'+(1+i)+'_wrapper').addClass('camera');
+    }
 });
