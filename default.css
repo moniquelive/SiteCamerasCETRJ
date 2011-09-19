@@ -285,12 +285,24 @@ a:hover
 /* local */
 .camera
 {
-    display: inline-block;
     width: 320px;
     height: 245px;
 }
 
-/* twiiter js */
+.caption
+{
+    display: table-cell;
+    width: 320px;
+    height: 16px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: x-small;
+    background: black;
+    color: white;
+    font-weight: bold;
+}
+
+/* twitter js */
 .tweet_list
 {
     margin: 0;

@@ -142,7 +142,10 @@ $(function() {
             var camera = cameras[i];
             if (camera.zona === zona) {
                 var title = 'camera cet-rio(' + (1+i) + ') ' + zona + ': ' + camera.label;
-                tabBody += '<div id="c'+(1+i)+'" title="'+title+'">'+title+'</div>';
+                tabBody += '<div style="display:inline-block">';
+                tabBody += '<div class="caption">'+camera.label+'</div>';
+                tabBody += '<div id="c'+(1+i)+'">'+title+'</div>';
+                tabBody += '</div>';
             }
         }
         $('#tabs').append("<div style='border:0' id='tabs-" + (1+j) + "'>" + tabBody + "</div>");
