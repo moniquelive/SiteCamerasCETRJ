@@ -153,7 +153,7 @@ $(function() {
             flashplayer: flashPlayer,
             file: (1+i)+sufixoURL,
             streamer: streamerURL,
-            autostart: true, 
+            autostart: false,
             'logo.hide': true
         });
         $('#c'+(1+i)+'_wrapper').attr('style','');
