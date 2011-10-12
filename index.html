@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head>
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="Cameras da CET-RIO (CET-RJ) em tempo real. Condições do transito ao vivo gratuitamente."/>
@@ -43,17 +43,12 @@
 //]]>
 </script>
 
-<!-- Place this tag in your head or just before your close body tag -->
-<script type="text/javascript" src="http://apis.google.com/js/plusone.js">
-  {lang: 'pt-BR'}
-</script>
-
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
-<script type="text/javascript" src="/jwplayer/jwplayer.js"></script>
-<script type="text/javascript" src="/jquery.tweet.js"></script>
-<script type="text/javascript" src="/hint.js"></script>
-<script type="text/javascript" src="/js.js"></script>
+<script type="text/javascript" src="jwplayer/jwplayer.js"></script>
+<script type="text/javascript" src="jquery.tweet.js"></script>
+<script type="text/javascript" src="hint.js"></script>
+<script type="text/javascript" src="js.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         FB.Event.subscribe('edge.create', function(targetUrl) {
@@ -84,6 +79,16 @@
 
 </head>
 <body>
+<!-- facebook bureaucracy -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=118615044860188";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<!-- facebook bureaucracy -->
 <div id="outer">
     <div id="header">
         <h1><a href="/">Câmeras da CET-RIO (CET-RJ) em tempo real</a></h1>
@@ -129,7 +134,10 @@
                     </tr>
                     <tr class="rowA">
                         <td id="paypal">
-                            <form method="post" action="https://www.paypal.com/cgi-bin/webscr">
+                            <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://cetrio.cyberleo.com.br/"></a>
+                            <noscript><a href="http://flattr.com/thing/379887/Cmeras-da-CET-Rio" target="_blank">
+                            <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+                            <form style="display:inline" method="post" action="https://www.paypal.com/cgi-bin/webscr">
                                 <input type="hidden" name="cmd" value="_donations"/>
                                 <input type="hidden" name="business" value="AQ86Q3G6YLPGE"/>
                                 <input type="hidden" name="lc" value="BR"/>
@@ -143,15 +151,11 @@
                         </td>
                         <td id="addthis">
                             <div class="addthis_toolbox addthis_default_style">
-                                <a class="FlattrButton" style="display:none;" rev="flattr;button:compact;" href="http://cetrio.cyberleo.com.br/"></a>
-                                <noscript><a href="http://flattr.com/thing/379887/Cmeras-da-CET-Rio" target="_blank">
-                                <img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
+                                <a class="addthis_button_google_plusone"></a>
                                 <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+                                <a class="addthis_button_facebook_send"></a>
                                 <a class="addthis_button_tweet"></a>
                                 <a class="addthis_counter addthis_pill_style"></a>
-                                <!-- Place this tag where you want the +1 button to render -->
-                                &nbsp;&nbsp;
-                                <g:plusone size="small"></g:plusone>
                             </div>
                             <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
                             <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#username=lccro"></script>
@@ -181,6 +185,10 @@
                     </tr>
                 </table>
                 <div id="tabs">
+                </div>
+                <br/>
+                <div id="fbcomments">
+                    <fb:comments href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light"></fb:comments>
                 </div>
             </div>
         </div>
