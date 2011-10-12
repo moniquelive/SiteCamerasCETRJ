@@ -283,6 +283,10 @@ a:hover
 /* // cyberama */
 
 /* local */
+#addthis {
+    padding-top: 6px;
+}
+
 .camera
 {
     width: 320px;
