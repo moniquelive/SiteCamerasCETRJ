@@ -50,21 +50,21 @@
 <script type="text/javascript" src="hint.js"></script>
 <script type="text/javascript" src="js.js"></script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        FB.Event.subscribe('edge.create', function(targetUrl) {
-          _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+$(document).ready(function() {
+        $('a.addthis_button_facebook_like').bind('edge.create', function(targetUrl) {
+            _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
         });
-        FB.Event.subscribe('edge.remove', function(targetUrl) {
-          _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
+        $('a.addthis_button_facebook_like').bind('edge.remove', function(targetUrl) {
+            _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
         });
-        twttr.events.bind('tweet', function(event) {
-          if (event) {
+        $('a.addthis_button_tweet').bind('tweet', function(event) {
+        if (event) {
             var targetUrl;
             if (event.target && event.target.nodeName == 'IFRAME') {
-              targetUrl = extractParamFromUri(event.target.src, 'url');
+                targetUrl = extractParamFromUri(event.target.src, 'url');
             }
             _gaq.push(['_trackSocial', 'twitter', 'tweet', targetUrl]);
-          }
+        }
         });
         $('#googleSearchBox').hint('googleSearchBox_blurred');
         $('#twitterLeiseca').tweet({
