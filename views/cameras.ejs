@@ -1,0 +1,45 @@
+<% layout('layout') -%>
+<section class="container">
+  <div class="row">
+    <section id="sidebar-1" class="span2">
+    <% if (Math.random() < 0.25) { %>
+      <%- include inc/meuastral-vertical.html -%>
+    <% } else { %>
+      <%- include inc/google-ads-vertical.html -%>
+    <% } %>
+    </section>
+
+    <section id="content" class="span8">
+      <div class="row">
+          <div class="span8">
+              <h5>DIVULGUE</h5>
+              <%- include inc/add-this.html -%>
+          </div>
+      </div>
+      <div class="row">
+          <div class="span8" id="time" style="text-align: center;">
+            <span>Atualizado &agrave;s <font color="red"><?php include 'time.php'; ?></font></span>
+          </div>
+          <div class="span8" id="chrome-store" style="text-align: center;">
+            <% if (is_chrome) { %>
+              <span>Veja as Cameras RJ diretamente no seu <a onclick='_gaq.push(["_trackEvent", "Chrome Store", "click"]);' href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag">Navegador</a>!</span>
+            <% } %>
+          </div>
+          <div class="span8">
+              <div id="tabs" class="tabbable">
+                  <ul class="nav nav-tabs"></ul>
+              </div>
+              <section class="tab-content"></section>
+          </div>
+          <div class="span8" id="fbcomments">
+            <fb:comments href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light">
+            </fb:comments>
+          </div>
+      </div>
+    </section>
+
+    <section id="sidebar-2" class="span2">
+      <%- include inc/twitter.html -%>
+    </section>
+  </div>
+</section>
