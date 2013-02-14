@@ -31,6 +31,21 @@ ul.tab-pane li
     color: white
     font-weight: bold
 
+.tab-content
+    overflow: visible!important
+
+.caption + img
+    -webkit-transition: all 0.1s ease-in-out
+    -moz-transition: all 0.1s ease-in-out
+    -o-transition: all 0.1s ease-in-out
+    transition: all 0.1s ease-in-out
+
+.caption + img:hover
+    -webkit-transform: scale(1.5,1.5)
+    -moz-transform: scale(1.5,1.5)
+    -o-transform: scale(1.5,1.5)
+    transform: scale(1.5,1.5)
+
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
 @media (min-width: 980px)
     .subnav-fixed
