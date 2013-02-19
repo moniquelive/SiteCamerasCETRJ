@@ -6,6 +6,7 @@ var express = require('express')
   , engine = require('ejs-locals')
   , routes = require('./routes')
   , http = require('http')
+  , connect = require('connect')
   , path = require('path');
 
 var app = express();
@@ -24,6 +25,7 @@ app.configure(function(){
   app.use(express.session());
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
+  app.use(connect.compress());
   app.use(express.static(path.join(__dirname, 'public')));
 });
 
