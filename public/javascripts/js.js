@@ -224,6 +224,25 @@ jQuery(function ($) {
   var CAM_PREFIX = 'http://img.camerasrj.com.br/cam';
   var tabHeader  = $(".nav.nav-tabs");
   var tabContent = $(".tab-content");
+  // ao vivo
+  tabHeader.append(
+    "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);mixpanel.track(\"{zona}\");'>{zona}</a></li>"
+    .replace(/{zona}/g, "AoVivo")
+  );
+  var tabBody = $(
+    "<ul class='tab-pane' style='list-style-type: none;' id='tabs-{zona}'></ul>"
+    .replace(/{zona}/g, "AoVivo")
+  );
+  tabContent.append(tabBody);
+  $.each(live_cams, function (index, camera) {
+    tabBody.append(
+      '<li><p class="caption">{label}</p><embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={cam}" quality="high" width="620" height="386" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></li>'
+      .replace(/{label}/g, camera[1])
+      .replace(/{cam}/g, live_cams_prefix+camera[0])
+    );
+  });
+  tabBody.append('<br clear="left"/>');
+  // zonas
   $.each(zonas, function (zona, cameras) {
     // tab header
     tabHeader.append(
@@ -248,24 +267,6 @@ jQuery(function ($) {
     });
     tabBody.append('<br clear="left"/>');
   });
-  // extra
-  tabHeader.append(
-    "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);mixpanel.track(\"{zona}\");'>{zona}</a></li>"
-    .replace(/{zona}/g, "AoVivo")
-  );
-  var tabBody = $(
-    "<ul class='tab-pane' style='list-style-type: none;' id='tabs-{zona}'></ul>"
-    .replace(/{zona}/g, "AoVivo")
-  );
-  tabContent.append(tabBody);
-  $.each(live_cams, function (index, camera) {
-    tabBody.append(
-      '<li><p class="caption">{label}</p><embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={cam}" quality="high" width="620" height="386" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></li>'
-      .replace(/{label}/g, camera[1])
-      .replace(/{cam}/g, live_cams_prefix+camera[0])
-    );
-  });
-  tabBody.append('<br clear="left"/>');
   tabHeader.find(":first").addClass('active');
   tabContent.find(":first").addClass('active');
   //$("p.caption,img").popover({html:true});
