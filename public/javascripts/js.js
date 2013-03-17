@@ -270,4 +270,8 @@ jQuery(function ($) {
   tabContent.find(":first").addClass('active');
   //$("p.caption,img").popover({html:true});
   //$("#googleSearchBox").focus();
+
+  $('div#tabs').bind('click', function(e) {
+    $.smoothScroll();
+  });
 });
