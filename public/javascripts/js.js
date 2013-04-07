@@ -221,8 +221,8 @@ jQuery(function ($) {
     $("span#time").html(data.time);
   });
   // update cameras
-  //var CAM_PREFIX = 'http://img.camerasrj.com.br/cam';
-  var CAM_PREFIX = 'https://s3-sa-east-1.amazonaws.com/camerasrj/cam';
+  var CAM_PREFIX = 'http://img.camerasrj.com.br/cam';
+  //var CAM_PREFIX = 'https://s3-sa-east-1.amazonaws.com/camerasrj/cam';
   var tabHeader  = $(".nav.nav-tabs");
   var tabContent = $(".tab-content");
   $.each(zonas, function (zona, cameras) {
