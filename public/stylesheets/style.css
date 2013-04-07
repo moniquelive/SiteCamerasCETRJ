@@ -14,6 +14,7 @@ a
 .camera {
   width: 320px;
   height: 245px;
+  -webkit-user-select: none;
 }
 ul.tab-pane li {
   float: left;
