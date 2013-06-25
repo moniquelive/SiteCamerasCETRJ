@@ -229,7 +229,7 @@ jQuery(function ($) {
   $.each(zonas, function (zona, cameras) {
     // tab header
     tabHeader.append(
-      "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);mixpanel.track(\"{zona}\");'>{zona}</a></li>"
+      "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);'>{zona}</a></li>"
       .replace(/{zona}/g, zona)
     );
     // tab contents
@@ -252,7 +252,7 @@ jQuery(function ($) {
   });
   // extra
   tabHeader.append(
-    "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);mixpanel.track(\"{zona}\");'>{zona}</a></li>"
+    "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);'>{zona}</a></li>"
     .replace(/{zona}/g, "AoVivo")
   );
   var tabBody = $(
