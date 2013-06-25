@@ -14,6 +14,16 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <script>
+    window.appendScript = function (src) {
+      var node = document.createElement('script');
+      node.type = 'text/javascript';
+      node.async = true;
+      node.src = src;
+      document.head.appendChild(node);
+    }
+    </script>
+
     <link rel="stylesheet" href="/stylesheets/bootstrap.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <style>
