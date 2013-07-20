@@ -39,16 +39,20 @@ var zonas = {
   new Camera(107, 'Alfredo Agache, ENTRADA do Mergulhão, sentido Brasil'),
   new Camera(139, 'Av. Brasil, altura da R. Eduardo Luiz Lopes'),
   new Camera(144, 'Av. Brasil, altura da Linha Amarela'),
-  //new Camera(146, 'Av. Brasil, altura R. Paris'),
-  //new Camera(147, 'Av. Brasil, entrada da Ilha'),
+  new Camera(146, 'Av. Brasil, altura R. Paris'),
+  new Camera(145, 'Av. Brasil x Canal do Cunha'),
+  new Camera(147, 'Av. Brasil, entrada da Ilha'),
   new Camera(150, 'Prédio Prefeitura - CASS'),
-  //new Camera(152, 'Av. Brasil, altura Av. Automóvel Clube'),
+  new Camera(152, 'Av. Brasil, altura Av. Automóvel Clube'),
   new Camera(153, 'Av. Brasil, altura da R. João Paulo'),
   new Camera(154, 'Av. Brasil, altura de Deodoro'),
   new Camera(156, 'Av. Brasil x Estr. do Quafá'),
-  //new Camera(157, 'Av. Brasil, altura Km 42 - Mendanha'),
+  new Camera(157, 'Av. Brasil, altura Km 42 - Mendanha'),
+  new Camera(158, 'Av. Brasil x Av Padre Guilherme Decaminada (em frente ao Extra)'),
   new Camera(169, 'Av. Brasil, altura da Linha Vermelha'),
-  new Camera(170, 'Av. Brasil, altura do Cemitério do Caju')
+  new Camera(170, 'Av. Brasil, altura do Cemitério do Caju'),
+  new Camera(172, 'Rua Visconde de Cabo Frio x Praça Barão Corumbá'),
+  new Camera(173, 'Av. Brasil x GAE')
   ],
   'Sul':[
   new Camera(12, 'R. das Laranjeiras X Soares Cabral'),
@@ -67,10 +71,10 @@ var zonas = {
   new Camera(27, 'Av. N. Sra. de Copacabana x R. Sta. Clara'),
   new Camera(28, 'Av. Atlântica x R. Rainha Elisabeth'),
   new Camera(29, 'Corte do Cantagalo, Pça. Eugênio Jardim'),
-  //new Camera(30, 'R. Raul Pompéia x R. Francisco Otaviano'),
+  new Camera(30, 'R. Raul Pompéia x R. Francisco Otaviano'),
   new Camera(31, 'Av. Vieira Souto x R. Rainha Elizabeth'),
   new Camera(32, 'Av. Epitácio Pessoa x R. Maria Quitéria'),
-  //new Camera(33, 'Av. Delfim Moreira x R. Bartolomeu Mitre'),
+  new Camera(33, 'Av. Delfim Moreira x R. Bartolomeu Mitre'),
   new Camera(34, 'R. Visconde de Pirajá x R. Gomes Carneiro'),
   new Camera(35, 'R. Barata Ribeiro x R. Constante Ramos'),
   new Camera(42, 'R. Praia do Flamengo x R. Barão do Flamengo'),
@@ -95,7 +99,8 @@ var zonas = {
   new Camera(118, 'Av. Epitácio Pessoa, próximo ao Corte do Cantagalo'),
   new Camera(119, 'Av. Epitácio Pessoa, próximo ao Parque da Catacumba'),
   new Camera(122, 'Auto Estrada / Estr. do Joá, Próximo ao Túnel de São Conrado'),
-  new Camera(123, 'Auto Estrada, alt. Túnel de São Conrado')
+  new Camera(123, 'Auto Estrada, alt. Túnel de São Conrado'),
+  new Camera(141, 'Saída do Túnel Rebouças')
   ],
   'Centro':[
   new Camera(1, 'Av. Pres.Vargas X R. 1º Março - teste'),
@@ -106,7 +111,7 @@ var zonas = {
   new Camera(6, 'Av. Rio Branco X Av. Alm. Barroso'),
   new Camera(7, 'R. Camerino X R. Barão de São Felix'),
   new Camera(8, 'R. Visconde do Rio Branco X Pça. da República'),
-  //new Camera(9, "???"),
+  new Camera(9, "Av. Presidente Antonio Carlos x Av. Almirante Barroso"),
   new Camera(10, 'R. Santana X R. Frei Caneca'),
   new Camera(11, 'Largo do Estácio'),
   new Camera(36, 'Trevo das Forças Armadas'),
@@ -117,7 +122,7 @@ var zonas = {
   new Camera(41, 'Lapa'),
   new Camera(53, 'Av. Presidente Wilson x Consulado EUA'),
   new Camera(98, 'Av. 31 de Março, saída do Túnel Santa Bárbara'),
-  //new Camera(99, 'Av. 31 de Março, praça da Apoteose, próximo. à R. Frei Caneca'),
+  new Camera(99, 'Av. 31 de Março, praça da Apoteose, próximo. à R. Frei Caneca'),
   new Camera(100, 'Av. 31 de Março, altura da Av. Salvador de Sá'),
   new Camera(101, 'Av. 31 de Março, altura da Av. Presidente Vargas'),
   new Camera(102, 'Vias Elevadas Prof. Eng. Rufino de Almeida, altura Leopoldina, pista inferior'),
@@ -131,7 +136,14 @@ var zonas = {
   ],
   'LinVermelha':[
   new Camera(103, 'Linha Vermelha, Km 0'),
-  new Camera(161, 'Linha Vermelha - Km 1, pista superior')
+  new Camera(160, 'Av. Cesário de Melo x Estrada do Monteiro'),
+  new Camera(161, 'Linha Vermelha - Km 1, pista superior'),
+  new Camera(162, 'Linha Vermelha KM1 x Pista Inferior'),
+  new Camera(163, 'Linha Vermelha KM3 x altura do Caju'),
+  new Camera(164, 'Linha Vermelha KM4 x Linha Amarela'),
+  new Camera(165, 'Linha Vermelha KM5 x Batalhão da Maré'),
+  new Camera(166, 'Linha Vermelha x Altura da Ilha'),
+  new Camera(167, 'Linha Vermelha x Altura da Ilha')
   ],
   'Oeste':[
   new Camera(54, 'Av. Embaixador Abelardo Bueno x Estr. Cel. Pedro Correa'),
@@ -148,7 +160,8 @@ var zonas = {
   new Camera(66, 'R. Armando Lombardi x Av. Min. Ivan Lins'),
   new Camera(67, 'Praia de São Conrado'),
   new Camera(68, 'Auto-estrada Lagoa-Barra em frente shopping Fashion Mall'),
-  //new Camera(125, 'Elevado das Bandeiras, pista superior, entre os túneis São Conrado e Joá'),
+  new Camera(120, 'Auto Estrada Lagoa-Barra x Av. Niemeyer'),
+  new Camera(125, 'Elevado das Bandeiras, pista superior, entre os túneis São Conrado e Joá'),
   new Camera(126, 'Auto Estrada Lagoa-Barra, próximo à R. Maria Luiza Pitanga'),
   new Camera(127, 'Av. Armando Lombardi, acesso Barra Point'),
   new Camera(129, 'Av. das Américas, próximo ao nº 2211, Hotel Dunas'),
@@ -157,7 +170,7 @@ var zonas = {
   new Camera(132, 'Av. das Américas, altura da Av. Ayrton Senna, sobre o Cebolão'),
   new Camera(133, 'Av. das Américas x R. Jornalista Ricardo Marinho'),
   new Camera(134, 'Av. das Américas, altura da A. Afonso Arinos de Mello Franco, EuroBarra'),
-  //new Camera(135, 'Av. Ayrton Senna, subida da Linha Amarela'),
+  new Camera(135, 'Av. Ayrton Senna, subida da Linha Amarela'),
   new Camera(136, 'Av. Ayrton Senna, próximo ao SENAC'),
   new Camera(140, 'Elevado Eng. Freyssinet, próximo ao Túnel Rebouças'),
   new Camera(142, 'R. Visconde de Niterói, altura Mangueira'),
@@ -169,8 +182,8 @@ var zonas = {
   new Camera(48, 'Av. Maracanã x R. Eurico Rabelo'),
   new Camera(69, 'Av. Pres. Castelo Branco x R. General Canabarro'),
   new Camera(70, 'R. Pereira Nunes x R. Barão de Mesquita'),
-  //new Camera(71, 'R. São Francisco Xavier x R. Heitor Beltrão'),
-  //new Camera(72, 'R. Conde de Bonfim x R. Uruguai'),
+  new Camera(71, 'R. São Francisco Xavier x R. Heitor Beltrão'),
+  new Camera(72, 'R. Conde de Bonfim x R. Uruguai'),
   new Camera(73, 'R. Conde de Bonfim x R. General Rocca'),
   new Camera(74, 'Boulevard 28 de Setembro x R. São Francisco Xavier'),
   new Camera(75, 'R. Uruguai x R. Maxwell'),
@@ -191,7 +204,8 @@ var zonas = {
   new Camera(90, 'Av. Dom Helder Câmara x R. Gandavo'),
   new Camera(91, 'Av. Dom Helder Câmara x R. Leopoldo Bulhões'),
   new Camera(93, 'R. Sen. Bernardo Monteiro x R. São Luis Gonzaga'),
-  new Camera(94, 'Largo da Cancela, R. S. Luis Gonzaga x R. João Ricardo')
+  new Camera(94, 'Largo da Cancela, R. S. Luis Gonzaga x R. João Ricardo'),
+  new Camera(138, 'Elevado Paulo de Frontin - Altura da Rua João Paulo I')
   ]
 };
 
