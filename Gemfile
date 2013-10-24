@@ -9,3 +9,8 @@ gem "wdm", "~> 0.1.0", :platforms => [:mswin, :mingw]
 platforms :mri_18 do
   gem "ruby18_source_location"
 end
+
+gem "middleman-minify-html"
+
+gem 'therubyracer' # faster JS compiles
+gem 'oj' # faster JS compiles
