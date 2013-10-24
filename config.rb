@@ -51,7 +51,9 @@ set :images_dir, 'images'
 
 # Build-specific configuration
 configure :build do
-  activate :minify_html
+  #activate :minify_html
+
+  activate :gzip
 
   # For example, change the Compass output style for deployment
   activate :minify_css
@@ -59,13 +61,25 @@ configure :build do
   # Minify Javascript on build
   activate :minify_javascript
 
-  # Enable cache buster
-  activate :asset_hash
-
   # Use relative URLs
   activate :relative_assets
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
+end
+
+activate :s3_sync do |s3_sync|
+  s3_sync.bucket                     = 'www.camerasrj.com.br' # The name of the S3 bucket you are targetting. This is globally unique.
+  s3_sync.region                     = 'sa-east-1'     # The AWS region for your bucket.
+  # set ENV vars:
+  #  AWS_ACCESS_KEY_ID
+  #  AWS_SECRET_ACCESS_KEY
+  #s3_sync.aws_access_key_id          = 'AWS KEY ID'
+  #s3_sync.aws_secret_access_key      = 'AWS SECRET KEY'
+  s3_sync.delete                     = true
+  s3_sync.after_build                = false # We chain after the build step by default. This may not be your desired behavior...
+  s3_sync.prefer_gzip                = false
+  s3_sync.path_style                 = true
+  s3_sync.reduced_redundancy_storage = false
 end
 
