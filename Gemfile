@@ -11,6 +11,7 @@ platforms :mri_18 do
 end
 
 gem 'middleman-s3_sync'
+gem 'middleman-cloudfront'
 
 gem "middleman-minify-html"
 

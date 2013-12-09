@@ -66,6 +66,8 @@ configure :build do
 
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
+
+  activate :asset_hash
 end
 
 activate :s3_sync do |s3_sync|
@@ -83,3 +85,9 @@ activate :s3_sync do |s3_sync|
   s3_sync.reduced_redundancy_storage = false
 end
 
+activate :cloudfront do |cf|
+  cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+  cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+  cf.distribution_id = 'E24VVIEBCKV6BF'
+  cf.filter = /\.html$/i
+end
