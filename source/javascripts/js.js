@@ -210,6 +210,19 @@ var zonas = {
 };
 
 jQuery(function ($) {
+  // utility format() method for js' String
+  if (!String.format) {
+    String.format = function(format) {
+      var args = Array.prototype.slice.call(arguments, 1);
+      return format.replace(/{(\d+)}/g, function(match, number) { 
+        return typeof args[number] != 'undefined'
+          ? args[number] 
+          : match
+        ;
+      });
+    };
+  }
+
   // fix sub nav on scroll
   var $win    = $(window)
     , $nav    = $('#tabs')
@@ -243,42 +256,34 @@ jQuery(function ($) {
   $.each(zonas, function (zona, cameras) {
     // tab header
     tabHeader.append(
-      "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);'>{zona}</a></li>"
-      .replace(/{zona}/g, zona)
+      String.format("<li><a href='#tabs-{0}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{0}\"]);'>{0}</a></li>"
+      , zona)
     );
     // tab contents
     var tabBody = $(
-      "<ul class='tab-pane' style='list-style-type: none;' id='tabs-{zona}'></ul>"
-      .replace(/{zona}/g, zona)
+      String.format("<ul class='tab-pane' style='list-style-type: none;' id='tabs-{0}'></ul>"
+      , zona)
     );
     tabContent.append(tabBody);
     $.each(cameras, function (index, camera) {
       var id = 'c' + camera.id;
       tabBody.append(
-        '<li><p class="caption">{label}</p><img id={id} src="{cam_prefix}/{cam}.jpg" width="320" height="245" data-original-title="{label}" data-content="<img src=&quot;cam/{cam}.jpg&quot;/>"/></li>'
-        .replace(/{cam_prefix}/g, CAM_PREFIX)
-        .replace(/{label}/g, camera.label)
-        .replace(/{id}/g, id)
-        .replace(/{cam}/g, camera.id)
+        String.format('<li><p class="caption">{1}</p><img id={2} src="{0}/{3}.jpg" width="320" height="245" data-original-title="{1}" data-content="<img src=&quot;cam/{3}.jpg&quot;/>"/></li>'
+        , CAM_PREFIX, camera.label, id, camera.id)
       );
     });
     tabBody.append('<br clear="left"/>');
   });
   // extra
   tabHeader.append(
-    "<li><a href='#tabs-{zona}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{zona}\"]);'>{zona}</a></li>"
-    .replace(/{zona}/g, "AoVivo")
+    "<li><a href='#tabs-AoVivo' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"AoVivo\"]);'>Ao Vivo</a></li>"
   );
-  var tabBody = $(
-    "<ul class='tab-pane' style='list-style-type: none;' id='tabs-{zona}'></ul>"
-    .replace(/{zona}/g, "AoVivo")
-  );
+  var tabBody = $("<ul class='tab-pane' style='list-style-type: none;' id='tabs-AoVivo'></ul>");
   tabContent.append(tabBody);
   $.each(live_cams, function (index, camera) {
     tabBody.append(
-      '<li><p class="caption">{label}</p><embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={cam}" quality="high" width="620" height="386" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></li>'
-      .replace(/{label}/g, camera[1])
-      .replace(/{cam}/g, live_cams_prefix+camera[0])
+      String.format('<li><p class="caption">{0}</p><embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={1}" quality="high" width="620" height="386" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></li>'
+      , camera[1], live_cams_prefix + camera[0])
     );
   });
   tabBody.append('<br clear="left"/>');
