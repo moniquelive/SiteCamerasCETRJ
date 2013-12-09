@@ -82,12 +82,16 @@ activate :s3_sync do |s3_sync|
   s3_sync.after_build                = false # We chain after the build step by default. This may not be your desired behavior...
   s3_sync.prefer_gzip                = true
   s3_sync.path_style                 = true
-  s3_sync.reduced_redundancy_storage = false
+  s3_sync.reduced_redundancy_storage = true
+
+  s3_sync.add_caching_policy :default, max_age: (60 * 60 * 24 * 365)
+  s3_sync.add_caching_policy 'text/html', max_age: 0, must_revalidate: true
+  s3_sync.add_caching_policy 'application/gzip', max_age: 0, must_revalidate: true
 end
 
 activate :cloudfront do |cf|
   cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
   cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
   cf.distribution_id = 'E24VVIEBCKV6BF'
-  cf.filter = /\.html$/i
+  cf.filter = /\.html$|\.html.gz$/i
 end
