@@ -87,6 +87,7 @@ activate :s3_sync do |s3_sync|
   ONE_YEAR = 60 * 60 * 24 * 365
   s3_sync.add_caching_policy 'text/html', max_age: 0, must_revalidate: true
   s3_sync.add_caching_policy 'application/gzip', max_age: 0, must_revalidate: true
+  s3_sync.add_caching_policy 'application/javascript', max_age: ONE_YEAR
   s3_sync.add_caching_policy 'application/x-javascript', max_age: ONE_YEAR
   s3_sync.add_caching_policy 'text/javascript', max_age: ONE_YEAR
   s3_sync.add_caching_policy 'text/css', max_age: ONE_YEAR
