@@ -10,10 +10,17 @@ platforms :mri_18 do
   gem "ruby18_source_location"
 end
 
-gem 'middleman-s3_sync'
-gem 'middleman-cloudfront'
-
-gem "middleman-minify-html"
-
 gem 'therubyracer' # faster JS compiles
 gem 'oj' # faster JS compiles
+
+# visuals
+gem 'bitters'
+
+# plugins
+gem 'middleman-neat'
+gem 'middleman-s3_sync'
+gem 'middleman-cloudfront'
+gem "middleman-minify-html"
+gem "middleman-livereload", "~> 3.1.0"
+gem "em-websocket", github: "igrigorik/em-websocket"
+
