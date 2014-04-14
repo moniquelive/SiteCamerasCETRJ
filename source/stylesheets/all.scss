@@ -1,7 +1,16 @@
-//=require bootstrap
-//=require style
-//=require_self
-//=require bootstrap-responsive
+//= require_self
 
-body { padding-top: 60px; padding-bottom: 115px; }
+@import 'bourbon';
+@import 'bitters/bitters';
+@import 'neat';
+
+$dark-gray: #eee;
+
+@import 'style';
+@import 'nav';
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
 

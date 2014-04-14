@@ -209,14 +209,28 @@ var zonas = {
   ]
 };
 
+jQuery(function($) {
+  var menu = $('#navigation-menu');
+  var menuToggle = $('#js-mobile-menu');
+
+  $(menuToggle).on('click', function(e) {
+    e.preventDefault();
+    menu.slideToggle(function(){
+      if(menu.is(':hidden')) {
+        menu.removeAttr('style');
+      }
+    });
+  });
+});
+
 jQuery(function ($) {
   // utility format() method for js' String
   if (!String.format) {
     String.format = function(format) {
       var args = Array.prototype.slice.call(arguments, 1);
-      return format.replace(/{(\d+)}/g, function(match, number) { 
+      return format.replace(/{(\d+)}/g, function(match, number) {
         return typeof args[number] != 'undefined'
-          ? args[number] 
+          ? args[number]
           : match
         ;
       });
