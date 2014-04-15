@@ -138,19 +138,19 @@ header.navigation {
       input[type=search] {
         background: $navigation-search-background;
         border: $navigation-search-border;
-        padding: .6em 6em .6em .1em;
+        padding: .6em 7.75em .6em .4em;
         font-size: .8em;
         font-style: italic;
         color: $navigation-color;
         border-radius: $base-border-radius * 2;
-        margin: 0;
+        margin: .3em auto;
       }
 
       button[type=submit] {
         @include button(simple);
         @include position(absolute, 0.3em 0.3em 0.3em 0);
         outline: none;
-        padding: 5px 15px 7px 15px;
+        padding: 3px 10px 7px 10px;
       }
     }
   }
