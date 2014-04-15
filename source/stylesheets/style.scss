@@ -20,6 +20,7 @@ section.main {
     @include span-columns(12);
     @include media ($large-screen) {
       @include span-columns(8);
+      padding-bottom: 120px;
     }
 
     h5 { margin-bottom: 8px; }
@@ -110,7 +111,21 @@ section.main {
   }
 }
 
-#page-footer { padding: 0; }
+footer.main {
+  display: none;
+
+  @include media ($large-screen) {
+    display: block;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    padding: 4px;
+    background-color: $dark-gray;
+
+    margin: 0 auto;
+    text-align: center;
+  }
+}
 
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
 @media (min-width: 980px) {
