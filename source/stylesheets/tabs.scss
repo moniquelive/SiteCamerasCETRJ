@@ -45,7 +45,21 @@
     color: $medium-gray;
     display: block;
     font-weight: bold;
-    padding: $base-line-height/2 $gutter/2;
+    text-align: center;
+
+    padding: 16px 4px;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include media($large-screen) {
+      padding: $base-line-height/2 $gutter/2;
+      width: initial;
+      overflow: initial;
+      text-overflow: initial;
+      white-space: initial;
+    }
 
     @include media($tab-mode) {
       @include inline-block;
