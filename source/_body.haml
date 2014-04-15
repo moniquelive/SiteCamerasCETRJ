@@ -1,36 +1,35 @@
-%section.container
-  .row
-    %section#sidebar-1.span2
-      %div(style="padding:4px;background-color:rgb(255,230,230)")
-        %h4 Dropbox
-        Ainda n&atilde;o usa Dropbox? <a href="http://db.tt/q7funZF">Clique aqui</a>.
-      %hr/
-      = partial 'google-ads-vertical'
+%section.main
 
-    %section#content.span8
-      .row
-        .span8
-          %h5 DIVULGUE
-          = partial 'add-this'
+  %aside.sidebar
+    %div(style="padding:4px;background-color:rgb(255,230,230)")
+      %h4 Dropbox
+      Ainda n&atilde;o usa Dropbox? <a href="http://db.tt/q7funZF">Clique aqui</a>.
+    %hr/
+    = partial 'google-ads-vertical'
 
-      .row
-        .span8#time(style="text-align: center;")
-          %span<
-            Atualizado &agrave;s&nbsp;
-            %font(color="red")><
-              %span#time
-        .span8#chrome-store(style="text-align: center;")
-          %span.for-chrome-only(style="display:none;")<
-            Veja as Cameras RJ diretamente no seu&nbsp;
-            %a(onclick='_gaq.push(["_trackEvent", "Chrome Store", "click"]);' href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag")><
-              Navegador
-            !
-          .span8
-            .tabbable#tabs
-              %ul.nav.nav-tabs
-            %section.tab-content
-          .span8#fbcomments
-            %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
+  %article.content
+    %h5 DIVULGUE
+    .add-this
+      = partial 'add-this'
 
-    %section#sidebar-2.span2
-      = partial 'twitter'
+    .time
+      %span<
+        Atualizado &agrave;s&nbsp;
+        %font(color="red")><
+          %span#time
+
+    .chrome-store
+      %span.for-chrome-only(style="display:none;")<
+        Veja as Cameras RJ diretamente no seu&nbsp;
+        %a(onclick='_gaq.push(["_trackEvent", "Chrome Store", "click"]);' href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag")><
+          Navegador
+        !
+
+    %ul.accordion-tabs
+
+    .fb-comments
+      %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
+
+  %aside.sidebar
+    = partial 'twitter'
+

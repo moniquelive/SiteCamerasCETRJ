@@ -223,6 +223,25 @@ jQuery(function($) {
   });
 });
 
+jQuery(function($) {
+  $('.accordion-tabs').each(function(index) {
+    $(this).children('li').first().children('a').addClass('is-active').next().addClass('is-open').show();
+  });
+  $('.accordion-tabs').on('click', 'li > a', function(event) {
+    if (!$(this).hasClass('is-active')) {
+      event.preventDefault();
+      var accordionTabs = $(this).closest('.accordion-tabs')
+      accordionTabs.find('.is-open').removeClass('is-open').hide();
+
+      $(this).next().toggleClass('is-open').toggle();
+      accordionTabs.find('.is-active').removeClass('is-active');
+      $(this).addClass('is-active');
+    } else {
+      event.preventDefault();
+    }
+  });
+});
+
 jQuery(function ($) {
   // utility format() method for js' String
   if (!String.format) {
@@ -239,8 +258,9 @@ jQuery(function ($) {
 
   // fix sub nav on scroll
   var $win    = $(window)
-    , $nav    = $('#tabs')
-    , navTop  = $('.nav-tabs').length && $('.nav-tabs').offset().top - 20
+    , tabs    = $('.accordion-tabs')
+    , $nav    = $('.accordion-tabs')
+    , navTop  = $('.accordion-tabs').offset().top + 40
     , isFixed = 0;
 
   function processScroll() {
@@ -254,59 +274,54 @@ jQuery(function ($) {
     }
   }
 
-  processScroll();
-  $win.on('scroll', processScroll);
+  //TODO: reenable fixed tabs
+  //processScroll();
+  //$win.on('scroll', processScroll);
 
   // update time
   $.getJSON("http://php.camerasrj.com.br/gettime.php?callback=?", function(data) {
     $("span#time").html(data.time);
   });
+
   // update cameras
   //var CAM_PREFIX = 'http://img.camerasrj.com.br/cam';
-  var CAM_PREFIX = 'https://s3-sa-east-1.amazonaws.com/camerasrj/cam';
   // var CAM_PREFIX = 'http://cdn.camerasrj.com.br/cam';
-  var tabHeader  = $(".nav.nav-tabs");
-  var tabContent = $(".tab-content");
-  $.each(zonas, function (zona, cameras) {
-    // tab header
-    tabHeader.append(
-      String.format("<li><a href='#tabs-{0}' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"{0}\"]);'>{0}</a></li>"
-      , zona)
-    );
-    // tab contents
-    var tabBody = $(
-      String.format("<ul class='tab-pane' style='list-style-type: none;' id='tabs-{0}'></ul>"
-      , zona)
-    );
-    tabContent.append(tabBody);
-    $.each(cameras, function (index, camera) {
-      var id = 'c' + camera.id;
-      tabBody.append(
-        String.format('<li><p class="caption">{1}</p><img id={2} src="{0}/{3}.jpg" width="320" height="245" data-original-title="{1}" data-content="<img src=&quot;cam/{3}.jpg&quot;/>"/></li>'
-        , CAM_PREFIX, camera.label, id, camera.id)
-      );
-    });
-    tabBody.append('<br clear="left"/>');
-  });
-  // extra
-  tabHeader.append(
-    "<li><a href='#tabs-AoVivo' data-toggle='tab' onclick='_gaq.push([\"_trackEvent\", \"Zona\", \"AoVivo\"]);'>Ao Vivo</a></li>"
-  );
-  var tabBody = $("<ul class='tab-pane' style='list-style-type: none;' id='tabs-AoVivo'></ul>");
-  tabContent.append(tabBody);
-  $.each(live_cams, function (index, camera) {
-    tabBody.append(
-      String.format('<li><p class="caption">{0}</p><embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={1}" quality="high" width="620" height="386" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer"></li>'
-      , camera[1], live_cams_prefix + camera[0])
-    );
-  });
-  tabBody.append('<br clear="left"/>');
-  tabHeader.find(":first").addClass('active');
-  tabContent.find(":first").addClass('active');
-  //$("p.caption,img").popover({html:true});
-  //$("#googleSearchBox").focus();
+  var CAM_PREFIX = 'https://s3-sa-east-1.amazonaws.com/camerasrj/cam';
 
-  $('div#tabs').bind('click', function(e) {
+  var tabTemplate = '<li class="tab-header-and-content">'+
+                    '  <a href="#" class="tab-link" onclick=\'_gaq.push(["_trackEvent", "Zona", "{0}"]);\'>{0}</a>'+
+                    '  <section>'+
+                    '    <ul>'+
+                    '      {1}'+
+                    '    </ul>'+
+                    '  </section>'+
+                    '</li>';
+
+  // for each zona
+  $.each(zonas, function (zona, cameras) {
+    var cc = $.map(cameras, function (camera) {
+      return String.format('<li>'+
+                          '<p>{0}</p>'+
+                          '<img src="{1}/{2}.jpg" />'+
+                          '</li>', camera.label, CAM_PREFIX, camera.id);
+    }).join('');
+    tabs.append(String.format(tabTemplate, zona, cc));
+  });
+
+  // live cams
+  var cc = $.map(live_cams, function (camera) {
+    return String.format('<li>'+
+                         '<p class="caption">{0}</p>'+
+                         '<embed src="http://radar.g1.globo.com/FinxiPlayer.swf" flashvars="urlMedia={1}" width="476" height="238" quality="high" align="middle" type="application/x-shockwave-flash" pluginspage="http://www.adobe.com/go/getflashplayer">'+
+                         '</li>', camera[1], live_cams_prefix + camera[0]);
+  }).join('');
+  tabs.append(String.format(tabTemplate, "AoVivo", cc));
+
+  // initial state
+  tabs.find(':first > a').addClass('is-active');
+  tabs.find(':first > section').addClass('is-open').attr('style','display:block;');
+
+  $('.tab-header-and-content > a').bind('click', function(e) {
     $.smoothScroll();
   });
 });

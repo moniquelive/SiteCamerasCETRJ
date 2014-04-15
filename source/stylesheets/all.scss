@@ -1,16 +1,17 @@
 //= require_self
 
+@import 'normalize';
 @import 'bourbon';
 @import 'bitters/bitters';
 @import 'neat';
 
 $dark-gray: #eee;
 
-@import 'style';
 @import 'nav';
+@import 'tabs';
+@import 'style';
 
 html, body {
   height: 100%;
-  margin: 0;
 }
 
