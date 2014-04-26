@@ -68,42 +68,43 @@ section.main {
         }
       }
 
-      // cameras tab
-      ul li {
-        @include span-columns(12 of 12);
-        @include omega;
+      // cameras tabs content
+      section {
+        ul li {
+          @include span-columns(12 of 12);
+          @include omega;
 
-        width: 310px;
-        margin-bottom: 5px;
+          width: 100%;
+          margin-bottom: 5px;
 
-        @include media ($large-screen) {
-          @include span-columns(4 of 8);
-          @include omega(2n);
-          width: 276px;
-          margin-bottom: 15px;
-        }
+          @include media ($large-screen) {
+            @include span-columns(4 of 8);
+            @include omega(2n);
+            margin-bottom: 15px;
+          }
 
-        @include transition(all 0.1s ease-in-out);
+          @include transition(all 0.1s ease-in-out);
 
-        p {
-          padding: 8px 0;
-          margin: 0 !important;
-          text-align: center;
-          font-size: x-small;
-          background-color: #000;
-          color: #fff;
-          font-weight: bold;
-        }
+          p {
+            padding: 8px 0;
+            margin: 0 !important;
+            text-align: center;
+            font-size: x-small;
+            background-color: #000;
+            color: #fff;
+            font-weight: bold;
+          }
 
-        img {
-          -webkit-user-select: none;
-        }
+          img {
+            -webkit-user-select: none;
+          }
 
-        @include media ($large-screen) {
-          &:hover {
-            @include transform(scale(1.5, 1.5));
-            box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
-            z-index: 2;
+          @include media ($large-screen) {
+            &:hover {
+              @include transform(scale(1.5, 1.5));
+              box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
+              z-index: 2;
+            }
           }
         }
       }
