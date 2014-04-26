@@ -47,10 +47,10 @@ section.main {
 
       // videos tab
       &:last-child {
-        display: none;
+        visibility: hidden;
 
         @include media ($large-screen) {
-          display: initial;
+          visibility: visible;
           ul li {
             @include span-columns(6 of 8);
             @include shift;
