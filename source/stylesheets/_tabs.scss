@@ -43,19 +43,18 @@
     background-color: $tab-inactive-color;
     border-top: $tab-border;
     color: $medium-gray;
-    display: block;
     font-weight: bold;
     text-align: center;
 
     padding: 16px 4px;
-    width: 50px;
+    width: 15%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 
     @include media($large-screen) {
       padding: $base-line-height/2 $gutter/2;
-      width: initial;
+      width: 13.5%;
       overflow: initial;
       text-overflow: initial;
       white-space: initial;
