@@ -99,13 +99,15 @@ section.main {
             -webkit-user-select: none;
             margin: 0 auto;
             display: block;
+            @include transition(opacity 0.4s ease);
           }
 
           @include media ($large-screen) {
             &:hover {
-              @include transform(scale(1.5, 1.5));
+              @include transform(scale(1.5));
               box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
-              z-index: 2;
+              z-index: 9999;
+              img { opacity: 0; }
             }
           }
         }
