@@ -19,10 +19,10 @@
       if (navigator.userAgent.match(/Chrome/i))
         $(".for-chrome-only").fadeIn()
       $('a.addthis_button_facebook_like').bind('edge.create', function (targetUrl) {
-        _gaq.push(['_trackSocial', 'facebook', 'like', targetUrl]);
+        ga('send', 'social', 'facebook', 'like', targetUrl]);
       });
       $('a.addthis_button_facebook_like').bind('edge.remove', function (targetUrl) {
-        _gaq.push(['_trackSocial', 'facebook', 'unlike', targetUrl]);
+        ga('send', 'social', 'facebook', 'unlike', targetUrl]);
       });
       $('a.addthis_button_tweet').bind('tweet', function (event) {
         if (event) {
@@ -30,7 +30,7 @@
           if (event.target && event.target.nodeName == 'IFRAME') {
             targetUrl = extractParamFromUri(event.target.src, 'url');
           }
-          _gaq.push(['_trackSocial', 'twitter', 'tweet', targetUrl]);
+          ga('send', 'social', 'twitter', 'tweet', targetUrl]);
         }
       });
       getScript('/javascripts/jquery.smooth-scroll.min.js',function(){});
