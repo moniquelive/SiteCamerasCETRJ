@@ -289,7 +289,7 @@ jQuery(function ($) {
   //var CAM_PREFIX = 'http://s3-sa-east-1.amazonaws.com/camerasrj/cam';
 
   var tabTemplate = '<li class="tab-header-and-content">'+
-                    '  <a href="#" class="tab-link" onclick=\'_gaq.push(["_trackEvent", "Zona", "{0}"]);\'>{0}</a>'+
+                    '  <a href="#" class="tab-link" onclick=\'ga("send", "event", "Zona", "{0}");\'>{0}</a>'+
                     '  <section>'+
                     '    <ul>'+
                     '      {1}'+
