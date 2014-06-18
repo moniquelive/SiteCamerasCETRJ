@@ -6,7 +6,7 @@ section.main {
     display: none;
 
     @include media ($large-screen) {
-      display: initial;
+      display: block;
 
       @include span-columns(2);
 
