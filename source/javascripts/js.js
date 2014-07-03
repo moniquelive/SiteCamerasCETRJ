@@ -278,11 +278,6 @@ jQuery(function ($) {
   //processScroll();
   //$win.on('scroll', processScroll);
 
-  // update time
-  $.getJSON("http://php.camerasrj.com.br/gettime.php?callback=?", function(data) {
-    $("span#time").html(data.time);
-  });
-
   // update cameras
   //var CAM_PREFIX = 'http://img.camerasrj.com.br/cam';
   var CAM_PREFIX = 'http://cdn.camerasrj.com.br/cam';
