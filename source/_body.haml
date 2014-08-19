@@ -22,7 +22,14 @@
           Navegador
         !
 
-    %ul.accordion-tabs
+    %ul.accordion-tabs(ng-controller='TabsCtrl as ctrl')
+      %li(ng-repeat='tab in ctrl.tabs' class='tab-header-and-content')
+        %a(href class="tab-link" ng-class="{'is-active':ctrl.isSelected($index)}" ng-click="ctrl.setActiveTab($index); ga('send', 'event', 'Zona', '{{tab.title}}');") {{tab.title}}
+        %section(ng-class="{'is-open':ctrl.isSelected($index)}" ng-show="ctrl.isSelected($index)")
+          %ul
+            %li(ng-repeat='cam in tab.cameras')
+              %p {{cam.caption}}
+              %img(ng-src="{{CAM_PREFIX}}/{{cam.id}}.jpg")
 
     .fb-comments
       %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
