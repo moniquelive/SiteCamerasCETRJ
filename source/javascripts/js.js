@@ -14,6 +14,7 @@
     });
 
     // fix sub nav on scroll
+    /*
     var $win    = $(window)
       , tabs    = $('.accordion-tabs')
       , $nav    = $('.accordion-tabs')
@@ -29,6 +30,7 @@
         $nav.removeClass('subnav-fixed');
       }
     }
+    */
 
     //TODO: reenable fixed tabs
     //processScroll();
@@ -272,35 +274,58 @@
   window.initAngular = function () {
     angular.module('camerasrj', [])
 
-      .run(['$rootScope', function($rootScope){
-        $rootScope.CAM_PREFIX  = 'http://cdn.camerasrj.com.br/cam';
-        $rootScope.LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
-      }])
+      .factory('globals', function(){
+        return {
+          CAM_PREFIX  : 'http://cdn.camerasrj.com.br/cam/',
+          LIVE_PREFIX : 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro'
+        };
+      })
 
-      .controller('TabsCtrl', ['$scope', function ($scope) {
-        this.tabs         = zonas;
-        this.live         = live_cams;
-        this.activeTab    = 0;
-        this.setActiveTab = function(n) { if (n === -1) this.activeTab = this.tabs.length; else this.activeTab = n; }
-        this.isSelected   = function(n) { return n === -1 ? this.activeTab === this.tabs.length : this.activeTab === n; }
-      }])
+      .directive('camerasTabs', function(){
+        return {
+          restrict: 'E',
+          replace: true,
+          transclude: true,
+          template:
+            '<ul class="accordion-tabs" ng-transclude>'+
+            '</ul>',
+          controller: ['$scope', function($scope){
+            //$scope.LIVE_PREFIX = globals.LIVE_PREFIX;
+            //this.live         = live_cams;
+            this.activeTab    = 0;
+            this.setActiveTab = function(n) { if (n === -1) this.activeTab = this.tabs.length; else this.activeTab = n; }
+            this.isSelected   = function(n) { return n === -1 ? this.activeTab === this.tabs.length : this.activeTab === n; }
+          }]
+        };
+      })
 
-      // .directive('camerasTabs', function(){
-      //   var tabTemplate =
-      //     '<li class="tab-header-and-content">'+
-      //     '  <a ng-click="selTab=$index" ng-class="tab-link {isActive:selTab === $index}" onclick=\'ga("send", "event", "Zona", "{0}");\' ng-transclude></a>'+
-      //     '  <section>'+
-      //     '    <ul>'+
-      //     '      {1}'+
-      //     '    </ul>'+
-      //     '  </section>'+
-      //     '</li>';
-      //   return {
-      //     restrict: 'E',
-      //     transclude: true,
-      //     template: tabTemplate
-      //   };
-      // })
+      .directive('imgCameras', function(){
+        return {
+          require: '^camerasTabs',
+          replace: true,
+          restrict: 'E',
+          template:
+            '<li class="tab-header-and-content" ng-repeat="tab in ctrl.tabs">' +
+            '  <a href class="tab-link" ng-class="{\'is-active\':tabsCtrl.isSelected($index)}" ng-click="tabsCtrl.setActiveTab($index); ga(\'send\', \'event\', \'Zona\', \'{{::tab.title}}\');">{{::tab.title}}</a>'+
+            '  <section ng-class="{\'is-open\':tabsCtrl.isSelected($index)}" ng-show="tabsCtrl.isSelected($index)">'+
+            '    <ul>'+
+            '      <li ng-repeat="cam in tab.cameras" ng-style="{background: \'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center\'}">'+
+            '        <p class="caption">{{::cam.caption}}</p>'+
+            '        <img ng-src="{{::CAM_PREFIX + cam.id}}.jpg">'+
+            '      </li>'+
+            '    </ul>'+
+            '  </section>'+
+            '</li>',
+          controller: ['globals','$scope', function(globals,$scope) {
+            $scope.CAM_PREFIX  = globals.CAM_PREFIX;
+            this.tabs          = zonas;
+          }],
+          link: function(scope, element, attrs, tabsCtrl) {
+            scope.tabsCtrl = tabsCtrl;
+          },
+          controllerAs: 'ctrl'
+        };
+      })
       ;
 
     angular.element(document).ready(function() {
