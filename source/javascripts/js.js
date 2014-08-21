@@ -236,11 +236,11 @@
           template:
             '<ul class="accordion-tabs" ng-transclude>'+
             '</ul>',
-          controller: ['$scope', function($scope){
+          controller: function(){
             var activeTab = 0;
             this.setActiveTab = function(n) { if (n === -1) activeTab = cameras.zonas.length; else activeTab = n; }
             this.isSelected   = function(n) { return n === -1 ? activeTab === cameras.zonas.length : activeTab === n; }
-          }]
+          }
         };
       })
 
