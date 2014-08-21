@@ -24,15 +24,7 @@
 
     %cameras-tabs
       %img-cameras
-
-    -# extra: live cams
-      %li(class='tab-header-and-content')
-        %a(href class="tab-link" ng-class="{'is-active':ctrl.isSelected(-1)}" ng-click="ctrl.setActiveTab(-1); ga('send', 'event', 'Zona', 'AoVivo');") AoVivo
-        %section(ng-class="{'is-open':ctrl.isSelected(-1)}" ng-show="ctrl.isSelected(-1)")
-          %ul
-            %li(ng-repeat='cam in ctrl.live')
-              %p.caption {{::cam.caption}}
-              %embed(src         = "http://radar.g1.globo.com/FinxiPlayer.swf" flashvars   = "urlMedia={{::LIVE_PREFIX + cam.url}}" width       = "476" height      = "238" quality     = "high" align       = "middle" type        = "application/x-shockwave-flash" pluginspage = "http://www.adobe.com/go/getflashplayer")
+      %video-cameras
 
     -#.fb-comments
       %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
