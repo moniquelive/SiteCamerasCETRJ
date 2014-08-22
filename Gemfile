@@ -21,6 +21,5 @@ gem 'middleman-neat'
 gem 'middleman-s3_sync'
 gem 'middleman-cloudfront'
 gem "middleman-minify-html"
-gem "middleman-livereload", "~> 3.1.0"
 gem "em-websocket", github: "igrigorik/em-websocket"
 

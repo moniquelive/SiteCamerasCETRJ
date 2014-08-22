@@ -50,7 +50,6 @@ set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
 activate :neat
-activate :livereload
 
 # Build-specific configuration
 configure :build do
