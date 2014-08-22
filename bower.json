@@ -1,0 +1,23 @@
+{
+  "name": "camerasrj",
+  "version": "0.0.0",
+  "homepage": "http://camerasrj.com.br/",
+  "authors": [
+    "cyber <cyber@21212.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "source/javascripts/"
+  ],
+  "dependencies": {
+    "angularjs": "~1.3.0",
+    "jquery-smooth-scroll": "~1.5.0",
+    "jquery": "~2.1.1"
+  }
+}
