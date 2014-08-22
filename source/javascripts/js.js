@@ -218,7 +218,7 @@
     ]
   };
 
-  window.initAngular = function () {
+  window.init = function () {
     angular.module('camerasrj', [])
 
       .factory('globals', function(){
@@ -237,9 +237,10 @@
             '<ul class="accordion-tabs" ng-transclude>'+
             '</ul>',
           controller: function(){
-            var activeTab = 0;
-            this.setActiveTab = function(n) { if (n === -1) activeTab = cameras.zonas.length; else activeTab = n; }
-            this.isSelected   = function(n) { return n === -1 ? activeTab === cameras.zonas.length : activeTab === n; }
+            var activeTab      = null;
+            this.setInitialTab = function(t) { activeTab = activeTab || t; }
+            this.setActiveTab  = function(t) { activeTab = t; }
+            this.isSelected    = function(t) { return activeTab === t; }
           }
         };
       })
@@ -250,9 +251,9 @@
           replace: true,
           restrict: 'E',
           template:
-            '<li class="tab-header-and-content" ng-repeat="tab in imgCtrl.tabs">' +
-            '  <a href class="tab-link" ng-class="{\'is-active\':tabsCtrl.isSelected($index)}" ng-click="tabsCtrl.setActiveTab($index); ga(\'send\', \'event\', \'Zona\', \'{{::tab.title}}\');">{{::tab.title}}</a>'+
-            '  <section ng-class="{\'is-open\':tabsCtrl.isSelected($index)}" ng-show="tabsCtrl.isSelected($index)">'+
+            '<li class="tab-header-and-content" ng-repeat="tab in imgCtrl.tabs" ng-init="tabsCtrl.setInitialTab(imgCtrl.tabs[0])">' +
+            '  <a href class="tab-link" ng-class="{\'is-active\':tabsCtrl.isSelected(tab)}" ng-click="tabsCtrl.setActiveTab(tab); ga(\'send\', \'event\', \'Zona\', \'{{::tab.title}}\');">{{::tab.title}}</a>'+
+            '  <section ng-class="{\'is-open\':tabsCtrl.isSelected(tab)}" ng-show="tabsCtrl.isSelected(tab)">'+
             '    <ul>'+
             '      <li ng-style="{background: \'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center\'}" ng-repeat="cam in tab.cameras">'+
             '        <p class="caption">{{::cam.caption}}</p>'+
@@ -279,8 +280,8 @@
           restrict: 'E',
           template:
             '<li class="tab-header-and-content">'+
-            '  <a href class="tab-link" ng-class="{\'is-active\':tabsCtrl.isSelected(-1)}" ng-click="tabsCtrl.setActiveTab(-1); ga(\'send\', \'event\', \'Zona\', \'AoVivo\');">AoVivo</a>'+
-            '  <section ng-class="{\'is-open\':tabsCtrl.isSelected(-1)}" ng-show="tabsCtrl.isSelected(-1)">'+
+            '  <a href class="tab-link" ng-class="{\'is-active\':tabsCtrl.isSelected(videoCtrl)}" ng-click="tabsCtrl.setActiveTab(videoCtrl); ga(\'send\', \'event\', \'Zona\', \'AoVivo\');">AoVivo</a>'+
+            '  <section ng-class="{\'is-open\':tabsCtrl.isSelected(videoCtrl)}" ng-show="tabsCtrl.isSelected(videoCtrl)">'+
             '    <ul>'+
             '      <li ng-repeat="cam in videoCtrl.live">'+
             '        <p class="caption">{{::cam.caption}}</p>'+
