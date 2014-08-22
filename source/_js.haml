@@ -16,11 +16,13 @@
       head.appendChild(script);
     }
 
-    getScript('/javascripts/jquery/dist/jquery.min.js',function(){
-      getScript('/javascripts/jquery-smooth-scroll/jquery.smooth-scroll.min.js',function(){
-        getScript('/javascripts/angularjs/angular.min.js',function(){
-          getScript('/javascripts/angular-route/angular-route.min.js',function(){
-            getScript('/javascripts/js.js',function(){ init(); });
+    getScript('/javascripts/underscore/underscore.js',function(){
+      getScript('/javascripts/jquery/dist/jquery.min.js',function(){
+        getScript('/javascripts/jquery-smooth-scroll/jquery.smooth-scroll.min.js',function(){
+          getScript('/javascripts/angularjs/angular.min.js',function(){
+            getScript('/javascripts/angular-route/angular-route.min.js',function(){
+              getScript('/javascripts/js.js',function(){ init(); });
+            });
           });
         });
       });
