@@ -51,6 +51,9 @@ set :images_dir, 'images'
 
 activate :neat
 
+# No layout around my partials, please!
+page "/partials/*", layout: false
+
 # Build-specific configuration
 configure :build do
   #activate :minify_html
@@ -102,3 +105,4 @@ activate :cloudfront do |cf|
   cf.distribution_id = 'E24VVIEBCKV6BF'
   cf.filter = /\.(html|html.gz)$/i
 end
+

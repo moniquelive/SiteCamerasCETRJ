@@ -1,0 +1,11 @@
+%ul
+  %li(ng-repeat="cam in cams.cameras")
+    %p.caption {{::cam.caption}}
+    %embed(src="http://radar.g1.globo.com/FinxiPlayer.swf"
+           flashvars="urlMedia={{::LIVE_PREFIX + cam.url}}"
+           width="476"
+           height="238"
+           quality="high"
+           align="middle"
+           type="application/x-shockwave-flash"
+           pluginspage="http://www.adobe.com/go/getflashplayer")

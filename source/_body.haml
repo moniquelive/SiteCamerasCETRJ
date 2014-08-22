@@ -22,9 +22,12 @@
           Navegador
         !
 
-    %cameras-tabs
-      %img-cameras
-      %video-cameras
+    %ul.accordion-tabs
+      %li.tab-header-and-content(ng-repeat="tab in tabs")
+        %a.tab-link(href="javascript:void(0);"
+           ng-href="{{::tab.href}}"
+           ng-click="ga('send', 'event', 'Zona', '{{::tab.title}}')") {{::tab.title}}
+    %div(ng-view)
 
     .fb-comments
       %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
