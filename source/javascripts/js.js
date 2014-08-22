@@ -238,8 +238,8 @@
             '</ul>',
           controller: function(){
             var activeTab      = null;
-            this.setInitialTab = function(t) { activeTab = activeTab || t; }
-            this.setActiveTab  = function(t) { activeTab = t; }
+            this.setInitialTab = function(t) { activeTab = activeTab || t; };
+            this.setActiveTab  = function(t) { activeTab = t; };
             this.isSelected    = function(t) { return activeTab === t; }
           }
         };
@@ -313,13 +313,13 @@
     angular.element(document).ready(function() {
       angular.bootstrap(document, ['camerasrj']);
 
-      $('.tab-header-and-content > a').bind('click', function(e) { $.smoothScroll(); });
+      $('.tab-header-and-content > a').bind('click', function() { $.smoothScroll(); });
 
       // fix sub nav on scroll
       var $win    = $(window)
         , tabs    = $('.accordion-tabs')
-        , $nav    = $('.accordion-tabs')
-        , navTop  = $('.accordion-tabs').offset().top + 40
+        , $nav    = tabs
+        , navTop  = tabs.offset().top + 40
         , isFixed = 0;
       function processScroll() {
         var scrollTop = $win.scrollTop();
@@ -347,10 +347,18 @@
         });
       });
 
+      function extractParamFromUri(uri, paramName) {
+        if (!uri) return;
+        var regex = new RegExp('[\\?&#]' + paramName + '=([^&#]*)');
+        var params = regex.exec(uri);
+        if (params != null) return decodeURIComponent(params[1]);
+      }
+
       // social thangs
       if (navigator.userAgent.match(/Chrome/i)) { $(".for-chrome-only").fadeIn(); }
-      $('a.addthis_button_facebook_like').bind('edge.create', function (targetUrl) { ga('send', 'social', 'facebook', 'like', targetUrl); });
-      $('a.addthis_button_facebook_like').bind('edge.remove', function (targetUrl) { ga('send', 'social', 'facebook', 'unlike', targetUrl); });
+      var $fb_like = $('a.addthis_button_facebook_like');
+      $fb_like.bind('edge.create', function (targetUrl) { ga('send', 'social', 'facebook', 'like', targetUrl); });
+      $fb_like.bind('edge.remove', function (targetUrl) { ga('send', 'social', 'facebook', 'unlike', targetUrl); });
       $('a.addthis_button_tweet').bind('tweet', function (event) {
         if (event) {
           var targetUrl='';
