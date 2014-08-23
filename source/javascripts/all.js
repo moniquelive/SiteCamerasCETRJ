@@ -1,6 +1,6 @@
-//=include underscore/underscore.js
-//=include jquery/dist/jquery.min.js
-//=include jquery-smooth-scroll/jquery.smooth-scroll.min.js
-//=include angularjs/angular.min.js
-//=include angular-route/angular-route.min.js
+//=include lodash/dist/lodash.js
+//=include jquery/dist/jquery.js
+//=include jquery-smooth-scroll/jquery.smooth-scroll.js
+//=include angularjs/angular.js
+//=include angular-route/angular-route.js
 //=include js.js
