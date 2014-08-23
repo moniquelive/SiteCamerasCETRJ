@@ -1,19 +1,27 @@
+$tab-border-color: $base-border-color;
+$tab-border: 1px solid $tab-border-color;
+$tab-content-background: lighten($light-gray, 10);
+$tab-mode: new-breakpoint(0);
 .accordion-tabs {
-  $tab-border-color: $base-border-color;
-  $tab-border: 1px solid $tab-border-color;
-  $tab-content-background: lighten($light-gray, 10);
   $tab-active-background: $tab-content-background;
   $tab-inactive-color: $base-body-color;
   $tab-inactive-hover-color: darken($light-gray, 5);
-  $tab-mode: new-breakpoint(0);
 
   @include clearfix;
   border: $tab-border;
   border-radius: $base-border-radius;
-  margin-bottom: $base-line-height;
+  margin-bottom: 0;
 
   @include media($tab-mode) {
     border: none;
+  }
+
+  li:last-child {
+    display: none !important;
+
+    @include media($large-screen) {
+      display: inline !important;
+    }
   }
 
   li.tab-header-and-content {
@@ -87,21 +95,21 @@
       }
     }
   }
+}
 
-  li.tab-header-and-content section {
-    padding: $base-line-height $gutter;
-    background: $tab-content-background;
-    overflow: hidden;
-    width: 100%;
+div.ng-scope {
+  padding: $base-line-height $gutter;
+  background: $tab-content-background;
+  overflow: hidden;
+  width: 100%;
 
-    @include media($tab-mode) {
-      border-bottom-left-radius: $base-border-radius;
-      border-bottom-right-radius: $base-border-radius;
-      border: $tab-border;
-      float: left;
-      left: 0;
-      padding: $base-line-height/2 $gutter/2;
-    }
+  @include media($tab-mode) {
+    border-bottom-left-radius: $base-border-radius;
+    border-bottom-right-radius: $base-border-radius;
+    border: $tab-border;
+    float: left;
+    left: 0;
+    padding: $base-line-height/2 $gutter/2;
   }
 }
 

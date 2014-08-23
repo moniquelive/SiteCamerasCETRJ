@@ -39,28 +39,34 @@ section.main {
       }
     }
 
-    li.tab-header-and-content {
-      section {
-        padding: 0;
-        overflow: visible;
-      }
+    // cameras tabs content
+    div.ng-scope {
+      padding: 0;
+      overflow: visible;
 
       // videos tab
-      &:last-child {
-        visibility: hidden;
+      ul.live {
 
-        @include media ($large-screen) {
-          visibility: visible;
-          ul li {
+        @include media($large-screen) {
+          li {
             @include span-columns(6 of 8);
             @include shift;
             @include omega;
             overflow: hidden;
-            & embed {
+            p {
+              padding: 8px 0;
+              margin: 0 !important;
+              text-align: center;
+              font-size: x-small;
+              background-color: #000;
+              color: #fff;
+              font-weight: bold;
+            }
+            embed {
               position: relative;
               left: -60px;
             }
-            &:hover{
+            &:hover {
               @include transform();
               box-shadow: 0 0;
             }
@@ -68,46 +74,45 @@ section.main {
         }
       }
 
-      // cameras tabs content
-      section {
-        ul li {
-          @include span-columns(12 of 12);
-          @include omega;
+      ul.zonas li {
+        @include span-columns(12 of 12);
+        @include omega;
 
-          width: 100%;
-          margin-bottom: 5px;
+        width: 100%;
+        margin-bottom: 5px;
 
-          @include media ($large-screen) {
-            @include span-columns(4 of 8);
-            @include omega(2n);
-            margin-bottom: 15px;
-          }
+        @include media($large-screen) {
+          @include span-columns(4 of 8);
+          @include omega(2n);
+          margin-bottom: 15px;
+        }
 
-          @include transition(all 0.1s ease-in-out);
+        @include transition(all 0.1s ease-in-out);
 
-          p {
-            padding: 8px 0;
-            margin: 0 !important;
-            text-align: center;
-            font-size: x-small;
-            background-color: #000;
-            color: #fff;
-            font-weight: bold;
-          }
+        p {
+          padding: 8px 0;
+          margin: 0 !important;
+          text-align: center;
+          font-size: x-small;
+          background-color: #000;
+          color: #fff;
+          font-weight: bold;
+        }
 
-          img {
-            -webkit-user-select: none;
-            margin: 0 auto;
-            display: block;
-            @include transition(opacity 0.4s ease);
-          }
+        img {
+          -webkit-user-select: none;
+          margin: 0 auto;
+          display: block;
+          @include transition(opacity 0.4s ease);
+        }
 
-          @include media ($large-screen) {
-            &:hover {
-              @include transform(scale(1.5));
-              box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
-              z-index: 9999;
-              img { opacity: 0; }
+        @include media($large-screen) {
+          &:hover {
+            @include transform(scale(1.5));
+            box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            img {
+              opacity: 0;
             }
           }
         }

@@ -1,0 +1,4 @@
+%ul.zonas
+  %li(ng-style="{background: 'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center'}" ng-repeat="cam in cams.cameras")
+    %p.caption {{::cam.caption}}
+    %img(ng-src="{{::CAM_PREFIX + cam.id}}.jpg")
