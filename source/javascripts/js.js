@@ -1,4 +1,4 @@
-(function(){ // just a scope
+;(function(){ // just a scope
 
   var CAMERAS = {
     'AvBrasil': [
@@ -223,13 +223,11 @@
 
       .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-          .when('/zona/AoVivo', {
-            templateUrl: '/partials/live.html',
-            controller: 'ZonaCtrl',
-            controllerAs: 'cams'
-          })
           .when('/zona/:zona', {
-            templateUrl: '/partials/zonas.html',
+            templateUrl: function (params) {
+              return params &&
+                params.zona === 'AoVivo' ? 'live.html' : 'zonas.html';
+            },
             controller: 'ZonaCtrl',
             controllerAs: 'cams'
           })
@@ -237,7 +235,7 @@
         ;
       }])
 
-      .controller('ZonaCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
+      .controller('ZonaCtrl', ['$routeParams', function ($routeParams) {
         this.cameras = CAMERAS[$routeParams['zona'] || "AoVivo"];
       }])
 
