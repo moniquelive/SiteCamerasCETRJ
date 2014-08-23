@@ -54,6 +54,12 @@ activate :neat
 # No layout around my partials, please!
 page "/partials/*", layout: false
 
+# Add bower's directory to sprockets asset path
+after_configuration do
+  @bower_config = JSON.parse(IO.read("#{root}/.bowerrc"))
+  sprockets.append_path File.join "#{root}", @bower_config["directory"]
+end
+
 # Build-specific configuration
 configure :build do
   #activate :minify_html

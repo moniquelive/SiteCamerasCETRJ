@@ -16,6 +16,8 @@ gem 'oj' # faster JS compiles
 # visuals
 gem 'bitters'
 
+gem "json"
+
 # plugins
 gem 'middleman-neat'
 gem 'middleman-s3_sync'

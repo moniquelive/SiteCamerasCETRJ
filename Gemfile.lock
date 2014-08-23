@@ -181,6 +181,7 @@ PLATFORMS
 DEPENDENCIES
   bitters
   em-websocket!
+  json
   middleman
   middleman-cloudfront
   middleman-minify-html
