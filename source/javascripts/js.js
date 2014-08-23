@@ -216,10 +216,9 @@
       .run(["$rootScope", function ($rootScope) {
         $rootScope.CAM_PREFIX = 'http://cdn.camerasrj.com.br/cam/';
         $rootScope.LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
-        $rootScope.tabs = _.map(_.keys(CAMERAS),
-          function (e) {
-            return {title: e, href: '#/zona/' + e};
-          });
+        $rootScope.tabs = _.keys(CAMERAS).map(function (e) {
+          return {title: e, href: '#/zona/' + e};
+        });
       }])
 
       .config(['$routeProvider', function ($routeProvider) {
