@@ -37,15 +37,15 @@
 
     %script(type="text/ng-template" id="zonas.html")
       %ul.zonas
-        %li(ng-style="{background: 'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center'}" ng-repeat="cam in cams.cameras")
+        %li(ng-style="::{background: 'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center'}" ng-repeat="cam in cams.cameras")
           %p.caption {{::cam.caption}}
           %img(ng-src="{{::CAM_PREFIX + cam.id}}.jpg")
 
-    %ul.accordion-tabs
-      %li.tab-header-and-content(ng-controller="ActiveCtrl as active" ng-repeat="tab in tabs")
+    %ul.accordion-tabs(ng-controller="ActiveCtrl as ctrl")
+      %li.tab-header-and-content(ng-repeat="tab in ctrl.tabs")
         %a.tab-link(href="javascript:void(0);"
            ng-class="{'is-active':tab.selected}"
-           ng-init="active.register(tab)"
+           ng-init="ctrl.register(tab)"
            ng-href="{{::tab.href}}"
            ng-click="ga('send', 'event', 'Zona', '{{::tab.title}}')") {{::tab.title}}
     %div(ng-view)
