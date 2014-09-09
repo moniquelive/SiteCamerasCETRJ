@@ -215,9 +215,7 @@
         ]
       })
 
-      .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
-        $compileProvider.debugInfoEnabled(false); // angular.reloadWithDebugInfo();
-
+      .config(['$routeProvider', function ($routeProvider) {
         $routeProvider
           .when('/zona/:zona', {
             templateUrl: function (params) {
