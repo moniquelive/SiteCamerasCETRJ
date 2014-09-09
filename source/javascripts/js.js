@@ -215,7 +215,9 @@
         ]
       })
 
-      .config(['$routeProvider', function ($routeProvider) {
+      .config(['$routeProvider', '$compileProvider', function ($routeProvider, $compileProvider) {
+        $compileProvider.debugInfoEnabled(false); // angular.reloadWithDebugInfo();
+
         $routeProvider
           .when('/zona/:zona', {
             templateUrl: function (params) {
@@ -261,8 +263,9 @@
 
       .controller('ActiveCtrl', ['$scope', 'links', 'CAMERAS',
         function ($scope, links, cameras) {
-          this.tabs = _.keys(cameras)
-            .map(function (e) { return {title: e, href: '#/zona/' + e}; });
+          this.tabs = _(cameras).keys()
+            .map(function (e) { return {title: e, href: '#/zona/' + e}; })
+            .value();
           this.register = function (link) { links.register(link); };
         }])
 
