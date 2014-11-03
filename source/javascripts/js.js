@@ -3,7 +3,7 @@
   window.init = function () {
     angular.module('camerasrj', ['ngRoute'])
 
-      .constant('CAM_PREFIX', 'http://cdn.camerasrj.com.br/cam/')
+      .constant('CAM_PREFIX', 'http://static.camerasrj.com.br/cam/')
       .constant('LIVE_PREFIX', 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro')
       .constant('CAMERAS', {
         'AvBrasil': [
