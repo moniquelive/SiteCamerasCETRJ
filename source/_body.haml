@@ -22,33 +22,7 @@
           Navegador
         !
 
-    %script(type="text/ng-template" id="live.html")
-      %ul.live
-        %li(ng-repeat="cam in cams.cameras")
-          %p.caption {{::cam.caption}}
-          %embed(src="http://radar.g1.globo.com/FinxiPlayer.swf"
-                 flashvars="urlMedia={{::LIVE_PREFIX + cam.url}}"
-                 width="476"
-                 height="238"
-                 quality="high"
-                 align="middle"
-                 type="application/x-shockwave-flash"
-             pluginspage="http://www.adobe.com/go/getflashplayer")
-
-    %script(type="text/ng-template" id="zonas.html")
-      %ul.zonas
-        %li(ng-style="::{background: 'url({{::CAM_PREFIX + cam.id}}.gif) no-repeat center'}" ng-repeat="cam in cams.cameras")
-          %p.caption {{::cam.caption}}
-          %img(ng-src="{{::CAM_PREFIX + cam.id}}.jpg")
-
-    %ul.accordion-tabs(ng-controller="ActiveCtrl as ctrl")
-      %li.tab-header-and-content(ng-repeat="tab in ctrl.tabs")
-        %a.tab-link(href="javascript:void(0);"
-           ng-class="{'is-active':tab.selected}"
-           ng-init="ctrl.register(tab)"
-           ng-href="{{::tab.href}}"
-           ng-click="ga('send', 'event', 'Zona', '{{::tab.title}}')") {{::tab.title}}
-    %div(ng-view)
+    = partial 'cameras'
 
     .fb-comments
       %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
