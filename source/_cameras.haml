@@ -19,17 +19,17 @@
           %p.caption= caption
           .img(style="background: url('#{CAM_PREFIX + id.to_s}.jpg')")
 
-  - AOVIVO = data.live.first
-  %ul.zonas(id="#{AOVIVO.first.underscore.dasherize}" style="display:none")
-    - LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro'
-    - AOVIVO.last.each do |camera| # vetor de hashes
-      - url = camera.first.first
-      - caption = camera.first.last
-      %li
-        %p.caption= caption
-        %embed(src="http://radar.g1.globo.com/FinxiPlayer.swf"
-        flashvars="urlMedia='#{LIVE_PREFIX + url}'"
-        width="476" height="238" quality="high" align="middle"
-        type="application/x-shockwave-flash"
-        pluginspage="http://www.adobe.com/go/getflashplayer")
+  -#- AOVIVO = data.live.first
+  -#%ul.zonas(id="#{AOVIVO.first.underscore.dasherize}" style="display:none")
+    -#- LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro'
+    -#- AOVIVO.last.each do |camera| # vetor de hashes
+      -#- url = camera.first.first
+      -#- caption = camera.first.last
+      -#%li
+        -#%p.caption= caption
+        -#%embed(src="http://radar.g1.globo.com/FinxiPlayer.swf"
+        -#flashvars="urlMedia='#{LIVE_PREFIX + url}'"
+        -#width="476" height="238" quality="high" align="middle"
+        -#type="application/x-shockwave-flash"
+        -#pluginspage="http://www.adobe.com/go/getflashplayer")
 
