@@ -3,33 +3,6 @@
     %li.tab-header-and-content
       %a.tab-link(href="#" id="#{area.underscore.dasherize}"
         onclick="ga('send', 'event', 'Zona', '#{area}')")= area
-  - data.live.each do |area|
-    %li.tab-header-and-content
-      %a.tab-link(href="#" id="#{area.first.underscore.dasherize}"
-        onclick="ga('send', 'event', 'Zona', '#{area.first}')")= area.first
 
 %div.cameras-tabs
-  -# CAM_PREFIX = 'http://static.camerasrj.com.br/cam/'
-  -# data.cameras.areas.each_pair do |area, cameras|
-    %ul.zonas(id="#{area.underscore.dasherize}" style="display:none")
-      - cameras.each do |camera| # vetor de hashes
-        - id = camera.first.first
-        - caption = camera.first.last
-        %li(style="background-image:url('#{CAM_PREFIX + id.to_s}.gif')")
-          %p.caption= caption
-          .img(style="background: url('#{CAM_PREFIX + id.to_s}.jpg')")
-
-  -#- AOVIVO = data.live.first
-  -#%ul.zonas(id="#{AOVIVO.first.underscore.dasherize}" style="display:none")
-    -#- LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro'
-    -#- AOVIVO.last.each do |camera| # vetor de hashes
-      -#- url = camera.first.first
-      -#- caption = camera.first.last
-      -#%li
-        -#%p.caption= caption
-        -#%embed(src="http://radar.g1.globo.com/FinxiPlayer.swf"
-        -#flashvars="urlMedia='#{LIVE_PREFIX + url}'"
-        -#width="476" height="238" quality="high" align="middle"
-        -#type="application/x-shockwave-flash"
-        -#pluginspage="http://www.adobe.com/go/getflashplayer")
 
