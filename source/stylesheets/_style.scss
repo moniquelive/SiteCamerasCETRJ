@@ -23,7 +23,14 @@ section.main {
       padding-bottom: 120px;
     }
 
-    h5 { margin-bottom: 8px; }
+    .social-share {
+      h5 { margin-bottom: 8px; }
+      display: none;
+
+      @include media ($large-screen) {
+        display: block;
+      }
+    }
 
     .add-this,
     .time,

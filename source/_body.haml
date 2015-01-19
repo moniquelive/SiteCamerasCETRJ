@@ -4,22 +4,22 @@
     = partial 'google-ads-vertical'
 
   %article.content
-    %h5 DIVULGUE
-    .add-this
-      = partial 'add-this'
+    .social-share
+      %h5 DIVULGUE
+      .add-this
+        = partial 'add-this'
+      .chrome-store
+        %span.for-chrome-only(style="display:none;")<
+          Veja as Cameras RJ diretamente no seu&nbsp;
+          %a(onclick='ga("send", "event", "Chrome Store", "click");' href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag")><
+            Navegador
+          !
 
     .time
       %span<
         Atualizado &agrave;s&nbsp;
         %font(color="red")><
           %span#time
-
-    .chrome-store
-      %span.for-chrome-only(style="display:none;")<
-        Veja as Cameras RJ diretamente no seu&nbsp;
-        %a(onclick='ga("send", "event", "Chrome Store", "click");' href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag")><
-          Navegador
-        !
 
     = partial 'cameras'
 
