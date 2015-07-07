@@ -1,1 +1,9 @@
-84rBT4FSqF7lpHwV5LhPYQTohYQ.html
+<html>
+    <head>
+        <meta name="alexaVerifyID" content="84rBT4FSqF7lpHwV5LhPYQTohYQ" />
+    </head>
+    <body>
+        <p>Great! The file uploaded properly.  Now click the 'Verify my file' button to
+        complete the process.</p>
+    </body>
+</html>
