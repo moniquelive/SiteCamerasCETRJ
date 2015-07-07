@@ -14,7 +14,6 @@ gem 'therubyracer' # faster JS compiles
 gem 'oj' # faster JS compiles
 
 # visuals
-gem 'bitters'
 
 gem "json"
 

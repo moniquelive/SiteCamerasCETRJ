@@ -17,10 +17,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     ansi (1.5.0)
-    bitters (1.0.0)
-      bourbon (>= 3.2)
-      sass (>= 3.2)
-      thor
     bourbon (4.2.3)
       sass (~> 3.4)
       thor
@@ -272,7 +268,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bitters
   em-websocket!
   json
   middleman

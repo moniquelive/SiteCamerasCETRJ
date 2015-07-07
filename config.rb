@@ -49,8 +49,6 @@ set :css_dir, 'stylesheets'
 set :js_dir, 'javascripts'
 set :images_dir, 'images'
 
-activate :neat
-
 # No layout around my partials, please!
 page "/partials/*", layout: false
 
