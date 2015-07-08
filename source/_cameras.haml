@@ -1,8 +1,1 @@
-%ul.accordion-tabs
-  - data.cameras.areas.each do |area, cameras|
-    %li.tab-header-and-content
-      %a.tab-link(href="#" id="#{area.underscore.dasherize}"
-        onclick="ga('send', 'event', 'Zona', '#{area}')")= area
-
-%div.cameras-tabs
-
+.cameras-tabs

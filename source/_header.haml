@@ -1,32 +1,39 @@
-%header.navigation
-  .menu-wrapper
-    %section(id="header-well" style="display:none;margin-bottom: 0")
+%header.mdl-layout__header.mdl-color--primary
+  .mdl-layout__header-row
+    %h3.mdl-layout-title Câmeras da CET-RIO
+    %section(style="display:none;margin-bottom: 0")
       %h1<
         %a(href="/") Câmeras da CET-RIO (CET-RJ) em tempo real
       %h2 Condições do trânsito ao vivo e de graça!
 
-    %a.logo(href="/")
-      %h3
-        Câmeras da CET-RIO
+    %span.mdl-layout-spacer
 
-    %p.navigation-menu-button#js-mobile-menu MENU
+    .mdl-layout--large-screen-only.mdl-layout__header-row
+      %nav.mdl-navigation
+        %a.mdl-navigation__link(href="http://cyberleo.com.br/") Home
+        %a.mdl-navigation__link(href="http://cyberleo.com.br/") Sobre
+        %a.mdl-navigation__link(href="http://cyberleo.com.br/ask") Contato
 
-    .nav
-      %ul#navigation-menu
-        %li.navigation-search-bar
-          .search-bar
-            .search-and-submit
-              %form(class="navbar-search" action="http://www.google.com.br/cse" target="_blank")
-                %input(type="hidden" name="cx" value="partner-pub-7232537493483974:4067985243")
-                %input(type="hidden" name="ie" value="UTF-8")
-                %input(type="search" name="q" size="80" id="googleSearchBox" placeholder="Clique aqui para buscar no Google" class="search-query")
-                %button(style="margin:0" class="btn btn-mini btn-primary" type="submit" name="sa") Pesquisar
-        %li<
-          %a(href="http://cyberleo.com.br/") Home
-        %li<
-          %a(href="http://cyberleo.com.br/") Sobre
-        %li<
-          %a(href="http://cyberleo.com.br/ask") Contato
+    %span.mdl-layout-spacer
 
-    =# render 'github'
+    %form#cse-search-box(action="http://www.google.com.br" target="_blank")
+      %input(type="hidden" name="cx" value="partner-pub-7232537493483974:4174415669")
+      %input(type="hidden" name="ie" value="UTF-8")
+      .mdl-textfield.mdl-js-textfield.mdl-textfield--expandable.mdl-textfield--align-right
+        %label.mdl-button.mdl-js-button.mdl-button--icon(for="google-search")
+          %i.material-icons search
+        .mdl-textfield__expandable-holder
+          %label.mdl-textfield__label(for="google-search") Buscar no Google
+          %input.mdl-textfield__input(type="search" name="q" id="google-search")
+      %button(type="submit" name="sa" style="display:none")
 
+  .mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--primary-dark
+    - data.cameras.areas.each_with_index do |(area, cameras), i|
+      %a(href="#area-#{area.underscore.dasherize}"
+        class="mdl-layout__tab#{i == 0 ? ' is-active' : ''}"
+        onclick="ga('send', 'event', 'Zona', '#{area}')")= area
+
+  .mdl-layout__drawer
+    %span.mdl-layout-title Câmeras da CET-RIO
+
+  -#= render 'github'

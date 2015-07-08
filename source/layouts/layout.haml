@@ -15,9 +15,7 @@
     %meta(property="fb:admins" content="506596308")
     = partial "fb-headers"
 
-    %link(rel="stylesheet" href="material-design-lite/material.min.css")
     %link(rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons")
-
 
     %link(rel="me" href="https://plus.google.com/u/2/+LeonardoConstantinoOliveiraCyber/posts")
     %link(rel="canonical" href="http://www.camerasrj.com.br/")
@@ -44,9 +42,10 @@
 
     %title= current_page.data.title || "Câmeras da CET-RIO (CET-RJ) em tempo real. Condições do trânsito ao vivo gratuitamente"
 
-  %body
-    = partial "spot-im"
-    = yield
+  %body.mdl-base
+    -#= partial "spot-im"
+
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+      = yield
 
     = stylesheet_link_tag "all", media: 'all'
-

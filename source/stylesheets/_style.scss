@@ -1,35 +1,35 @@
 section.main {
-  @include outer-container;
+  /*@include outer-container;*/
   margin-top: 16px;
 
   .sidebar {
     display: none;
 
-    @include media ($large-screen) {
-      display: block;
+    /*@include media ($large-screen) {*/
+      /*display: block;*/
 
-      @include span-columns(2);
+      /*@include span-columns(2);*/
 
-      &:last-child {
-        @include omega;
-      }
-    }
+      /*&:last-child {*/
+        /*@include omega;*/
+      /*}*/
+    /*}*/
   }
 
   .content {
-    @include span-columns(12);
-    @include media ($large-screen) {
-      @include span-columns(8);
-      padding-bottom: 120px;
-    }
+    /*@include span-columns(12);*/
+    /*@include media ($large-screen) {*/
+      /*@include span-columns(8);*/
+      /*padding-bottom: 120px;*/
+    /*}*/
 
     .social-share {
       h5 { margin-bottom: 8px; }
       display: none;
 
-      @include media ($large-screen) {
-        display: block;
-      }
+      /*@include media ($large-screen) {*/
+        /*display: block;*/
+      /*}*/
     }
 
     .add-this,
@@ -38,12 +38,12 @@ section.main {
     .fb-comments {
       margin-bottom: 7px;
       text-align: center;
-      @include span-columns(12 of 12); // in mobile there's no sidebars
-      @include omega;
+      /*@include span-columns(12 of 12); // in mobile there's no sidebars*/
+      /*@include omega;*/
 
-      @include media ($large-screen) {
-        @include span-columns(8 of 8);
-      }
+      /*@include media ($large-screen) {*/
+        /*@include span-columns(8 of 8);*/
+      /*}*/
     }
 
     // cameras tabs content
@@ -54,36 +54,36 @@ section.main {
       // videos tab
       ul.zonas:last-child {
 
-        @include media($large-screen) {
-          li {
-            @include span-columns(6 of 8);
-            @include shift;
-            @include omega;
-            overflow: hidden;
-            p {
-              padding: 8px 0;
-              margin: 0 !important;
-              text-align: center;
-              font-size: x-small;
-              background-color: #000;
-              color: #fff;
-              font-weight: bold;
-            }
-            embed {
-              position: relative;
-              left: -60px;
-            }
-            &:hover {
-              @include transform();
-              box-shadow: 0 0;
-            }
-          }
-        }
+        /*@include media($large-screen) {*/
+          /*li {*/
+            /*@include span-columns(6 of 8);*/
+            /*@include shift;*/
+            /*@include omega;*/
+            /*overflow: hidden;*/
+            /*p {*/
+              /*padding: 8px 0;*/
+              /*margin: 0 !important;*/
+              /*text-align: center;*/
+              /*font-size: x-small;*/
+              /*background-color: #000;*/
+              /*color: #fff;*/
+              /*font-weight: bold;*/
+            /*}*/
+            /*embed {*/
+              /*position: relative;*/
+              /*left: -60px;*/
+            /*}*/
+            /*&:hover {*/
+              /*@include transform();*/
+              /*box-shadow: 0 0;*/
+            /*}*/
+          /*}*/
+        /*}*/
       }
 
       ul.zonas li {
-        @include span-columns(12 of 12);
-        @include omega;
+        /*@include span-columns(12 of 12);*/
+        /*@include omega;*/
 
         width: 100%;
         margin-bottom: 5px;
@@ -91,13 +91,13 @@ section.main {
         background-repeat: no-repeat !important;
         background-position: center !important;
 
-        @include media($large-screen) {
-          @include span-columns(4 of 8);
-          @include omega(2n);
-          margin-bottom: 10px;
-        }
+        /*@include media($large-screen) {*/
+          /*@include span-columns(4 of 8);*/
+          /*@include omega(2n);*/
+          /*margin-bottom: 10px;*/
+        /*}*/
 
-        @include transition(all 0.1s ease-in-out);
+        /*@include transition(all 0.1s ease-in-out);*/
 
         .caption {
           padding: 8px 0;
@@ -118,21 +118,21 @@ section.main {
           width: 100%;
           height: 0;
           padding-top: 68%;
-          @include transition(opacity 0.4s ease);
+          /*@include transition(opacity 0.4s ease);*/
         }
 
-        @include media($large-screen) {
-          &:hover {
-            @include transform(scale(1.5));
-            box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);
-            background-position: center 50% !important;
-            z-index: 9999;
-            .img {
-              opacity: 0;
-              padding-top: 57%;
-            }
-          }
-        }
+        /*@include media($large-screen) {*/
+          /*&:hover {*/
+            /*@include transform(scale(1.5));*/
+            /*box-shadow: 4px 4px 2px 1px rgba(0, 0, 0, 0.75);*/
+            /*background-position: center 50% !important;*/
+            /*z-index: 9999;*/
+            /*.img {*/
+              /*opacity: 0;*/
+              /*padding-top: 57%;*/
+            /*}*/
+          /*}*/
+        /*}*/
       }
     }
   }
@@ -141,50 +141,50 @@ section.main {
 footer.main {
   display: none;
 
-  @include media ($large-screen) {
-    display: block;
-    position: fixed;
-    width: 100%;
-    bottom: 0;
-    padding: 4px;
-    background-color: $dark-gray;
+  /*@include media ($large-screen) {*/
+    /*display: block;*/
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*bottom: 0;*/
+    /*padding: 4px;*/
+    /*background-color: $dark-gray;*/
 
-    margin: 0 auto;
-    text-align: center;
-  }
+    /*margin: 0 auto;*/
+    /*text-align: center;*/
+  /*}*/
 }
 
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
-@media (min-width: 980px) {
-  .subnav-fixed {
-    background-color: #fff;
-    position: fixed;
-    top: 40px;
-    left: 200px;
-    right: 0;
-    z-index: 1020;
-    /* 10 less than .navbar-fixed to prevent any overlap */
-    border-color: #d5d5d5;
-    border-width: 0 0 1px;
-    /* drop the border on the fixed edges */
-    border-radius: 0;
-    -webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);
-    -moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);
-    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); # IE6-9 */
+/*@media (min-width: 980px) {*/
+  /*.subnav-fixed {*/
+    /*background-color: #fff;*/
+    /*position: fixed;*/
+    /*top: 40px;*/
+    /*left: 200px;*/
+    /*right: 0;*/
+    /*z-index: 1020;*/
+    /*[> 10 less than .navbar-fixed to prevent any overlap <]*/
+    /*border-color: #d5d5d5;*/
+    /*border-width: 0 0 1px;*/
+    /*[> drop the border on the fixed edges <]*/
+    /*border-radius: 0;*/
+    /*-webkit-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);*/
+    /*-moz-box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);*/
+    /*box-shadow: inset 0 1px 0 #fff, 0 1px 5px rgba(0, 0, 0, 0.1);*/
+    /*[>filter: progid:DXImageTransform.Microsoft.gradient(enabled = false); # IE6-9 <]*/
 
-    .accordion-tabs {
-      width: 938px;
-      margin: 0 auto;
-      padding: 0 1px;
-    }
-  }
-  .subnav {
-    .nav > li:first-child > a,
-    .nav > li:first-child > a:hover {
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0;
-    }
-  }
-}
+    /*.accordion-tabs {*/
+      /*width: 938px;*/
+      /*margin: 0 auto;*/
+      /*padding: 0 1px;*/
+    /*}*/
+  /*}*/
+  /*.subnav {*/
+    /*.nav > li:first-child > a,*/
+    /*.nav > li:first-child > a:hover {*/
+      /*-webkit-border-radius: 0;*/
+      /*-moz-border-radius: 0;*/
+      /*border-radius: 0;*/
+    /*}*/
+  /*}*/
+/*}*/

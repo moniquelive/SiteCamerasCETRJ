@@ -7,28 +7,19 @@
     return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
   };
 
-  $('.tab-header-and-content > a').bind('click', function(e) {
-    e.preventDefault();
-    $(this).closest('ul').find('a.tab-link.is-active').removeClass('is-active');
-    $(this).addClass('is-active');
-    $('ul.zonas').hide();
-    $('ul.zonas#'+this.id).show();
-    $.smoothScroll();
-  });
+  //$.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
+    //var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
+    //var time = $body.text();
+    //$('.content .time #time').text(time);
 
-  $.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
-    var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
-    var time = $body.text();
-    $('.content .time #time').text(time);
+    //var today = new Date();
+    //var date = today.yyyymmdd();
 
-    var today = new Date();
-    var date = today.yyyymmdd();
+    //var hash = encodeURIComponent(date + time.replace(/:/g,''));
+    //createCameras(hash);
 
-    var hash = encodeURIComponent(date + time.replace(/:/g,''));
-    createCameras(hash);
-
-    $('.tab-header-and-content > a:first').trigger('click');
-  });
+    //$('.tab-header-and-content > a:first').trigger('click');
+  //});
 
   var AREAS = {
     "AvBrasil": [
@@ -241,30 +232,32 @@
   };
 
   function createCameras(h) {
-    var $content = $('.cameras-tabs');
+    var $content = $('main.mdl-layout__content');
     var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
     var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
     var LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
 
-    var partial = _(AREAS).map(function(cameras, area) {
-      var area = area.replace(/::/g, '/')
+    var partial = _(AREAS).map(function(cameras, zone) {
+      var area = zone.replace(/::/g, '/')
         .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
         .replace(/([a-z\d])([A-Z])/g, '$1_$2')
         .replace(/_/g, '-')
         .toLowerCase();
-      return '<ul class="zonas" id="'+area+'" style="display:none">' +
+      return '<section class="mdl-layout__tab-panel" id="area-'+area+'">' +
+        '<div class="page-content"><ul>'+
         _(cameras).map(function(hash){
           var id = _.keys(hash)[0];
           var caption = _.values(hash)[0];
           if (id.match(/@/)) {
-            return '<li>'+
-                     '<p class="caption">' + caption + '</p>'+
-                     '<embed src="http://radar.g1.globo.com/FinxiPlayer.swf" '+
-                     'flashvars="urlMedia=' + LIVE_PREFIX + id + '" '+
-                     'width="476" height="238" quality="high" align="middle" '+
-                     'type="application/x-shockwave-flash" '+
-                     'pluginspage="http://www.adobe.com/go/getflashplayer"></embed>'+
-                   '</li>';
+            return '';
+            // return '<li>'+
+            //         '<p class="caption">' + caption + '</p>'+
+            //         '<embed src="http://radar.g1.globo.com/FinxiPlayer.swf" '+
+            //         'flashvars="urlMedia=' + LIVE_PREFIX + id + '" '+
+            //         'width="476" height="238" quality="high" align="middle" '+
+            //         'type="application/x-shockwave-flash" '+
+            //         'pluginspage="http://www.adobe.com/go/getflashplayer"></embed>'+
+            //       '</li>';
           } else {
             return '<li style="background-image:url(\''+CAM_URL_GIF.replace('{0}',id).replace('{1}',h)+'\')">'+
                    '<p class="caption">'+ caption +'</p>'+
@@ -272,48 +265,19 @@
                    '</li>';
           }
         }).join('')
-      + '</ul>';
+      + '</ul></div></section>';
     }).join('');
     $content.append(partial);
+    $content.find('section.mdl-layout__tab-panel').each(function(){
+      componentHandler.upgradeElement(this, 'MaterialTab');
+    })
   }
-
-  // fix sub nav on scroll
-  var $win    = $(window)
-    , tabs    = $('.accordion-tabs')
-    , $nav    = tabs
-    , navTop  = tabs.offset().top + 40
-    , isFixed = 0;
-  function processScroll() {
-    var scrollTop = $win.scrollTop();
-    if (scrollTop >= navTop && !isFixed) {
-      isFixed = 1;
-      $nav.addClass('subnav-fixed');
-    } else if (scrollTop <= navTop && isFixed) {
-      isFixed = 0;
-      $nav.removeClass('subnav-fixed');
-    }
-  }
-  //TODO: reenable fixed tabs
-  //processScroll();
-  //$win.on('scroll', processScroll);
-
-  var menu = $('#navigation-menu');
-  var menuToggle = $('#js-mobile-menu');
-
-  $(menuToggle).on('click', function(e) {
-    e.preventDefault();
-    menu.slideToggle(function(){
-      if (menu.is(':hidden')) {
-        menu.removeAttr('style');
-      }
-    });
-  });
 
   function extractParamFromUri(uri, paramName) {
     if (!uri) return;
     var regex = new RegExp('[\\?&#]' + paramName + '=([^&#]*)');
     var params = regex.exec(uri);
-    if (params != null) return decodeURIComponent(params[1]);
+    if (params !== null) return decodeURIComponent(params[1]);
   }
 
   // social thangs
@@ -331,4 +295,3 @@
     }
   });
 }
-
