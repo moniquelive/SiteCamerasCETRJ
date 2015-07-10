@@ -7,19 +7,19 @@
     return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
   };
 
-  //$.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
-    //var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
-    //var time = $body.text();
-    //$('.content .time #time').text(time);
+  $.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
+    var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
+    var time = $body.text();
+    $('.content .time #time').text(time);
 
-    //var today = new Date();
-    //var date = today.yyyymmdd();
+    var today = new Date();
+    var date = today.yyyymmdd();
 
-    //var hash = encodeURIComponent(date + time.replace(/:/g,''));
+    var hash = encodeURIComponent(date + time.replace(/:/g,''));
     //createCameras(hash);
 
     //$('.tab-header-and-content > a:first').trigger('click');
-  //});
+  });
 
   var AREAS = {
     "AvBrasil": [
@@ -232,7 +232,7 @@
   };
 
   function createCameras(h) {
-    var $content = $('main.mdl-layout__content');
+    var $content = $('.cameras-tabs');
     var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
     var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
     var LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
@@ -243,8 +243,8 @@
         .replace(/([a-z\d])([A-Z])/g, '$1_$2')
         .replace(/_/g, '-')
         .toLowerCase();
-      return '<section class="mdl-layout__tab-panel" id="area-'+area+'">' +
-        '<div class="page-content"><ul>'+
+      return '<section class="mdl-layout__tab-panel'+(zone===_.keys(AREAS)[0]?' is-active':'')+'" id="area-'+area+'">' +
+        '<ul class="page-content">'+
         _(cameras).map(function(hash){
           var id = _.keys(hash)[0];
           var caption = _.values(hash)[0];
@@ -265,11 +265,13 @@
                    '</li>';
           }
         }).join('')
-      + '</ul></div></section>';
+      + '</ul></section>';
     }).join('');
     $content.append(partial);
+    debugger;
     $content.find('section.mdl-layout__tab-panel').each(function(){
-      componentHandler.upgradeElement(this, 'MaterialTab');
+      console.log(this.id);
+      componentHandler.upgradeElement(this, 'MaterialTabs');
     })
   }
 

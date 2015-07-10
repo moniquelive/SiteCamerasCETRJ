@@ -1,0 +1,5 @@
+{
+  "CAM_URL_JPG": "http://static.camerasrj.com.br/cam/%s.jpg?h=%s",
+  "CAM_URL_GIF": "http://static.camerasrj.com.br/cam/%s.gif?h=%s",
+  "LIVE_PREFIX": "http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro"
+}

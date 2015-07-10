@@ -13,7 +13,7 @@
     %meta(name="apple-mobile-web-app-capable" content="yes")
     %meta(name="apple-touch-fullscreen" content="yes")
     %meta(property="fb:admins" content="506596308")
-    = partial "fb-headers"
+    -#= partial "fb-headers"
 
     %link(rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons")
 
@@ -45,7 +45,7 @@
   %body.mdl-base
     -#= partial "spot-im"
 
-    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header
+    .mdl-layout.mdl-js-layout.mdl-layout--fixed-header.mdl-layout--fixed-tabs
       = yield
 
     = stylesheet_link_tag "all", media: 'all'

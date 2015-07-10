@@ -1,1 +1,14 @@
-.cameras-tabs
+%main.cameras-tabs.mdl-layout__content
+  - data.cameras.areas.each_with_index do |(area, cameras), i|
+    %section(class="mdl-layout__tab-panel#{i.zero? ? ' is-active':''}" id="area-#{area.underscore.dasherize}")
+      %ul.page-content
+        - h = SecureRandom.uuid
+        - cameras.each do |hash|
+          - id = hash.keys.first
+          - caption = hash.values.first
+          - if id =~ /@/
+            %span
+          - else
+            %li(style="background-image:url('#{sprintf(data.constants.CAM_URL_GIF, id,h)}')")
+              %p.caption= caption
+              .img(style="background:url('#{sprintf(data.constants.CAM_URL_JPG, id,h)}')")

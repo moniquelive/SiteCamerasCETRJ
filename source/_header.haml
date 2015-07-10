@@ -27,10 +27,10 @@
           %input.mdl-textfield__input(type="search" name="q" id="google-search")
       %button(type="submit" name="sa" style="display:none")
 
-  .mdl-layout__tab-bar.mdl-js-ripple-effect.mdl-color--primary-dark
+  .mdl-layout__tab-bar.mdl-js-ripple-effect
     - data.cameras.areas.each_with_index do |(area, cameras), i|
       %a(href="#area-#{area.underscore.dasherize}"
-        class="mdl-layout__tab#{i == 0 ? ' is-active' : ''}"
+        class="mdl-layout__tab#{i.zero? ? ' is-active' : ''}"
         onclick="ga('send', 'event', 'Zona', '#{area}')")= area
 
   .mdl-layout__drawer

@@ -1,15 +1,14 @@
-%main.mdl-layout__content
-  // = partial 'cameras'
+= partial 'cameras'
 
 %section.main
 
   %aside.sidebar
-    = partial 'google-ads-vertical'
+    -#= partial 'google-ads-vertical'
 
   %article.content
     .social-share
       %h5 DIVULGUE
-      .add-this
+      -#.add-this
         = partial 'add-this'
       .chrome-store
         %span.for-chrome-only(style="display:none;")<
@@ -28,4 +27,4 @@
       %fb:comments(href="cetrio.cyberleo.com.br" num_posts="2" width="500" colorscheme="light")
 
   %aside.sidebar
-    = partial 'twitter'
+    -#= partial 'twitter'
