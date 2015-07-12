@@ -1,4 +1,5 @@
-//=include lodash/dist/lodash.js
-//=include jquery/dist/jquery.js
-//=include jquery-smooth-scroll/jquery.smooth-scroll.js
-//=include js.js
+//=require lodash/dist/lodash.js
+//=require jquery/dist/jquery.js
+//=require jquery-smooth-scroll/jquery.smooth-scroll.js
+//=require bootstrap-sprockets
+//=require js.js

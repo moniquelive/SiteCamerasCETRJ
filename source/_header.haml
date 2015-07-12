@@ -1,17 +1,68 @@
-%header.navigation
-  .menu-wrapper
-    %section(id="header-well" style="display:none;margin-bottom: 0")
-      %h1<
-        %a(href="/") Câmeras da CET-RIO (CET-RJ) em tempo real
-      %h2 Condições do trânsito ao vivo e de graça!
+%nav.navbar.navbar-default.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      %span(style="display:none")
+        %h1<
+          %a(href="/") Câmeras da CET-RIO (CET-RJ) em tempo real
+        %h2 Condições do trânsito ao vivo e de graça!
+      %button(type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false")
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand(href="#")Câmeras da CET-RIO
 
-    %a.logo(href="/")
-      %h3
-        Câmeras da CET-RIO
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      %ul.nav.navbar-nav
+        %li.active
+          %a(href="#")
+            Link
+            %span.sr-only (current)
+        %li
+          %a(href="#")Link
+        %li.dropdown
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+            Dropdown
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a(href="#") Action
+            %li
+              %a(href="#") Another action
+            %li
+              %a(href="#") Something else here
+            %li.divider(role="separator")
+            %li
+              %a(href="#") Separated link
+            %li.divider(role="separator")
+            %li
+              %a(href="#") One more separated link
 
-    %p.navigation-menu-button#js-mobile-menu MENU
+      %form.navbar-form.navbar-left(role="search")
+        .form-group
+          %input.form-control(type="text" placeholder="Search")
+        %button.btn.btn-default(type="submit") Submit
 
-    .nav
+      %ul.nav.navbar-nav.navbar-right
+        %li
+          %a(href="#") Link
+        %li.dropdown
+          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
+            Dropdown
+            %span.caret
+          %ul.dropdown-menu
+            %li
+              %a(href="#") Action
+            %li
+              %a(href="#") Another action
+            %li
+              %a(href="#") Something else here
+            %li.divider(role="separator")
+            %li
+              %a(href="#") Separated link
+
+    -#.nav
       %ul#navigation-menu
         %li.navigation-search-bar
           .search-bar

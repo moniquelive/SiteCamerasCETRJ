@@ -17,10 +17,16 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     ansi (1.5.0)
+    autoprefixer-rails (5.2.1)
+      execjs
+      json
     bitters (1.0.0)
       bourbon (>= 3.2)
       sass (>= 3.2)
       thor
+    bootstrap-sass (3.3.5.1)
+      autoprefixer-rails (>= 5.0.0.1)
+      sass (>= 3.3.0)
     bourbon (4.2.3)
       sass (~> 3.4)
       thor
@@ -194,9 +200,6 @@ GEM
     middleman-minify-html (3.4.1)
       htmlcompressor (~> 0.2.0)
       middleman-core (>= 3.2)
-    middleman-neat (0.0.4)
-      bourbon (>= 2.1)
-      neat (>= 1.1.0)
     middleman-s3_sync (3.0.47)
       ansi (~> 1.5.0)
       fog-aws (>= 0.1.1)
@@ -214,9 +217,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.11.2)
-    neat (1.7.2)
-      bourbon (>= 4.0)
-      sass (>= 3.3)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
@@ -273,12 +273,12 @@ PLATFORMS
 
 DEPENDENCIES
   bitters
+  bootstrap-sass
   em-websocket!
   json
   middleman
   middleman-cloudfront
   middleman-minify-html
-  middleman-neat
   middleman-s3_sync
   oj
   ruby18_source_location

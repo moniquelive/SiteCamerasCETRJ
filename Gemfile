@@ -18,8 +18,10 @@ gem 'bitters'
 
 gem "json"
 
+# twitter bootstrap
+gem 'bootstrap-sass', require: false
+
 # plugins
-gem 'middleman-neat'
 gem 'middleman-s3_sync'
 gem 'middleman-cloudfront'
 gem "middleman-minify-html"

@@ -1,21 +1,18 @@
 @import 'normalize';
-@import 'bourbon';
-@import 'bitters/bitters';
-@import 'neat';
-
-$dark-gray: #eee;
-
-@import 'nav';
-@import 'tabs';
-@import 'style';
+@import 'bootstrap-sprockets';
 
 //= require_self
 
-iframe[seamless]{
-    background-color: transparent;
-    border: 0px none transparent;
-    padding: 0px;
-    overflow: hidden;
-    position: absolute;
+body {
+  padding-top: 100px;
+}
+@import 'bootstrap';
+
+iframe[seamless] {
+  background-color: transparent;
+  border: 0px none transparent;
+  padding: 0px;
+  overflow: hidden;
+  position: absolute;
 }
 
