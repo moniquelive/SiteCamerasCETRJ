@@ -1,0 +1,6 @@
+.mdl-cell--2-col.mdl-cell--4-col-desktop.mdl-cell--4-col-tablet
+  .mdl-card.mdl-shadow--4dp.camera-card
+    .mdl-card__media(style="background:url('#{sprintf(data.constants.CAM_URL_GIF, id,h)}') center / cover")
+      %img(src="#{sprintf(data.constants.CAM_URL_JPG, id,h)}" width="320" height="240" border="0" style="padding:10px;")
+    .mdl-card__title
+      %p.mdl-card__subtitle-text= caption
