@@ -4,14 +4,14 @@
 //= require_self
 
 body {
-  padding-top: 100px;
+  padding-top: 50px;
 }
 @import 'bootstrap';
 
 iframe[seamless] {
   background-color: transparent;
-  border: 0px none transparent;
-  padding: 0px;
+  border: 0 none transparent;
+  padding: 0;
   overflow: hidden;
   position: absolute;
 }

@@ -14,64 +14,14 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     .collapse.navbar-collapse#bs-example-navbar-collapse-1
-      %ul.nav.navbar-nav
-        %li.active
-          %a(href="#")
-            Link
-            %span.sr-only (current)
-        %li
-          %a(href="#")Link
-        %li.dropdown
-          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-            Dropdown
-            %span.caret
-          %ul.dropdown-menu
-            %li
-              %a(href="#") Action
-            %li
-              %a(href="#") Another action
-            %li
-              %a(href="#") Something else here
-            %li.divider(role="separator")
-            %li
-              %a(href="#") Separated link
-            %li.divider(role="separator")
-            %li
-              %a(href="#") One more separated link
-
-      %form.navbar-form.navbar-left(role="search")
+      %form.navbar-form.navbar-right#cse-search-box(action="http://www.google.com.br" target="_blank")
+        %input(type="hidden" name="cx" value="partner-pub-7232537493483974:4174415669")
+        %input(type="hidden" name="ie" value="UTF-8")
         .form-group
-          %input.form-control(type="text" placeholder="Search")
-        %button.btn.btn-default(type="submit") Submit
+          %input.form-control(type="search" name="q" id="google-search" placeholder="Google")
+        %button.btn.btn-default(type="submit" name="sa") Buscar
 
       %ul.nav.navbar-nav.navbar-right
-        %li
-          %a(href="#") Link
-        %li.dropdown
-          %a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false")
-            Dropdown
-            %span.caret
-          %ul.dropdown-menu
-            %li
-              %a(href="#") Action
-            %li
-              %a(href="#") Another action
-            %li
-              %a(href="#") Something else here
-            %li.divider(role="separator")
-            %li
-              %a(href="#") Separated link
-
-    -#.nav
-      %ul#navigation-menu
-        %li.navigation-search-bar
-          .search-bar
-            .search-and-submit
-              %form(class="navbar-search" action="http://www.google.com.br/cse" target="_blank")
-                %input(type="hidden" name="cx" value="partner-pub-7232537493483974:4067985243")
-                %input(type="hidden" name="ie" value="UTF-8")
-                %input(type="search" name="q" size="80" id="googleSearchBox" placeholder="Clique aqui para buscar no Google" class="search-query")
-                %button(style="margin:0" class="btn btn-mini btn-primary" type="submit" name="sa") Pesquisar
         %li<
           %a(href="http://cyberleo.com.br/") Home
         %li<
