@@ -6,7 +6,10 @@
 body {
   padding-top: 50px;
 }
+// bootstrap theme
+@import 'variables';
 @import 'bootstrap';
+@import 'bootswatch';
 
 iframe[seamless] {
   background-color: transparent;
