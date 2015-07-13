@@ -1,8 +1,13 @@
-%footer.main
-  = partial 'google-ads-horizontal'
-  / Start of StatCounter Code for Default Guide
-  .statcounter<
-    %a(title="web analytics" href="http://statcounter.com/" target="_blank")<
-      %img(class="statcounter" src="http://c.statcounter.com/6833115/0/729a8e46/0/" alt="web analytics")
-  / End of StatCounter Code for Default Guide
+%footer.navbar.navbar-default.navbar-fixed-bottom.navbar-inverse.visible-lg-block
+  .container-fluid(style="text-align:center;")
+    .row
+      .col-md-12
+        = partial 'google-ads-horizontal'
+    .row
+      .col-md-12
+        / Start of StatCounter Code for Default Guide
+        .statcounter<
+          %a(title="web analytics" href="http://statcounter.com/" target="_blank")<
+            %img(class="statcounter" src="http://c.statcounter.com/6833115/0/729a8e46/0/" alt="web analytics")
+        / End of StatCounter Code for Default Guide
   %p(style="display:none") &copy; 2013 CyberLeo. All Rights Reserved. All Wrongs Reversed.
