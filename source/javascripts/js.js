@@ -246,13 +246,13 @@
     var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
     var LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
 
-    var partial = _(AREAS).map(function(cameras, area) {
-      var area = area.replace(/::/g, '/')
+    var partial = _(AREAS).map(function(cameras, zone) {
+      var area = zone.replace(/::/g, '/')
         .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
         .replace(/([a-z\d])([A-Z])/g, '$1_$2')
         .replace(/_/g, '-')
         .toLowerCase();
-      return '<ul class="zonas" id="'+area+'" style="display:none">' +
+      return '<div class="tab-pane" id="'+area+'">' +
         _(cameras).map(function(hash){
           var id = _.keys(hash)[0];
           var caption = _.values(hash)[0];
@@ -272,9 +272,10 @@
                    '</li>';
           }
         }).join('')
-      + '</ul>';
+      + '</div>';
     }).join('');
     $content.append(partial);
+    $content.find('div.tab-pane:nth(0)').addClass('active');
   }
 
   // fix sub nav on scroll
@@ -330,5 +331,5 @@
       ga('send', 'social', 'twitter', 'tweet', targetUrl);
     }
   });
-}
+};
 

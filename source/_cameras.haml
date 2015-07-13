@@ -1,8 +1,10 @@
-%ul.accordion-tabs
-  - data.cameras.areas.each do |area, cameras|
-    %li.tab-header-and-content
-      %a.tab-link(href="#" id="#{area.underscore.dasherize}"
-        onclick="ga('send', 'event', 'Zona', '#{area}')")= area
+%ul.nav.nav-tabs(role="tablist")
+  - data.cameras.areas.each_with_index do |(area, cameras), index|
+    - first = index.zero?
+    %li(role="presentation" class="#{first ? 'active' : ''}")
+      %a(href="##{area.underscore.dasherize}"
+        onclick="ga('send', 'event', 'Zona', '#{area}')"
+        data-toggle="tab")= area
 
-%div.cameras-tabs
+%div.cameras-tabs.tab-content
 
