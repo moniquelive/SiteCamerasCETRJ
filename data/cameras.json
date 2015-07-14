@@ -1,5 +1,14 @@
 {
   "areas": {
+    "AoVivo": [
+      {"002": "Av. Pres. Vargas x Av. Rio Branco"},
+      {"017": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
+      {"021": "Praça da Bandeira"},
+      {"058": "Av. Ayrton Senna x Av. Via Parque"},
+      {"068": "Autoestrada Lagoa-Barra, em frente ao Fashion Mall"},
+      {"170": "Av. Brasil (Caju)"}
+    ],
+
     "AvBrasil": [
       {"92": "Av. Brasil, altura de Benfica"},
       {"107": "Alfredo Agache, ENTRADA do Mergulhão, sentido Brasil"},
@@ -177,35 +186,6 @@
       {"93": "R. Sen. Bernardo Monteiro x R. São Luis Gonzaga"},
       {"94": "Largo da Cancela, R. S. Luis Gonzaga x R. João Ricardo"},
       {"138": "Elevado Paulo de Frontin - Altura da Rua João Paulo I"}
-    ],
-
-    "AoVivo": [
-      {"1w@18765": "Av. Rodrigues Alves x R. Prof. Pereira Reis"},
-      {"2w@18765": "Elevado da Perimetral, descida para Av. Presidente Vargas"},
-      {"3w@18765": "Av. Brasil, altura da R. Eduardo Luiz Lopes"},
-      {"4w@18765": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
-      {"5w@18765": "R. Mário Ribeiro x Av. Borges de Medeiros"},
-      {"6w@18765": "Aterro x Av. Oswaldo Cruz"},
-      {"7w@18765": "Av. Nossa Sra. de Copacabana (Lido)"},
-      {"8w@18765": "Autoestrada Lagoa-Barra em frente shoping Fashion Mall"},
-      {"9w@18765": "R. Barata Ribeiro x R. Constante Ramos"},
-      {"10w@36574": "Praia do Flamengo x R. Barão do Flamengo"},
-      {"11w@36574": "Praça Sibélius"},
-      {"12w@36574": "Viaduto Saint Hilaire, saída do Túnel Rebouças, sobre a Rua Jard"},
-      {"13w@36574": "R. Jardim Botânico, altura da Praça Santos Dumont"},
-      {"14w@78": "Praça da Bandeira"},
-      {"15w@78": "R. Conde de Bonfim x R. General Rocca"},
-      {"16w@78": "R. Vinte Quatro de Maio x R. Bela Vista"},
-      {"17w@78": "R. Arquias Cordeiro x R. José dos Reis (Engenhão)"},
-      {"18w@78": "Av. Brasil, altura de Benfica"},
-      {"19w@78": "Elevado Eng. Freyssinet, próximo ao Túnel Rebouças"},
-      {"20w@78": "Av. Brasil, altura R. Paris"},
-      {"21w@78": "Av. Brasil, altura da Linha Vermelha"},
-      {"22w@78": "Linha Vermelha - Km 1, pista superior"},
-      {"23w@36574": "Av. Ayrton Senna x R. Abelardo Bueno"},
-      {"24w@36574": "Av. Ayrton Senna x Hospital Lourenço Jorge"},
-      {"25w@36574": "Av. das Américas, altura da Av. Luis Carlos Prestes"},
-      {"26w@36574": "Av. Armando Lombardi, acesso Barra Point"}
     ]
   }
 }

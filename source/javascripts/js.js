@@ -7,15 +7,6 @@
     return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
   };
 
-  $('.tab-header-and-content > a').bind('click', function(e) {
-    e.preventDefault();
-    $(this).closest('ul').find('a.tab-link.is-active').removeClass('is-active');
-    $(this).addClass('is-active');
-    $('ul.zonas').hide();
-    $('ul.zonas#'+this.id).show();
-    $.smoothScroll();
-  });
-
   $.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
     var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
     var time = $body.text();
@@ -26,11 +17,18 @@
 
     var hash = encodeURIComponent(date + time.replace(/:/g,''));
     createCameras(hash);
-
-    $('.tab-header-and-content > a:first').trigger('click');
   });
 
   var AREAS = {
+    "AoVivo": [
+      {"002": "Av. Pres. Vargas x Av. Rio Branco"},
+      {"017": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
+      {"021": "Praça da Bandeira"},
+      {"058": "Av. Ayrton Senna x Av. Via Parque"},
+      {"068": "Autoestrada Lagoa-Barra, em frente ao Fashion Mall"},
+      {"170": "Av. Brasil (Caju)"}
+    ],
+
     "AvBrasil": [
       {"92": "Av. Brasil, altura de Benfica"},
       {"107": "Alfredo Agache, ENTRADA do Mergulhão, sentido Brasil"},
@@ -208,35 +206,6 @@
       {"93": "R. Sen. Bernardo Monteiro x R. São Luis Gonzaga"},
       {"94": "Largo da Cancela, R. S. Luis Gonzaga x R. João Ricardo"},
       {"138": "Elevado Paulo de Frontin - Altura da Rua João Paulo I"}
-    ],
-
-    "AoVivo": [
-      {"1w@18765": "Av. Rodrigues Alves x R. Prof. Pereira Reis"},
-      {"2w@18765": "Elevado da Perimetral, descida para Av. Presidente Vargas"},
-      {"3w@18765": "Av. Brasil, altura da R. Eduardo Luiz Lopes"},
-      {"4w@18765": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
-      {"5w@18765": "R. Mário Ribeiro x Av. Borges de Medeiros"},
-      {"6w@18765": "Aterro x Av. Oswaldo Cruz"},
-      {"7w@18765": "Av. Nossa Sra. de Copacabana (Lido)"},
-      {"8w@18765": "Autoestrada Lagoa-Barra em frente shoping Fashion Mall"},
-      {"9w@18765": "R. Barata Ribeiro x R. Constante Ramos"},
-      {"10w@36574": "Praia do Flamengo x R. Barão do Flamengo"},
-      {"11w@36574": "Praça Sibélius"},
-      {"12w@36574": "Viaduto Saint Hilaire, saída do Túnel Rebouças, sobre a Rua Jard"},
-      {"13w@36574": "R. Jardim Botânico, altura da Praça Santos Dumont"},
-      {"14w@78": "Praça da Bandeira"},
-      {"15w@78": "R. Conde de Bonfim x R. General Rocca"},
-      {"16w@78": "R. Vinte Quatro de Maio x R. Bela Vista"},
-      {"17w@78": "R. Arquias Cordeiro x R. José dos Reis (Engenhão)"},
-      {"18w@78": "Av. Brasil, altura de Benfica"},
-      {"19w@78": "Elevado Eng. Freyssinet, próximo ao Túnel Rebouças"},
-      {"20w@78": "Av. Brasil, altura R. Paris"},
-      {"21w@78": "Av. Brasil, altura da Linha Vermelha"},
-      {"22w@78": "Linha Vermelha - Km 1, pista superior"},
-      {"23w@36574": "Av. Ayrton Senna x R. Abelardo Bueno"},
-      {"24w@36574": "Av. Ayrton Senna x Hospital Lourenço Jorge"},
-      {"25w@36574": "Av. das Américas, altura da Av. Luis Carlos Prestes"},
-      {"26w@36574": "Av. Armando Lombardi, acesso Barra Point"}
     ]
   };
 
@@ -244,7 +213,7 @@
     var $content = $('.cameras-tabs');
     var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
     var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
-    var LIVE_PREFIX = 'http://radar_g1-f.akamaihd.net/radarg1_rj_riodejaneiro';
+    var LIVE_PREFIX = 'http://radar_g1-i.akamaihd.net/hls/live/202695/rj_rio_de_janeiro{0}.stream/master.m3u8';
 
     var partial = _(AREAS).map(function(cameras, zone) {
       var area = zone.replace(/::/g, '/')
@@ -252,23 +221,19 @@
         .replace(/([a-z\d])([A-Z])/g, '$1_$2')
         .replace(/_/g, '-')
         .toLowerCase();
-      return '<div class="tab-pane" id="'+area+'">' +
+      return '<div class="tab-pane row-fluid" id="'+area+'">' +
         _(cameras).map(function(hash){
           var id = _.keys(hash)[0];
           var caption = _.values(hash)[0];
-          if (id.match(/@/)) {
-            return '<li>'+
-                     '<p class="caption">' + caption + '</p>'+
-                     '<embed src="http://radar.g1.globo.com/FinxiPlayer.swf" '+
-                     'flashvars="urlMedia=' + LIVE_PREFIX + id + '" '+
-                     'width="476" height="238" quality="high" align="middle" '+
-                     'type="application/x-shockwave-flash" '+
-                     'pluginspage="http://www.adobe.com/go/getflashplayer"></embed>'+
+          if (zone === 'AoVivo') {
+            return '<li class="col-md-4 thumbnail">'+
+                     '<div id="video-{0}" data-video="{1}" style="width:100%;height:240px">'.replace('{0}',id).replace('{1}',LIVE_PREFIX.replace('{0}', id))+
+                     '</div>'+
                    '</li>';
           } else {
-            return '<li style="background-image:url(\''+CAM_URL_GIF.replace('{0}',id).replace('{1}',h)+'\')">'+
-                   '<p class="caption">'+ caption +'</p>'+
-                   '<div class="img" style="background:url(\''+CAM_URL_JPG.replace('{0}',id).replace('{1}',h) +'\')"></div>'+
+            //return '<li class="thumbnail" style="background-image:url(\''+CAM_URL_GIF.replace('{0}',id).replace('{1}',h)+'\')">'+
+            return '<li class="col-md-3 thumbnail">'+
+                   '<img src="'+CAM_URL_JPG.replace('{0}',id).replace('{1}',h) +'" title="'+caption+'">'+
                    '</li>';
           }
         }).join('')
@@ -276,39 +241,27 @@
     }).join('');
     $content.append(partial);
     $content.find('div.tab-pane:nth(0)').addClass('active');
-  }
-
-  // fix sub nav on scroll
-  var $win    = $(window)
-    , tabs    = $('.accordion-tabs')
-    , $nav    = tabs
-    , navTop  = tabs.offset().top + 40
-    , isFixed = 0;
-  function processScroll() {
-    var scrollTop = $win.scrollTop();
-    if (scrollTop >= navTop && !isFixed) {
-      isFixed = 1;
-      $nav.addClass('subnav-fixed');
-    } else if (scrollTop <= navTop && isFixed) {
-      isFixed = 0;
-      $nav.removeClass('subnav-fixed');
-    }
-  }
-  //TODO: reenable fixed tabs
-  //processScroll();
-  //$win.on('scroll', processScroll);
-
-  var menu = $('#navigation-menu');
-  var menuToggle = $('#js-mobile-menu');
-
-  $(menuToggle).on('click', function(e) {
-    e.preventDefault();
-    menu.slideToggle(function(){
-      if (menu.is(':hidden')) {
-        menu.removeAttr('style');
-      }
+    $content.find('div[data-video]').each(function(){
+      var filename = $(this).data('video');
+      flowplayer(this.id, 'http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf', {
+        plugins: {
+          controls: null,
+          flashls: {
+            url: '/flashlsFlowPlayer.swf',
+            debug: false
+          }
+        },
+        clip: {
+          accelerated: true,
+          live: true,
+          url: filename,
+          urlResolvers: ['flashls','brselect'],
+          provider: 'flashls',
+          autoPlay: true
+        }
+      }).ipad();
     });
-  });
+  }
 
   function extractParamFromUri(uri, paramName) {
     if (!uri) return;

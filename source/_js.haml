@@ -2,4 +2,10 @@
   var addthis_config = {data_track_clickback:true,data_ga_property:'UA-10270235-3',data_ga_social:true};
   window.getScript('http://s7.addthis.com/js/300/addthis_widget.js#pubid=lccro', function(){});
   window.getScript("http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", function(){});
-  window.getScript('/javascripts/all.js',function(){ init(); });
+  window.getScript("http://code.jquery.com/jquery-1.11.2.min.js", function(){
+    window.getScript("http://releases.flowplayer.org/js/flowplayer-3.2.13.min.js", function(){
+      window.getScript("http://releases.flowplayer.org/js/flowplayer.ipad-3.2.13.min.js", function(){
+        window.getScript('/javascripts/all.js',function(){ init(); });
+      })
+    })
+  });
