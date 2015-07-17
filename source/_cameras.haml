@@ -1,5 +1,5 @@
 %ul.nav.nav-tabs(role="tablist")
-  - data.cameras.areas.each_with_index do |(area, cameras), index|
+  - data.tabs.each_with_index do |area, index|
     - first = index.zero?
     %li(role="presentation" class="#{first ? 'active' : ''}")
       %a(href="##{area.underscore.dasherize}"
