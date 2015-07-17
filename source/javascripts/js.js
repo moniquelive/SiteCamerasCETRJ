@@ -7,27 +7,24 @@
     return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
   };
 
-  $.get("http://static.camerasrj.com.br/cam/timestamp.html").then(function(resp) {
-    var $body = $(/<body>.*<\/body>/.exec(resp)[0]);
+  var req1 = $.get("http://static.camerasrj.com.br/cam/timestamp.html");
+  var req2 = $.getJSON("http://static.camerasrj.com.br/cam/cameras.php");
+  $.when(req1, req2).done(function(timestamp, liveCameras) {
+    AREAS['AoVivo'] = liveCameras[0]['cidades']['cameras'];
+
+    var $body = $(/<body>.*<\/body>/.exec(timestamp)[0]);
     var time = $body.text();
     $('.content .time #time').text(time);
 
     var today = new Date();
     var date = today.yyyymmdd();
-
     var hash = encodeURIComponent(date + time.replace(/:/g,''));
     createCameras(hash);
+
   });
 
   var AREAS = {
-    "AoVivo": [
-      {"002": "Av. Pres. Vargas x Av. Rio Branco"},
-      {"017": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
-      {"021": "Praça da Bandeira"},
-      {"058": "Av. Ayrton Senna x Av. Via Parque"},
-      {"068": "Autoestrada Lagoa-Barra, em frente ao Fashion Mall"},
-      {"170": "Av. Brasil (Caju)"}
-    ],
+    "AoVivo": [],
 
     "AvBrasil": [
       {"92": "Av. Brasil, altura de Benfica"},
@@ -213,7 +210,6 @@
     var $content = $('.cameras-tabs');
     var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
     var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
-    var LIVE_PREFIX = 'http://radar_g1-i.akamaihd.net/hls/live/202695/rj_rio_de_janeiro{0}.stream/master.m3u8';
 
     var partial = _(AREAS).map(function(cameras, zone) {
       var area = zone.replace(/::/g, '/')
@@ -227,7 +223,7 @@
           var caption = _.values(hash)[0];
           if (zone === 'AoVivo') {
             return '<li class="col-md-4 thumbnail">'+
-                     '<div id="video-{0}" data-video="{1}" style="width:100%;height:240px">'.replace('{0}',id).replace('{1}',LIVE_PREFIX.replace('{0}', id))+
+                     '<div id=":id" data-video=":url" style="width:100%;height:240px">'.replace('{0}',id).replace(':id',_.uniqueId('video-')).replace(':url', hash['url']) +
                      '</div>'+
                    '</li>';
           } else {
@@ -255,8 +251,8 @@
           accelerated: true,
           live: true,
           url: filename,
-          urlResolvers: ['flashls','brselect'],
-          provider: 'flashls',
+            urlResolvers: ['flashls','brselect'],
+            provider: 'flashls',
           autoPlay: true
         }
       }).ipad();
