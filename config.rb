@@ -92,16 +92,16 @@ activate :s3_sync do |s3_sync|
   s3_sync.prefer_gzip                = true
   s3_sync.path_style                 = true
   s3_sync.reduced_redundancy_storage = true
-
-  ONE_YEAR = 60 * 60 * 24 * 365
-  s3_sync.add_caching_policy 'text/html', max_age: 0, must_revalidate: true
-  s3_sync.add_caching_policy 'application/gzip', max_age: 0, must_revalidate: true
-  s3_sync.add_caching_policy 'application/javascript', max_age: ONE_YEAR
-  s3_sync.add_caching_policy 'application/x-javascript', max_age: ONE_YEAR
-  s3_sync.add_caching_policy 'text/javascript', max_age: ONE_YEAR
-  s3_sync.add_caching_policy 'text/css', max_age: ONE_YEAR
-  s3_sync.add_caching_policy 'image/png', max_age: ONE_YEAR
 end
+
+ONE_YEAR = 60 * 60 * 24 * 365
+caching_policy 'text/html', max_age: 0, must_revalidate: true
+caching_policy 'application/gzip', max_age: 0, must_revalidate: true
+caching_policy 'application/javascript', max_age: ONE_YEAR
+caching_policy 'application/x-javascript', max_age: ONE_YEAR
+caching_policy 'text/javascript', max_age: ONE_YEAR
+caching_policy 'text/css', max_age: ONE_YEAR
+caching_policy 'image/png', max_age: ONE_YEAR
 
 activate :cloudfront do |cf|
   cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
