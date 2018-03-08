@@ -2,7 +2,12 @@
   .container-fluid(style="text-align:center;")
     .row
       .col-md-12
-        = partial 'google-ads-horizontal'
+        %script(async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+        :javascript
+            (adsbygoogle = window.adsbygoogle || []).push({
+                  google_ad_client: "ca-pub-7232537493483974",
+                  enable_page_level_ads: true
+            });
     .row
       .col-md-12
         / Start of StatCounter Code for Default Guide
