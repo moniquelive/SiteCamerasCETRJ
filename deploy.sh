@@ -1,10 +1,10 @@
 #!/bin/sh
 
 echo "********************* Building ***"
-middleman build || exit
+bundle exec middleman build || exit
 
 echo "********************* Syncing ***"
-middleman s3_sync || exit
+bundle exec middleman s3_sync || exit
 
 echo "********************* Invalidating ***"
-middleman invalidate || exit
+bundle exec middleman invalidate || exit
