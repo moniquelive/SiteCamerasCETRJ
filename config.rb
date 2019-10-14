@@ -104,8 +104,8 @@ caching_policy 'text/css', max_age: ONE_YEAR
 caching_policy 'image/png', max_age: ONE_YEAR
 
 activate :cloudfront do |cf|
-  cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
-  cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
+  # cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
+  # cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
   cf.distribution_id = 'E24VVIEBCKV6BF'
   cf.filter = /\.(html|html.gz)$/i
 end
