@@ -1,0 +1,6 @@
+baseURL: https://www.camerasrj.com.br/
+languageCode: pt-br
+defaultContentLanguage: pt-br
+title: Cameras da CET RJ
+
+theme: camerasrj

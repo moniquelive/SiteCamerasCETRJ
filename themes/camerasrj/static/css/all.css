@@ -1,0 +1,21 @@
+body {
+  padding-top: 50px;
+}
+
+iframe[seamless] {
+  background-color: transparent;
+  border: 0 none transparent;
+  padding: 0;
+  overflow: hidden;
+  position: absolute;
+}
+
+/* center addthis sharing buttons */
+div.addthis_toolbox {
+  width: 440px;
+  margin: 0 auto;
+}
+
+main {
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
