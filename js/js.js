@@ -1,0 +1,284 @@
+;window.init = function() {
+
+  Date.prototype.yyyymmdd = function() {
+    var yyyy = this.getFullYear().toString();
+    var mm = (this.getMonth()+1).toString(); // getMonth() is zero-based
+    var dd  = this.getDate().toString();
+    return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
+  };
+
+  var req1 = $.get("http://static.camerasrj.com.br/cam/timestamp.html");
+  var req2 = $.getJSON("http://static.camerasrj.com.br/cam/cameras.php");
+  $.when(req1, req2).done(function(timestamp, liveCameras) {
+    AREAS['AoVivo'] = liveCameras[0]['cidades']['cameras'];
+
+    var $body = $(/<body>.*<\/body>/.exec(timestamp)[0]);
+    var time = $body.text();
+    $('.content .time #time').text(time);
+
+    var today = new Date();
+    var date = today.yyyymmdd();
+    var hash = encodeURIComponent(date + time.replace(/:/g,''));
+    createCameras(hash);
+
+  });
+
+  var AREAS = {
+    "AoVivo": [],
+
+    "AvBrasil": [
+      {"92": "Av. Brasil, altura de Benfica"},
+      {"107": "Alfredo Agache, ENTRADA do Mergulhão, sentido Brasil"},
+      {"139": "Av. Brasil, altura da R. Eduardo Luiz Lopes"},
+      {"144": "Av. Brasil, altura da Linha Amarela"},
+      {"146": "Av. Brasil, altura R. Paris"},
+      {"145": "Av. Brasil x Canal do Cunha"},
+      {"147": "Av. Brasil, entrada da Ilha"},
+      {"150": "Prédio Prefeitura - CASS"},
+      {"152": "Av. Brasil, altura Av. Automóvel Clube"},
+      {"153": "Av. Brasil, altura da R. João Paulo"},
+      {"154": "Av. Brasil, altura de Deodoro"},
+      {"156": "Av. Brasil x Estr. do Quafá"},
+      {"157": "Av. Brasil, altura Km 42 - Mendanha"},
+      {"158": "Av. Brasil x Av Padre Guilherme Decaminada (em frente ao Extra)"},
+      {"169": "Av. Brasil, altura da Linha Vermelha"},
+      {"170": "Av. Brasil, altura do Cemitério do Caju"},
+      {"172": "Rua Visconde de Cabo Frio x Praça Barão Corumbá"},
+      {"173": "Av. Brasil x GAE"}
+    ],
+
+    "Sul": [
+      {"12": "R. das Laranjeiras X Soares Cabral"},
+      {"13": "Praia de Botafogo x Viaduto"},
+      {"14": "R. São Clemente x R. Muniz de Barreto"},
+      {"15": "R. São Clemente x Consulado Português"},
+      {"16": "R. Jardim Botânico próximo ao Parque Lage"},
+      {"17": "Av. Borges de Medeiros x Av. Epitácio Pessoa"},
+      {"18": "R. Mário Ribeiro x Av. Borges de Medeiros"},
+      {"19": "R. Voluntários da Pátria x R. Real Grandeza"},
+      {"20": "Aterro x Av. Oswaldo Cruz"},
+      {"23": "R. Barata Ribeiro x R. Duvivier"},
+      {"24": "Av. Nossa Sra. de Copacabana (Lido"},
+      {"25": "Av. Atlântica x Av. Princesa Isabel"},
+      {"26": "Av. Atlântica x R. Figueiredo de Magalhães"},
+      {"27": "Av. N. Sra. de Copacabana x R. Sta. Clara"},
+      {"28": "Av. Atlântica x R. Rainha Elisabeth"},
+      {"29": "Corte do Cantagalo, Pça. Eugênio Jardim"},
+      {"30": "R. Raul Pompéia x R. Francisco Otaviano"},
+      {"31": "Av. Vieira Souto x R. Rainha Elizabeth"},
+      {"32": "Av. Epitácio Pessoa x R. Maria Quitéria"},
+      {"33": "Av. Delfim Moreira x R. Bartolomeu Mitre"},
+      {"34": "R. Visconde de Pirajá x R. Gomes Carneiro"},
+      {"35": "R. Barata Ribeiro x R. Constante Ramos"},
+      {"42": "R. Praia do Flamengo x R. Barão do Flamengo"},
+      {"43": "R. Humaitá x R. Macedo Sobrinho"},
+      {"44": "R. Jardim Botânico x R. Pacheco Leão"},
+      {"45": "Praça Sibélius"},
+      {"46": "R. Voluntários da Pátria x R. Praia de Botafogo"},
+      {"47": "Av. Lauro Sodré x R. Venceslau Brás"},
+      {"49": "R.Barata Ribeiro x R. Siqueira Campos"},
+      {"50": "Av. N. Sra. de Copacabana x R. Alm. Gonçalves"},
+      {"51": "R. Visconde de Pirajá x R. Maria Quitéria"},
+      {"52": "R. Ataulfo de Paiva x R. Afrânio de Melo Franco"},
+      {"95": "R. Pinheiro Machado, altura da R. Carlos de Campos"},
+      {"96": "R. Pinheiro Machado, altura da R. das Laranjeiras"},
+      {"97": "Viaduto Eng. Noronha, sob Viaduto Jardel Filho"},
+      {"112": "Viaduto Saint Hilaire, saída do Túnel Rebouças, sobre a Rua Jardim Botânico"},
+      {"113": "Av. Borges de Medeiros, altura da Av. Lineu de Paula Machado"},
+      {"114": "Av. Borges de  Medeiros, altura da R. J. J. Seabra"},
+      {"115": "Av. Borges de  Medeiros, altura da R. Gal. Garzon"},
+      {"116": "Av. Epitácio Pessoa, próximo ao Jardim de Alah"},
+      {"117": "R. Jardim Botânico, altura da Praça Santos Dumont"},
+      {"118": "Av. Epitácio Pessoa, próximo ao Corte do Cantagalo"},
+      {"119": "Av. Epitácio Pessoa, próximo ao Parque da Catacumba"},
+      {"122": "Auto Estrada / Estr. do Joá, Próximo ao Túnel de São Conrado"},
+      {"123": "Auto Estrada, alt. Túnel de São Conrado"},
+      {"141": "Saída do Túnel Rebouças"}
+    ],
+
+    "Centro": [
+      {"1": "Av. Pres.Vargas X R. 1º Março - teste"},
+      {"2": "Av. Pres.Vargas X Av. Rio Branco"},
+      {"3": "Av. Pres.Vargas X Pça. da República"},
+      {"4": "Praça Mauá"},
+      {"5": "Av. Rio Branco X Aterro"},
+      {"6": "Av. Rio Branco X Av. Alm. Barroso"},
+      {"7": "R. Camerino X R. Barão de São Felix"},
+      {"8": "R. Visconde do Rio Branco X Pça. da República"},
+      {"9": "Av. Presidente Antonio Carlos x Av. Almirante Barroso"},
+      {"10": "R. Santana X R. Frei Caneca"},
+      {"11": "Largo do Estácio"},
+      {"36": "Trevo das Forças Armadas"},
+      {"37": "Av. Francisco Bicalho x R. Francisco Eugênio"},
+      {"38": "Av. Rodrigues Alves x R. Prof. Pereira Reis"},
+      {"39": "Av. Pres. Antonio Carlos x Av. Franklin Roosevelt"},
+      {"40": "Praça Tiradentes"},
+      {"41": "Lapa"},
+      {"53": "Av. Presidente Wilson x Consulado EUA"},
+      {"98": "Av. 31 de Março, saída do Túnel Santa Bárbara"},
+      {"99": "Av. 31 de Março, praça da Apoteose, próximo. à R. Frei Caneca"},
+      {"100": "Av. 31 de Março, altura da Av. Salvador de Sá"},
+      {"101": "Av. 31 de Março, altura da Av. Presidente Vargas"},
+      {"102": "Vias Elevadas Prof. Eng. Rufino de Almeida, altura Leopoldina, pista inferior"},
+      {"104": "Vias Elevadas Prof. Eng. Rufino de Almeida, altura Leopoldina, pista superior"},
+      {"105": "Elevado Eng. Freyssinet, próximo R. João Paulo"},
+      {"106": "Elevado da Perimetral, descida para Av. Presidente Vargas"},
+      {"108": "Av. General Justo, próximo ao Aeroporto Santos Dumont"},
+      {"109": "Elevado da Perimetral, altura da Av. Gal. Justo"},
+      {"110": "Alfredo Agache, SAÍDA do Mergulhão, sentido Aterro"},
+      {"111": "Av. Venceslau Brás, próximo ao GMAR"}
+    ],
+
+    "LinVermelha": [
+      {"103": "Linha Vermelha, Km 0"},
+      {"160": "Av. Cesário de Melo x Estrada do Monteiro"},
+      {"161": "Linha Vermelha - Km 1, pista superior"},
+      {"162": "Linha Vermelha KM1 x Pista Inferior"},
+      {"163": "Linha Vermelha KM3 x altura do Caju"},
+      {"164": "Linha Vermelha KM4 x Linha Amarela"},
+      {"165": "Linha Vermelha KM5 x Batalhão da Maré"},
+      {"166": "Linha Vermelha x Altura da Ilha"},
+      {"167": "Linha Vermelha x Altura da Ilha"}
+    ],
+
+    "Oeste": [
+      {"54": "Av. Embaixador Abelardo Bueno x Estr. Cel. Pedro Correa"},
+      {"55": "Praça da Taquara"},
+      {"57": "Av. Ayrton Senna x R. Abelardo Bueno"},
+      {"58": "Av. Ayrton Senna x Av.Via Parque"},
+      {"59": "Av. Ayrton Senna x Hospital Lourenço Jorge"},
+      {"60": "Av. Ayrton Senna x Av. Lúcio Costa"},
+      {"61": "Av. Sernambetiba x Ponte Lúcio Costa"},
+      {"62": "Av. Sernambetiba x Praça do O"},
+      {"63": "Av. das Américas x R. Felicissimo Cardoso"},
+      {"64": "Av. das Américas (Supermercado Extra"},
+      {"65": "Av. das Américas x Ponte Lúcio Costa"},
+      {"66": "R. Armando Lombardi x Av. Min. Ivan Lins"},
+      {"67": "Praia de São Conrado"},
+      {"68": "Auto-estrada Lagoa-Barra em frente shopping Fashion Mall"},
+      {"120": "Auto Estrada Lagoa-Barra x Av. Niemeyer"},
+      {"125": "Elevado das Bandeiras, pista superior, entre os túneis São Conrado e Joá"},
+      {"126": "Auto Estrada Lagoa-Barra, próximo à R. Maria Luiza Pitanga"},
+      {"127": "Av. Armando Lombardi, acesso Barra Point"},
+      {"129": "Av. das Américas, próximo ao nº 2211, Hotel Dunas"},
+      {"130": "Av. das Américas, Próximo ao n° 3434, Centro Empresarial Mário Henrique Simonsem"},
+      {"131": "Av. das Américas, Altura da Av. Luis Carlos Prestes"},
+      {"132": "Av. das Américas, altura da Av. Ayrton Senna, sobre o Cebolão"},
+      {"133": "Av. das Américas x R. Jornalista Ricardo Marinho"},
+      {"134": "Av. das Américas, altura da A. Afonso Arinos de Mello Franco, EuroBarra"},
+      {"135": "Av. Ayrton Senna, subida da Linha Amarela"},
+      {"136": "Av. Ayrton Senna, próximo ao SENAC"},
+      {"140": "Elevado Eng. Freyssinet, próximo ao Túnel Rebouças"},
+      {"142": "R. Visconde de Niterói, altura Mangueira"},
+      {"143": "Praça Santo Cristo, antes da Igreja, sentido Rodrigues Alves"}
+    ],
+
+    "Norte": [
+      {"21": "Praça da Bandeira"},
+      {"22": "Av. Pres. Castelo Branco x R. Radialista Waldir Amaral"},
+      {"48": "Av. Maracanã x R. Eurico Rabelo"},
+      {"69": "Av. Pres. Castelo Branco x R. General Canabarro"},
+      {"70": "R. Pereira Nunes x R. Barão de Mesquita"},
+      {"71": "R. São Francisco Xavier x R. Heitor Beltrão"},
+      {"72": "R. Conde de Bonfim x R. Uruguai"},
+      {"73": "R. Conde de Bonfim x R. General Rocca"},
+      {"74": "Boulevard 28 de Setembro x R. São Francisco Xavier"},
+      {"75": "R. Uruguai x R. Maxwell"},
+      {"76": "Av. Maracanã x R. Deputado Soares Filho"},
+      {"77": "R. Teodoro da Silva x R. Barão de São Francisco"},
+      {"78": "Av. Pres. Castelo Branco x R. São Francisco Xavier"},
+      {"79": "R. Teodoro da Silva x R. Barão Bom Retiro"},
+      {"80": "Av. Marechal Rondom x R. Barão do Bom Retiro"},
+      {"81": "R. Vinte Quatro de Maio x R. Bela Vista"},
+      {"82": "R. 24 de Maio x R. Cônego Tobias"},
+      {"83": "R. Arquias Cordeiro x R. José dos Reis (Engenhão"},
+      {"84": "R. Ana Néri x R. Licínio Cardoso"},
+      {"85": "R. Dias da Cruz x R. Hermengarda"},
+      {"86": "R. Dias da Cruz x R. Maranhão"},
+      {"87": "R. Amaro Cavalcanti x Viaduto Todos os Santos"},
+      {"88": "R. Aristides Caire x R. Santa Fé"},
+      {"89": "Av. Dom Helder Câmara x Viaduto de Pilares"},
+      {"90": "Av. Dom Helder Câmara x R. Gandavo"},
+      {"91": "Av. Dom Helder Câmara x R. Leopoldo Bulhões"},
+      {"93": "R. Sen. Bernardo Monteiro x R. São Luis Gonzaga"},
+      {"94": "Largo da Cancela, R. S. Luis Gonzaga x R. João Ricardo"},
+      {"138": "Elevado Paulo de Frontin - Altura da Rua João Paulo I"}
+    ]
+  };
+
+  function createCameras(h) {
+    var $content = $('.cameras-tabs');
+    var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
+    var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
+
+    var partial = _(AREAS).map(function(cameras, zone) {
+      var area = zone.replace(/::/g, '/')
+        .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+        .replace(/([a-z\d])([A-Z])/g, '$1_$2')
+        .replace(/_/g, '-')
+        .toLowerCase();
+      return '<div class="tab-pane row-fluid" id="'+area+'">' +
+        _(cameras).map(function(hash){
+          var id = _.keys(hash)[0];
+          var caption = _.values(hash)[0];
+          if (zone === 'AoVivo') {
+            return '<li class="col-md-4 thumbnail">'+
+                     '<div id=":id" data-video=":url" style="width:100%;height:240px">'.replace('{0}',id).replace(':id',_.uniqueId('video-')).replace(':url', hash['url']) +
+                     '</div>'+
+                   '</li>';
+          } else {
+            //return '<li class="thumbnail" style="background-image:url(\''+CAM_URL_GIF.replace('{0}',id).replace('{1}',h)+'\')">'+
+            return '<li class="col-md-3 thumbnail">'+
+                   '<img src="'+CAM_URL_JPG.replace('{0}',id).replace('{1}',h) +'" title="'+caption+'">'+
+                   '</li>';
+          }
+        }).join('')
+      + '</div>';
+    }).join('');
+    $content.append(partial);
+    $content.find('div.tab-pane:nth(0)').addClass('active');
+    $content.find('div[data-video]').each(function(){
+      var filename = $(this).data('video');
+      flowplayer(this.id, 'http://releases.flowplayer.org/swf/flowplayer-3.2.18.swf', {
+        plugins: {
+          controls: null,
+          flashls: {
+            url: '/flashlsFlowPlayer.swf',
+            debug: false
+          }
+        },
+        clip: {
+          accelerated: true,
+          live: true,
+          url: filename,
+            urlResolvers: ['flashls','brselect'],
+            provider: 'flashls',
+          autoPlay: true
+        }
+      }).ipad();
+    });
+  }
+
+  function extractParamFromUri(uri, paramName) {
+    if (!uri) return;
+    var regex = new RegExp('[\\?&#]' + paramName + '=([^&#]*)');
+    var params = regex.exec(uri);
+    if (params != null) return decodeURIComponent(params[1]);
+  }
+
+  // social thangs
+  if (navigator.userAgent.match(/Chrome/i)) { $(".for-chrome-only").fadeIn(); }
+  var $fb_like = $('a.addthis_button_facebook_like');
+  $fb_like.bind('edge.create', function (targetUrl) { ga('send', 'social', 'facebook', 'like', targetUrl); });
+  $fb_like.bind('edge.remove', function (targetUrl) { ga('send', 'social', 'facebook', 'unlike', targetUrl); });
+  $('a.addthis_button_tweet').bind('tweet', function (event) {
+    if (event) {
+      var targetUrl='';
+      if (event.target && event.target.nodeName == 'IFRAME') {
+        targetUrl = extractParamFromUri(event.target.src, 'url');
+      }
+      ga('send', 'social', 'twitter', 'tweet', targetUrl);
+    }
+  });
+};
+
