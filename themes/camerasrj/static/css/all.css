@@ -2,7 +2,7 @@ body {
   padding-top: 50px;
 }
 
-iframe[seamless] {
+iframe {
   background-color: transparent;
   border: 0 none transparent;
   padding: 0;

@@ -1,0 +1,18 @@
+<div class="row text-center">
+  <p>
+    <select id="camera">
+      <option selected value="km123">Entroncamento com Av. Brasil (km 123 (sentido RJ))</h4>
+      <option value="km119">Feirão Moda Rio (km 119 (sentido RJ))</h4>
+      <option value="km113">Proximidades Reduc - Duque de Caxias (km 113)</h4>
+    </select>
+  </p>
+  <img id="camFeed" width="100%" loading="lazy"
+    src="https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=km123&AuthUser=appconcer&AuthPass=CoNcrRdi13892">
+</div>
+<script>
+  document.getElementById("camera").addEventListener("change", function () {
+    const camera = this.selectedOptions[0].value;
+    document.getElementById("camFeed").src = `https://cameras2.concer.com.br:8401/interface/cameras/getjpegstream?camera=${camera}&AuthUser=appconcer&AuthPass=CoNcrRdi13892`;
+  });
+</script>
+<br>
