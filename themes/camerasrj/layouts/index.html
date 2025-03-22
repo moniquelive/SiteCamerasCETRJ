@@ -1,8 +1,8 @@
 {{ define "main" }}
 <main class='container'>
-<!--  <aside class='sidebar col-md-1 visible-lg-block'>-->
-<!--    &lt;!&ndash; partial 'google-ads-vertical' &ndash;&gt;-->
-<!--  </aside>-->
+  <!--  <aside class='sidebar col-md-1 visible-lg-block'>-->
+  <!--    &lt;!&ndash; partial 'google-ads-vertical' &ndash;&gt;-->
+  <!--  </aside>-->
   <article class='col-md-10'>
     <div class='social-share row' style='text-align:center;'>
       <div class='add-this col-md-12'>
@@ -10,17 +10,34 @@
         {{- partial "add-this.html" . -}}
       </div>
       <div class='chrome-store col-md-12'>
-        <span class='for-chrome-only' style='display:none;'>Veja as Cameras RJ diretamente no seu&nbsp;<a href='https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag' onclick='ga("send", "event", "Chrome Store", "click");'>Navegador</a>!</span>
+        <span class='for-chrome-only' style='display:none;'>Veja as Cameras RJ diretamente no seu&nbsp;<a
+            href='https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag'
+            onclick='ga("send", "event", "Chrome Store", "click");'>Navegador</a>!</span>
       </div>
     </div>
-    <div class='time row' style='text-align:center;'>
+    <div class='time row text-center'>
       <span class='col-md-12'>Atualizado em tempo real</span>
     </div>
     <!-- = partial 'cameras' -->
-    {{- partial "waze.html" . -}}
-    {{- partial "concer.html" . -}}
-    <div class='row'>
-      <div class='fb-comments col-md-10' style='text-align:center;'>
+    <br>
+    <div class='waze row'>
+      <div class="col-md-11">
+        {{- partial "waze.html" . -}}
+      </div>
+    </div>
+    <br>
+    <div class='separator row'>
+      <div class="col-md-11">
+        <hr>
+      </div>
+    </div>
+    <div class="concer row">
+      <div class="col-md-11 text-center">
+        {{- partial "concer.html" . -}}
+      </div>
+    </div>
+    <div class='facebook row'>
+      <div class='fb-comments col-md-11 embed-responsive embed-responsive-16by9' style='text-align:center;'>
         <fb:comments colorscheme='light' href='cetrio.cyberleo.com.br' num_posts='2' width='500'></fb:comments>
       </div>
     </div>
