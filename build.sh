@@ -8,10 +8,9 @@
 #------------------------------------------------------------------------------
 
 main() {
-
   DART_SASS_VERSION=1.97.1
-  GO_VERSION=1.25.5
-  HUGO_VERSION=0.154.2
+  GO_VERSION=1.25.6
+  HUGO_VERSION=0.155.2
   NODE_VERSION=24.12.0
 
   export TZ=America/Sao_Paulo
@@ -62,7 +61,6 @@ main() {
   # Build the site
   echo "Building the site..."
   hugo --gc --minify
-
 }
 
 set -euo pipefail
