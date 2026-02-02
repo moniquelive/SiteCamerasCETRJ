@@ -1,5 +1,6 @@
 {{- $slot := .slot | default "5213106864" -}}
-<section class='google-ads-responsive' style='margin:16px 0;'>
+{{- $class := .class | default "" -}}
+<section class='google-ads-responsive {{ $class }}'>
   <ins class='adsbygoogle'
        style='display:block; width:100%;'
        data-ad-client='ca-pub-7232537493483974'

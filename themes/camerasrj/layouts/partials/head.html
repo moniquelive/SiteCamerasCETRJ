@@ -11,6 +11,25 @@
   <meta content='506596308' property='fb:admins'>
   <link rel="stylesheet" href="/css/all.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+    .google-ads-responsive {
+      margin: 10px 0;
+    }
+    .google-ads-responsive .adsbygoogle {
+      min-height: 90px;
+    }
+    @media (max-width: 480px) {
+      .google-ads-responsive {
+        margin: 6px 0;
+      }
+      .google-ads-responsive .adsbygoogle {
+        min-height: 60px;
+      }
+      .google-ads-responsive.ads-top {
+        display: none;
+      }
+    }
+  </style>
 
   {{- partial "fb-headers.html" . -}}
 
