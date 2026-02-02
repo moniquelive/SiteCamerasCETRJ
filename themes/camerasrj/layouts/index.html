@@ -4,6 +4,11 @@
   <!--    &lt;!&ndash; partial 'google-ads-vertical' &ndash;&gt;-->
   <!--  </aside>-->
   <article class='col-md-10'>
+    <div class='time row text-center'>
+      <span class='col-md-12'>Atualizado em tempo real</span>
+    </div>
+    {{- partial "google-ads-responsive.html" (dict "slot" "6989275983") -}}
+    <!-- = partial 'cameras' -->
     <div class='social-share row' style='text-align:center;'>
       <div class='add-this col-md-12'>
         <h5>DIVULGUE</h5>
@@ -15,14 +20,9 @@
             onclick='ga("send", "event", "Chrome Store", "click");'>Navegador</a>!</span>
       </div>
     </div>
-    <div class='time row text-center'>
-      <span class='col-md-12'>Atualizado em tempo real</span>
-    </div>
-    {{- partial "google-ads-responsive.html" (dict "slot" "6989275983") -}}
-    <!-- = partial 'cameras' -->
     <br>
     <div class='waze row'>
-      <div class="col-md-11">
+      <div class="col-md-12">
         {{- partial "waze.html" . -}}
       </div>
     </div>
