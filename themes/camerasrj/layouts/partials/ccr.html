@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-6">
+    <h4>Paracambi (KM 224)</h4>
+    <video class="img-rounded img-responsive camera-stream" width="100%" controls playsinline muted autoplay
+      poster="https://rodovias.motiva.com.br/content/dam/conteudo-multicanal/rodovias/conteudo/pt/cameras/riosp/images/br116km224rj.png"
+      data-stream="https://dlziwpy8wmigq.cloudfront.net/out/v1/4e01de7aff184385a6a4cff8524c742f/CMAF_HLS/index.m3u8"></video>
+  </div>
+  <div class="col-md-6">
+    <h4>Itatiaia (KM 315)</h4>
+    <video class="img-rounded img-responsive camera-stream" width="100%" controls playsinline muted autoplay
+      poster="https://rodovias.motiva.com.br/content/dam/conteudo-multicanal/rodovias/conteudo/pt/cameras/riosp/images/br116km315rj.png"
+      data-stream="https://d3b8201cy0qzzb.cloudfront.net/out/v1/12d7e2e551894165a5e2d08fc2b58b20/CMAF_HLS/index.m3u8"></video>
+  </div>
+</div>
+<script>
+  (function () {
+    var streams = document.querySelectorAll(".camera-stream");
+    if (!streams.length) return;
+
+    function initHls() {
+      streams.forEach(function (video) {
+        var src = video.getAttribute("data-stream");
+        if (!src) return;
+
+        if (video.canPlayType("application/vnd.apple.mpegurl")) {
+          video.src = src;
+          video.play().catch(function () {});
+          return;
+        }
+
+        if (window.Hls && window.Hls.isSupported()) {
+          var hls = new Hls({ maxBufferLength: 15 });
+          hls.loadSource(src);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.MANIFEST_PARSED, function () {
+            video.play().catch(function () {});
+          });
+          return;
+        }
+
+        video.src = src;
+        video.play().catch(function () {});
+      });
+    }
+
+    if (window.Hls) {
+      initHls();
+      return;
+    }
+
+    var script = document.createElement("script");
+    script.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.18/dist/hls.min.js";
+    script.async = true;
+    script.onload = initHls;
+    document.head.appendChild(script);
+  })();
+</script>

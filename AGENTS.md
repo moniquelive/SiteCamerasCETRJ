@@ -22,7 +22,8 @@
 
 ## Testing Guidelines
 - There are no automated tests in this repository.
-- Validate changes by running `hugo server -D` and a production build with `hugo --gc --minify`, then review the generated pages under `public/`.
+- Always verify changes by running `hugo --gc --minify`.
+- For manual QA, run `hugo server -D` and review the generated pages under `public/`.
 
 ## Commit & Pull Request Guidelines
 - Commit history mixes short, descriptive messages and Conventional Commit-style prefixes (e.g., `chore:`, `fix:`, `feat:`). Prefer concise present-tense messages under ~72 characters and avoid noisy commits.

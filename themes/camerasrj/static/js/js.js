@@ -7,8 +7,8 @@
     return yyyy + (mm[1]?mm:"0"+mm[0]) + (dd[1]?dd:"0"+dd[0]); // padding
   };
 
-  var req1 = $.get("http://static.camerasrj.com.br/cam/timestamp.html");
-  var req2 = $.getJSON("http://static.camerasrj.com.br/cam/cameras.php");
+  var req1 = $.get("https://static.camerasrj.com.br/cam/timestamp.html");
+  var req2 = $.getJSON("https://static.camerasrj.com.br/cam/cameras.php");
   $.when(req1, req2).done(function(timestamp, liveCameras) {
     AREAS['AoVivo'] = liveCameras[0]['cidades']['cameras'];
 
@@ -208,8 +208,8 @@
 
   function createCameras(h) {
     var $content = $('.cameras-tabs');
-    var CAM_URL_JPG = 'http://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
-    var CAM_URL_GIF = 'http://static.camerasrj.com.br/cam/{0}.gif?h={1}';
+    var CAM_URL_JPG = 'https://static.camerasrj.com.br/cam/{0}.jpg?h={1}';
+    var CAM_URL_GIF = 'https://static.camerasrj.com.br/cam/{0}.gif?h={1}';
 
     var partial = _(AREAS).map(function(cameras, zone) {
       var area = zone.replace(/::/g, '/')
@@ -281,4 +281,3 @@
     }
   });
 };
-
