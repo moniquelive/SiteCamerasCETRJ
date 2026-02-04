@@ -25,5 +25,5 @@ params:
 - Analytics: `layouts/partials/analytics.html`
 
 ## Assets
-- CSS lives in `static/css/all.css`
+- Tailwind source lives in `assets/css/main.css`
 - JavaScript lives in `static/js/js.js`

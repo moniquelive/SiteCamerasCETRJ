@@ -1,40 +1,30 @@
 {{ define "main" }}
-<main class='container'>
-  <!--  <aside class='sidebar col-md-1 visible-lg-block'>-->
-  <!--    &lt;!&ndash; partial 'google-ads-vertical' &ndash;&gt;-->
-  <!--  </aside>-->
-  <article class='col-md-10'>
-    <div class='time row text-center'>
-      <span class='col-md-12'>Atualizado em tempo real</span>
-    </div>
-    {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
-    <!-- = partial 'cameras' -->
-    <div class='social-share row' style='text-align:center;'>
-      <div class='add-this col-md-12'>
-        <h5>DIVULGUE</h5>
-        {{- partial "add-this.html" . -}}
+<main class="site-main">
+  <div class="layout-grid">
+    <article class="layout-main">
+      <div class="time-banner">
+        <span>Atualizado em tempo real</span>
       </div>
-      <div class='chrome-store col-md-12'>
-        <span class='for-chrome-only' style='display:none;'>Veja as Cameras RJ diretamente no seu&nbsp;<a
-            href='https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag'
-            onclick='ga("send", "event", "Chrome Store", "click");'>Navegador</a>!</span>
-      </div>
-    </div>
-    {{/* - partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") - */}}
-    <div class='waze row'>
-      <div class="col-md-12">
+      {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
+      <div class="cameras-ui"></div>
+      <section class="share-panel">
+        <h2 class="share-title">DIVULGUE</h2>
+        <div class="share-actions">
+          {{- partial "add-this.html" . -}}
+        </div>
+        <div class="chrome-note chrome-only">Veja as Câmeras RJ diretamente no seu <a
+            href="https://chrome.google.com/webstore/detail/ajafcggbmpnnlpnncpppijjkhclneiag"
+            onclick="ga('send', 'event', 'Chrome Store', 'click');">Navegador</a>!</div>
+      </section>
+      {{/* - partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") - */}}
+      <section class="waze-panel">
         {{- partial "waze.html" . -}}
-      </div>
-    </div>
-    <br>
-    <div class='separator row'>
-      <div class="col-md-11">
-        <hr>
-      </div>
-    </div>
-  </article>
-  <aside class='sidebar col-md-2 visible-lg-block'>
-    {{- partial "twitter.html" . -}}
-  </aside>
+      </section>
+      <hr class="section-divider">
+    </article>
+    <aside class="layout-aside">
+      {{- partial "twitter.html" . -}}
+    </aside>
+  </div>
 </main>
 {{ end }}

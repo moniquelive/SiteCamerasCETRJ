@@ -1,0 +1,374 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  body {
+    @apply min-h-screen bg-white font-sans text-slate-900;
+  }
+
+  .site-body {
+    @apply min-h-screen pb-12;
+  }
+
+  a {
+    @apply text-blue-600 underline-offset-4;
+  }
+
+  a:hover {
+    @apply text-blue-800;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-slate-900;
+  }
+
+  h1 {
+    @apply text-2xl;
+  }
+
+  h2 {
+    @apply text-xl;
+  }
+
+  h3 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply leading-relaxed text-slate-700;
+  }
+
+  img {
+    @apply block;
+  }
+}
+
+@layer components {
+  .site-header {
+    @apply fixed left-0 top-0 z-50 w-full border-b border-slate-200 bg-slate-100;
+  }
+
+  .nav-shell {
+    @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8;
+  }
+
+  .nav-branding {
+    @apply flex items-center;
+  }
+
+  .nav-brand {
+    @apply text-lg font-normal text-slate-800 no-underline;
+  }
+
+  .nav-menu {
+    @apply relative;
+  }
+
+  .nav-menu summary {
+    @apply list-none;
+  }
+
+  .nav-menu summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .nav-menu summary {
+      display: none;
+    }
+
+    .nav-menu .nav-panel {
+      display: flex;
+    }
+  }
+
+  .nav-toggle {
+    @apply flex items-center rounded border border-slate-300 bg-slate-100 px-3 py-2 text-slate-700 md:hidden;
+  }
+
+  .nav-toggle-icon {
+    @apply inline-flex flex-col gap-1;
+  }
+
+  .nav-toggle-icon span {
+    @apply block h-0.5 w-5 bg-slate-600;
+  }
+
+  .nav-panel {
+    @apply mt-3 hidden flex-col gap-4 rounded border border-slate-200 bg-white p-4 md:mt-0 md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0;
+  }
+
+  .nav-menu[open] .nav-panel {
+    @apply flex;
+  }
+
+  .nav-links {
+    @apply flex flex-col gap-3 md:flex-row md:items-center;
+  }
+
+  .nav-link {
+    @apply text-sm font-normal text-slate-700 no-underline hover:text-slate-900;
+  }
+
+  .nav-search {
+    @apply flex flex-col gap-2 md:flex-row md:items-center;
+  }
+
+  .nav-input {
+    @apply w-full rounded border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:border-slate-400 focus:outline-none md:w-52;
+  }
+
+  .nav-button {
+    @apply rounded border border-slate-300 bg-white px-3 py-2 text-sm font-normal text-slate-700 hover:bg-slate-50;
+  }
+
+  .visually-hidden {
+    @apply sr-only;
+  }
+
+  .site-main {
+    @apply mx-auto w-full max-w-6xl px-4 pb-16 pt-16 sm:px-6 lg:px-8;
+  }
+
+  .layout-grid {
+    @apply grid gap-6 lg:grid-cols-12;
+  }
+
+  .layout-main {
+    @apply lg:col-span-10;
+  }
+
+  .layout-aside {
+    @apply hidden lg:col-span-2 lg:block;
+  }
+
+  .time-banner {
+    @apply mb-2 text-center text-sm text-slate-600;
+  }
+
+  .time-banner span {
+    @apply block;
+  }
+
+  .share-panel {
+    @apply mt-4 text-center;
+  }
+
+  .share-title {
+    @apply text-sm font-semibold uppercase text-slate-700;
+  }
+
+  .share-actions {
+    @apply mt-2 flex flex-wrap items-center justify-center gap-3;
+  }
+
+  .share-toolbox {
+    @apply flex flex-wrap items-center justify-center gap-3;
+  }
+
+  .chrome-note {
+    @apply mt-2 text-center text-sm text-slate-600;
+  }
+
+  .chrome-note a {
+    @apply font-semibold text-blue-600 underline;
+  }
+
+  .chrome-only {
+    @apply hidden;
+  }
+
+  .waze-panel {
+    @apply mt-4;
+  }
+
+  .waze-embed {
+    @apply overflow-hidden;
+  }
+
+  .waze-frame {
+    @apply h-[50vh] w-full;
+  }
+
+  .section-divider {
+    @apply my-4 border-slate-200;
+  }
+
+  .twitter-panel {
+    @apply border-slate-200;
+  }
+
+  .twitter-title {
+    @apply text-base font-semibold text-slate-700;
+  }
+
+  .twitter-embed {
+    @apply mt-2;
+  }
+
+  .timeline-panel {
+    @apply border border-slate-200 bg-white p-4;
+  }
+
+  .timeline-embed {
+    @apply mt-2 overflow-hidden;
+  }
+
+  .timeline-frame {
+    @apply h-[600px] w-full;
+  }
+
+  .cameras-ui {
+    @apply mt-6;
+  }
+
+  .camera-controls {
+    @apply mt-4 grid gap-3 sm:grid-cols-2;
+  }
+
+  .form-field {
+    @apply flex flex-col gap-2;
+  }
+
+  .form-label {
+    @apply text-sm font-semibold text-slate-700;
+  }
+
+  .form-select {
+    @apply h-11 w-full rounded border border-slate-300 bg-white pl-4 pr-10 text-sm text-slate-700;
+  }
+
+  .cameras-list {
+    @apply mt-6;
+  }
+
+  .camera-grid {
+    @apply flex flex-wrap justify-center gap-4;
+  }
+
+  .camera-card {
+    @apply w-full rounded border border-slate-300 bg-white p-3 transition-all duration-200 md:w-1/2;
+  }
+
+  .camera-card.is-expanded {
+    @apply md:w-full;
+  }
+
+  .camera-card.is-expanded .camera-image {
+    @apply shadow-md;
+  }
+
+  .camera-media {
+    @apply relative flex items-center justify-center;
+  }
+
+  .camera-image {
+    @apply mx-auto block w-full max-w-full rounded transition-shadow duration-200;
+  }
+
+  .camera-caption {
+    @apply mt-2 px-1 text-sm text-slate-600;
+  }
+
+  .camera-empty {
+    @apply border border-dashed border-slate-300 bg-white p-4 text-center text-sm text-slate-600;
+  }
+
+  .google-ads-responsive {
+    @apply my-3;
+  }
+
+  .google-ads-responsive .adsbygoogle {
+    @apply min-h-[90px];
+  }
+
+  .ads-responsive-slot {
+    @apply block w-full;
+  }
+
+  .ads-horizontal {
+    @apply my-4;
+  }
+
+  .ads-horizontal__frame {
+    @apply mx-auto h-[90px] w-[728px] overflow-hidden;
+  }
+
+  .ads-horizontal__slot {
+    @apply block h-[90px] w-[728px];
+  }
+
+  @media (max-width: 480px) {
+    .google-ads-responsive {
+      @apply my-2;
+    }
+
+    .google-ads-responsive .adsbygoogle {
+      @apply min-h-[60px];
+    }
+
+    .google-ads-responsive.ads-top {
+      @apply hidden;
+    }
+
+    .ads-horizontal__frame {
+      @apply w-full;
+    }
+
+    .ads-horizontal__slot {
+      @apply w-full;
+    }
+  }
+
+  .page-shell {
+    @apply mx-auto max-w-4xl;
+  }
+
+  .page-header {
+    @apply mb-4;
+  }
+
+  .page-title {
+    @apply text-2xl font-semibold text-slate-900;
+  }
+
+  .page-body {
+    @apply space-y-3 text-slate-700;
+  }
+
+  .list-grid {
+    @apply grid gap-4;
+  }
+
+  .list-item {
+    @apply border border-slate-200 bg-white p-4;
+  }
+
+  .list-title {
+    @apply text-lg font-semibold text-slate-900;
+  }
+
+  .list-summary {
+    @apply mt-2 text-slate-600;
+  }
+
+  .site-footer {
+    @apply fixed bottom-0 left-0 w-full border-t border-slate-200 bg-slate-800 py-3;
+  }
+
+  .footer-shell {
+    @apply mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8;
+  }
+
+  .statcounter {
+    @apply opacity-80;
+  }
+}

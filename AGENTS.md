@@ -15,6 +15,7 @@
 - Layout overrides should live in `themes/camerasrj/layouts/`; only add new layouts when reusing existing ones is not possible.
 - Shared assets should go in `themes/camerasrj/static/` and referenced with Hugo `relURL`/`absURL` helpers to keep paths consistent.
 - Use Hugo partials for repeatable sections and keep partial names short, lowercase, and hyphenated.
+- Keep layout and styling within the theme; avoid layout markup in content files.
 
 ## Build, Test, and Development Commands
 - `hugo server -D` runs the local dev server and includes drafts.
@@ -24,6 +25,7 @@
 ## Coding Style & Naming Conventions
 - HTML/Hugo templates use 2-space indentation; keep the existing spacing and line breaks for diffs.
 - JavaScript follows the style in `themes/camerasrj/static/js/` (2-space indent, semicolons) and always uses modern JavaScript syntax (ES6+).
+- Always use semantic CSS class names in templates and define them with Tailwind's `@apply` directive in theme styles.
 - YAML files use 2-space indentation; avoid tabs.
 - Prefer lowercase, hyphenated filenames for new content or assets (e.g., `content/cameras-ao-vivo.md`).
 

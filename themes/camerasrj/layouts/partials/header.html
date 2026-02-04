@@ -1,33 +1,35 @@
-<nav class='navbar navbar-default navbar-fixed-top'>
-  <div class='container-fluid'>
-    <div class='navbar-header'>
-      <span style='display:none'>
-        <h1><a href='/'>Câmeras da CET-RIO (CET-RJ) em tempo real</a></h1>
+<header class="site-header">
+  <div class="nav-shell">
+    <div class="nav-branding">
+      <span class="visually-hidden">
+        <h1><a href="/">Câmeras da CET-RIO (CET-RJ) em tempo real</a></h1>
         <h2>Condições do trânsito ao vivo e de graça!</h2>
       </span>
-      <button aria-expanded='false' class='navbar-toggle collapsed' data-target='#bs-example-navbar-collapse-1' data-toggle='collapse' type='button'>
-        <span class='sr-only'>Toggle navigation</span>
-        <span class='icon-bar'></span>
-        <span class='icon-bar'></span>
-        <span class='icon-bar'></span>
-      </button>
-      <a class='navbar-brand' href='#'>Câmeras da CET-RIO</a>
+      <a class="nav-brand" href="/">Câmeras da CET-RIO</a>
     </div>
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class='collapse navbar-collapse' id='bs-example-navbar-collapse-1'>
-      <form action='http://www.google.com.br' class='navbar-form navbar-right' id='cse-search-box' target='_blank'>
-        <input name='cx' type='hidden' value='partner-pub-7232537493483974:4174415669'>
-        <input name='ie' type='hidden' value='UTF-8'>
-        <div class='form-group'>
-          <input class='form-control' id='google-search' name='q' placeholder='Google' type='search'>
-        </div>
-        <button class='btn btn-default' name='sa' type='submit'>Buscar</button>
-      </form>
-      <ul class='nav navbar-nav navbar-right'>
-        <li><a href='/'>Home</a></li>
-        <li><a href='https://monique.dev/'>Sobre</a></li>
-        <li><a href='https://x.com/moniquelive'>Contato</a></li>
-      </ul>
-    </div>
+    <details class="nav-menu" open>
+      <summary class="nav-toggle" aria-controls="nav-panel" aria-expanded="false">
+        <span class="visually-hidden">Toggle navigation</span>
+        <span class="nav-toggle-icon" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </summary>
+      <div class="nav-panel" id="nav-panel">
+        <nav class="nav-links" aria-label="Principal">
+          <a class="nav-link" href="/">Home</a>
+          <a class="nav-link" href="https://monique.dev/">Sobre</a>
+          <a class="nav-link" href="https://x.com/moniquelive">Contato</a>
+        </nav>
+        <form action="https://www.google.com.br" class="nav-search" id="cse-search-box" target="_blank">
+          <input name="cx" type="hidden" value="partner-pub-7232537493483974:4174415669">
+          <input name="ie" type="hidden" value="UTF-8">
+          <label class="visually-hidden" for="google-search">Buscar</label>
+          <input class="nav-input" id="google-search" name="q" placeholder="Google" type="search">
+          <button class="nav-button" name="sa" type="submit">Buscar</button>
+        </form>
+      </div>
+    </details>
   </div>
-</nav>
+</header>

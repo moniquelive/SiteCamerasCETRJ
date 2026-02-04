@@ -3,8 +3,7 @@
 {{- $account := $.Site.Params.adsenseAccount -}}
 {{- if $account }}
 <section class="google-ads-responsive {{ $class }}">
-  <ins class="adsbygoogle"
-       style="display:block; width:100%;"
+  <ins class="adsbygoogle ads-responsive-slot"
        data-ad-client="{{ $account }}"
        data-ad-slot="{{ $slot }}"
        data-ad-format="auto"

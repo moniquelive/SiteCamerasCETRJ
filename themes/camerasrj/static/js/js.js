@@ -20,17 +20,12 @@ window.init = function () {
     }
 
     const ensureHost = () => {
-      let $host = $(".cameras-ui");
+      let $host = $(".cameras-ui").first();
       if ($host.length) return $host;
-      const $article = $("main article").first();
-      $host = $('<div class="cameras-ui row"></div>');
-      if ($article.length) {
-        const $time = $article.find(".time").last();
-        if ($time.length) {
-          $host.insertAfter($time);
-        } else {
-          $host.prependTo($article);
-        }
+      $host = $('<div class="cameras-ui"></div>');
+      const $main = $("main").first();
+      if ($main.length) {
+        $host.appendTo($main);
       } else {
         $host.appendTo("body");
       }
@@ -41,23 +36,23 @@ window.init = function () {
     $host.empty();
 
     const $controls = $(
-      `<div class="col-md-12 cameras-controls">
-        <label for="bairro-select">Bairro</label>
-        <select id="bairro-select" class="form-control"></select>
-      </div>`,
-    );
-    const $cameraControls = $(
-      `<div class="col-md-12 cameras-controls">
-        <label for="camera-select">Câmera</label>
-        <select id="camera-select" class="form-control"></select>
+      `<div class="camera-controls">
+        <div class="form-field">
+          <label class="form-label" for="bairro-select">Bairro</label>
+          <select id="bairro-select" class="form-select"></select>
+        </div>
+        <div class="form-field">
+          <label class="form-label" for="camera-select">Câmera</label>
+          <select id="camera-select" class="form-select"></select>
+        </div>
       </div>`,
     );
     const $listWrapper = $(
-      `<div class="col-md-12 cameras-list">
-        <div class="row camera-grid"></div>
+      `<div class="cameras-list">
+        <div class="camera-grid"></div>
       </div>`,
     );
-    $host.append($controls, $cameraControls, $listWrapper);
+    $host.append($controls, $listWrapper);
 
     const $select = $host.find("#bairro-select");
     const $cameraSelect = $host.find("#camera-select");
@@ -95,7 +90,7 @@ window.init = function () {
     const bindImageEvents = ($imgs) => {
       $imgs.each(function () {
         const $img = $(this);
-        const $caption = $img.next(".caption");
+        const $caption = $img.closest(".camera-card").find(".camera-caption");
         $img
           .off("load.camera")
           .on("load.camera", function () {
@@ -128,13 +123,13 @@ window.init = function () {
           const caption = cam.caption || "";
           const src = CAM_URL + encodeURIComponent(id);
           return `
-            <div class="col-md-6 camera-item">
-              <div class="thumbnail">
-                <img class="camera-image img-responsive" alt="" style="width:100%" src="${src}">
-                <div class="caption" data-caption="${escapeHtml(
-                  caption,
-                )}">Carregando...</div>
+            <div class="camera-card">
+              <div class="camera-media">
+                <img class="camera-image" alt="" src="${src}">
               </div>
+              <div class="camera-caption" data-caption="${escapeHtml(
+                caption,
+              )}">Carregando...</div>
             </div>
           `;
         })
@@ -159,22 +154,15 @@ window.init = function () {
 
     const bindGridHover = () => {
       $grid
-        .find(".camera-item")
+        .find(".camera-card")
         .off("mouseenter.camera mouseleave.camera")
         .on("mouseenter.camera", function () {
           const $item = $(this);
-          $grid
-            .find(".camera-item")
-            .removeClass("camera-item--expanded col-md-12")
-            .addClass("col-md-6");
-          $item
-            .removeClass("col-md-6")
-            .addClass("col-md-12 camera-item--expanded");
+          $grid.find(".camera-card").removeClass("is-expanded");
+          $item.addClass("is-expanded");
         })
         .on("mouseleave.camera", function () {
-          $(this)
-            .removeClass("camera-item--expanded col-md-12")
-            .addClass("col-md-6");
+          $(this).removeClass("is-expanded");
         });
     };
 
@@ -190,7 +178,7 @@ window.init = function () {
     });
 
     if (!state.bairro) {
-      $grid.html("<p>Nenhum bairro disponível.</p>");
+      $grid.html("<p class=\"camera-empty\">Nenhum bairro disponível.</p>");
       return;
     }
 
@@ -207,7 +195,7 @@ window.init = function () {
 
   // social thangs
   if (navigator.userAgent.match(/Chrome/i)) {
-    $(".for-chrome-only").fadeIn();
+    $(".chrome-only").fadeIn();
   }
   const $fb_like = $("a.addthis_button_facebook_like");
   $fb_like.bind("edge.create", (targetUrl) =>

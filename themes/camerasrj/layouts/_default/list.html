@@ -1,11 +1,17 @@
 {{ define "main" }}
-<h1>{{ .Title }}</h1>
-{{ range .Pages.ByPublishDate.Reverse }}
-<p>
-<h3><a class="title" href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
-<a class="summary" href="{{ .RelPermalink }}">
-  <p>{{ .Summary }}</p>
-</a>
-</p>
-{{ end }}
+<main class="site-main">
+  <div class="page-shell">
+    <header class="page-header">
+      <h1 class="page-title">{{ .Title }}</h1>
+    </header>
+    <div class="list-grid">
+      {{ range .Pages.ByPublishDate.Reverse }}
+      <article class="list-item">
+        <h2 class="list-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+        <p class="list-summary">{{ .Summary }}</p>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</main>
 {{ end }}

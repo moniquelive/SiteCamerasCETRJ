@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang | default "pt-br" }}">
     {{- partial "head.html" . -}}
-    <body>
+    <body class="site-body">
         {{- partial "header.html" . -}}
         <div id="content">
         {{- block "main" . }}{{- end }}
@@ -9,9 +9,5 @@
         {{- partial "footer.html" . -}}
         {{- partial "analytics.html" . -}}
         {{- partial "js.html" . -}}
-        {{/* "Padding" */}}
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
-        <div class="row">&nbsp;</div>
     </body>
 </html>
