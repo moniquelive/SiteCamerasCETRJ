@@ -277,7 +277,7 @@
               imageControllers.set(img, { controller, objectUrl });
               img.src = objectUrl;
             })
-            .catch((error) => {
+            .catch(() => {
               if (controller.signal.aborted) return;
               img.src = url;
             });
@@ -349,8 +349,8 @@
         state.cameraId = cameraIds.includes(state.cameraId)
           ? state.cameraId
           : cameras.length
-          ? cameras[0].id
-          : "";
+            ? cameras[0].id
+            : "";
         if (state.cameraId) cameraSelect.value = state.cameraId;
       };
 
