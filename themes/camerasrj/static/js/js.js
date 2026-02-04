@@ -1,6 +1,10 @@
 (function () {
   window.init = function () {
     const bairrosUrl = "/js/cor-bairros.json";
+    const storageKeys = {
+      bairro: "camerasrj.bairro",
+      camera: "camerasrj.camera",
+    };
     fetch(bairrosUrl)
       .then((response) => {
         if (!response.ok) {
@@ -130,7 +134,12 @@
           bairroSelect.appendChild(optgroup);
         });
 
-      const state = { bairro: bairros[0] || "", cameraId: "" };
+      const savedBairro = window.localStorage.getItem(storageKeys.bairro) || "";
+      const savedCamera = window.localStorage.getItem(storageKeys.camera) || "";
+      const state = {
+        bairro: bairros.includes(savedBairro) ? savedBairro : bairros[0] || "",
+        cameraId: savedCamera,
+      };
 
       const bindImageEvents = (imgs) => {
         imgs.forEach((img) => {
@@ -197,17 +206,28 @@
           });
           cameraSelect.appendChild(option);
         });
-        state.cameraId = cameras.length ? cameras[0].id : "";
+        const cameraIds = cameras.map((cam) => cam.id);
+        state.cameraId = cameraIds.includes(state.cameraId)
+          ? state.cameraId
+          : cameras.length
+            ? cameras[0].id
+            : "";
+        if (state.cameraId) {
+          cameraSelect.value = state.cameraId;
+        }
       };
 
+      bairroSelect.value = state.bairro;
       bairroSelect.addEventListener("change", (event) => {
         state.bairro = event.target.value;
+        window.localStorage.setItem(storageKeys.bairro, state.bairro);
         updateCameraSelect();
         renderCamera();
       });
 
       cameraSelect.addEventListener("change", (event) => {
         state.cameraId = event.target.value;
+        window.localStorage.setItem(storageKeys.camera, state.cameraId);
         renderCamera();
       });
 
