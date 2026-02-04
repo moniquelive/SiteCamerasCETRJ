@@ -172,7 +172,7 @@
             const caption = cam.caption || "";
             const src = CAM_URL + encodeURIComponent(id);
             return `
-            <div class="camera-card">
+            <div class="camera-card is-expanded">
               <div class="camera-media">
                 <img class="camera-image" alt="" src="${src}">
               </div>
@@ -185,7 +185,6 @@
           .join("");
         grid.innerHTML = html;
         bindImageEvents(Array.from(grid.querySelectorAll("img.camera-image")));
-        bindGridHover();
       };
 
       const updateCameraSelect = () => {
@@ -199,19 +198,6 @@
           cameraSelect.appendChild(option);
         });
         state.cameraId = cameras.length ? cameras[0].id : "";
-      };
-
-      const bindGridHover = () => {
-        const cards = Array.from(grid.querySelectorAll(".camera-card"));
-        cards.forEach((card) => {
-          card.addEventListener("mouseenter", () => {
-            cards.forEach((item) => item.classList.remove("is-expanded"));
-            card.classList.add("is-expanded");
-          });
-          card.addEventListener("mouseleave", () => {
-            card.classList.remove("is-expanded");
-          });
-        });
       };
 
       bairroSelect.addEventListener("change", (event) => {

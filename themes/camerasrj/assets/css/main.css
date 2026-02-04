@@ -8,38 +8,38 @@
   }
 
   body {
-    @apply min-h-screen bg-white font-sans text-slate-900;
+    @apply min-h-screen bg-gradient-to-b from-slate-50 via-white to-sky-50 font-sans text-slate-900;
   }
 
   .site-body {
-    @apply min-h-screen pb-12;
+    @apply min-h-screen flex flex-col;
   }
 
   a {
-    @apply text-blue-600 underline-offset-4;
+    @apply text-sky-700 underline-offset-4;
   }
 
   a:hover {
-    @apply text-blue-800;
+    @apply text-sky-900;
   }
 
   h1,
   h2,
   h3,
   h4 {
-    @apply font-display text-slate-900;
+    @apply font-sans text-slate-900;
   }
 
   h1 {
-    @apply text-2xl;
+    @apply text-2xl md:text-3xl;
   }
 
   h2 {
-    @apply text-xl;
+    @apply text-xl md:text-2xl;
   }
 
   h3 {
-    @apply text-lg;
+    @apply text-lg md:text-xl;
   }
 
   p {
@@ -53,11 +53,11 @@
 
 @layer components {
   .site-header {
-    @apply fixed left-0 top-0 z-50 w-full border-b border-slate-200 bg-slate-100;
+    @apply sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur;
   }
 
   .nav-shell {
-    @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8;
+    @apply mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8;
   }
 
   .nav-branding {
@@ -65,7 +65,7 @@
   }
 
   .nav-brand {
-    @apply text-lg font-normal text-slate-800 no-underline;
+    @apply text-lg font-semibold text-slate-900 no-underline;
   }
 
   .nav-menu {
@@ -91,7 +91,7 @@
   }
 
   .nav-toggle {
-    @apply flex items-center rounded border border-slate-300 bg-slate-100 px-3 py-2 text-slate-700 md:hidden;
+    @apply flex items-center rounded-full border border-slate-200 bg-white px-4 py-2 text-slate-700 shadow-sm md:hidden;
   }
 
   .nav-toggle-icon {
@@ -99,11 +99,11 @@
   }
 
   .nav-toggle-icon span {
-    @apply block h-0.5 w-5 bg-slate-600;
+    @apply block h-0.5 w-5 bg-slate-700;
   }
 
   .nav-panel {
-    @apply mt-3 hidden flex-col gap-4 rounded border border-slate-200 bg-white p-4 md:mt-0 md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0;
+    @apply mt-3 hidden flex-col gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-lg md:mt-0 md:flex md:flex-row md:items-center md:border-0 md:bg-transparent md:p-0 md:shadow-none;
   }
 
   .nav-menu[open] .nav-panel {
@@ -115,7 +115,7 @@
   }
 
   .nav-link {
-    @apply text-sm font-normal text-slate-700 no-underline hover:text-slate-900;
+    @apply text-sm font-semibold uppercase tracking-wide text-slate-600 no-underline hover:text-slate-900;
   }
 
   .nav-search {
@@ -123,11 +123,11 @@
   }
 
   .nav-input {
-    @apply w-full rounded border border-slate-300 px-3 py-2 text-sm text-slate-700 focus:border-slate-400 focus:outline-none md:w-52;
+    @apply w-full rounded-full border border-slate-300 bg-white px-4 py-2 text-sm text-slate-700 shadow-sm focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200 md:w-52;
   }
 
   .nav-button {
-    @apply rounded border border-slate-300 bg-white px-3 py-2 text-sm font-normal text-slate-700 hover:bg-slate-50;
+    @apply rounded-full bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-slate-800;
   }
 
   .visually-hidden {
@@ -135,19 +135,19 @@
   }
 
   .site-main {
-    @apply mx-auto w-full max-w-6xl px-4 pb-16 pt-16 sm:px-6 lg:px-8;
+    @apply mx-auto w-full max-w-6xl flex-1 px-4 pb-16 pt-8 sm:px-6 lg:px-8;
   }
 
   .layout-grid {
-    @apply grid gap-6 lg:grid-cols-12;
+    @apply grid gap-8 lg:grid-cols-12;
   }
 
   .layout-main {
-    @apply lg:col-span-10;
+    @apply lg:col-span-9;
   }
 
   .layout-aside {
-    @apply hidden lg:col-span-2 lg:block;
+    @apply hidden lg:col-span-3 lg:block;
   }
 
   .time-banner {
@@ -159,15 +159,15 @@
   }
 
   .share-panel {
-    @apply mt-4 text-center;
+    @apply mt-0 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 text-center shadow-sm;
   }
 
   .section-title {
-    @apply mt-6 text-base font-semibold text-slate-700;
+    @apply mt-3 mb-3 text-xs font-semibold uppercase tracking-[0.28em] text-slate-500;
   }
 
   .share-actions {
-    @apply mt-2 flex flex-wrap items-center justify-center gap-3;
+    @apply mt-4 flex flex-wrap items-center justify-center gap-3;
   }
 
   .share-toolbox {
@@ -175,11 +175,11 @@
   }
 
   .waze-panel {
-    @apply mt-4;
+    @apply mt-8 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
   }
 
   .waze-embed {
-    @apply overflow-hidden;
+    @apply mt-4 overflow-hidden rounded-2xl border border-slate-200;
   }
 
   .waze-frame {
@@ -187,27 +187,23 @@
   }
 
   .section-divider {
-    @apply my-4 border-slate-200;
+    @apply my-8 border-slate-200;
   }
 
   .twitter-panel {
-    @apply border-slate-200;
-  }
-
-  .twitter-title {
-    @apply text-base font-semibold text-slate-700;
+    @apply rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
   }
 
   .twitter-embed {
-    @apply mt-2;
+    @apply mt-3;
   }
 
   .timeline-panel {
-    @apply border border-slate-200 bg-white p-4;
+    @apply rounded-2xl border border-slate-200 bg-white px-6 pb-6 pt-4 shadow-sm;
   }
 
   .timeline-embed {
-    @apply mt-2 overflow-hidden;
+    @apply mt-4 overflow-hidden rounded-2xl border border-slate-200;
   }
 
   .timeline-frame {
@@ -218,8 +214,12 @@
     @apply mt-6;
   }
 
+  .cameras-panel {
+    @apply mt-8 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
+  }
+
   .camera-controls {
-    @apply mt-4 grid gap-3 sm:grid-cols-2;
+    @apply mt-4 grid gap-4 sm:grid-cols-2;
   }
 
   .form-field {
@@ -231,7 +231,7 @@
   }
 
   .form-select {
-    @apply h-11 w-full rounded border border-slate-300 bg-white pl-4 pr-10 text-sm text-slate-700;
+    @apply h-12 w-full rounded-xl border border-slate-300 bg-white pl-4 pr-10 text-sm text-slate-700 shadow-sm focus:border-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-200;
   }
 
   .cameras-list {
@@ -239,19 +239,15 @@
   }
 
   .camera-grid {
-    @apply flex flex-wrap justify-center gap-4;
+    @apply flex flex-wrap justify-center gap-6;
   }
 
   .camera-card {
-    @apply w-full rounded border border-slate-300 bg-white p-3 transition-all duration-200 md:w-1/2;
-  }
-
-  .camera-card.is-expanded {
-    @apply md:w-full;
+    @apply w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 md:w-full;
   }
 
   .camera-card.is-expanded .camera-image {
-    @apply shadow-md;
+    @apply shadow-lg;
   }
 
   .camera-media {
@@ -259,15 +255,15 @@
   }
 
   .camera-image {
-    @apply mx-auto block w-full max-w-full rounded transition-shadow duration-200;
+    @apply mx-auto block w-full max-w-full rounded-lg transition-shadow duration-200;
   }
 
   .camera-caption {
-    @apply mt-2 px-1 text-sm text-slate-600;
+    @apply mt-3 px-1 text-sm text-slate-600;
   }
 
   .camera-empty {
-    @apply border border-dashed border-slate-300 bg-white p-4 text-center text-sm text-slate-600;
+    @apply rounded-2xl border border-dashed border-slate-300 bg-white p-6 text-center text-sm text-slate-600;
   }
 
   .google-ads-responsive {
@@ -337,7 +333,7 @@
   }
 
   .list-item {
-    @apply border border-slate-200 bg-white p-4;
+    @apply rounded-2xl border border-slate-200 bg-white px-5 pb-5 pt-4 shadow-sm;
   }
 
   .list-title {
@@ -349,11 +345,39 @@
   }
 
   .site-footer {
-    @apply fixed bottom-0 left-0 w-full border-t border-slate-200 bg-slate-800 py-3;
+    @apply mt-auto border-t border-slate-200 bg-white/90 py-8;
   }
 
   .footer-shell {
-    @apply mx-auto flex max-w-6xl items-center justify-center px-4 sm:px-6 lg:px-8;
+    @apply mx-auto grid max-w-6xl gap-6 px-4 sm:px-6 lg:grid-cols-[1.2fr_1fr_1fr] lg:items-center lg:px-8;
+  }
+
+  .footer-brand {
+    @apply flex flex-col gap-2 text-center lg:text-left;
+  }
+
+  .footer-title {
+    @apply text-base font-semibold text-slate-900;
+  }
+
+  .footer-subtitle {
+    @apply text-sm text-slate-600;
+  }
+
+  .footer-links {
+    @apply flex flex-wrap justify-center gap-4 text-sm font-semibold text-slate-700 lg:justify-start;
+  }
+
+  .footer-links a {
+    @apply text-slate-700 no-underline hover:text-slate-900;
+  }
+
+  .footer-meta {
+    @apply flex flex-col items-center gap-3 text-xs text-slate-500 lg:items-end;
+  }
+
+  .footer-copy {
+    @apply text-xs text-slate-500;
   }
 
   .statcounter {

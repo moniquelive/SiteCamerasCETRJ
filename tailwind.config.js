@@ -8,18 +8,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: [
-          "Helvetica Neue",
-          "Helvetica",
-          "Arial",
-          "sans-serif",
-        ],
-        display: [
-          "Helvetica Neue",
-          "Helvetica",
-          "Arial",
-          "sans-serif",
-        ],
+        sans: ["Manrope", "system-ui", "sans-serif"],
       },
     },
   },
