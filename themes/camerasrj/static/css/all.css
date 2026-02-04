@@ -20,6 +20,49 @@ main {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
+.cameras-ui {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.cameras-controls {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+.camera-grid {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.camera-item {
+  margin-bottom: 20px;
+}
+
+.camera-item .thumbnail {
+  padding: 12px;
+}
+
+.camera-item .caption {
+  margin-top: 10px;
+}
+
+.waze {
+  margin-top: 16px;
+  margin-bottom: 24px;
+}
+
+.social-share {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.google-ads-responsive {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
 .camera-item .thumbnail {
   position: relative;
   overflow: visible;

@@ -7,7 +7,7 @@
     <div class='time row text-center'>
       <span class='col-md-12'>Atualizado em tempo real</span>
     </div>
-    {{- partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") -}}
+    {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
     <!-- = partial 'cameras' -->
     <div class='social-share row' style='text-align:center;'>
       <div class='add-this col-md-12'>
@@ -20,27 +20,16 @@
             onclick='ga("send", "event", "Chrome Store", "click");'>Navegador</a>!</span>
       </div>
     </div>
-    <br>
+    {{/* - partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") - */}}
     <div class='waze row'>
       <div class="col-md-12">
         {{- partial "waze.html" . -}}
       </div>
     </div>
-    {{- partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") -}}
     <br>
     <div class='separator row'>
       <div class="col-md-11">
         <hr>
-      </div>
-    </div>
-    <div class="ccr row">
-      <div class="col-md-11 text-center">
-        {{- partial "ccr.html" . -}}
-      </div>
-    </div>
-    <div class='facebook row'>
-      <div class='fb-comments col-md-11 embed-responsive embed-responsive-16by9' style='text-align:center;'>
-        <fb:comments colorscheme='light' href='cetrio.cyberleo.com.br' num_posts='2' width='500'></fb:comments>
       </div>
     </div>
   </article>
