@@ -4,11 +4,11 @@
 name = "CamerasRJ"
 license = "MIT"
 licenselink = "https://www.camerasrj.com.br/themes/camerasrj/LICENSE"
-description = "CamerasRJ"
+description = "Custom theme for Cameras da CET RJ"
 homepage = "https://www.camerasrj.com.br/"
-tags = ["website"]
-features = ["", ""]
-min_version = "0.41.0"
+tags = ["cameras", "traffic", "city", "bootstrap"]
+features = ["responsive", "ads", "analytics"]
+min_version = "0.111.0"
 
 [author]
   name = "Monique Oliveira"

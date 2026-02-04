@@ -9,6 +9,13 @@
 - `public/` is the generated build output (do not edit by hand).
 - `_localizacao das cameras/` stores source CSVs and helper scripts for camera location data.
 
+## Common Hugo Theme Settings
+- Site configuration lives in `config.yaml`; prefer updating theme params there instead of hardcoding values in templates.
+- Theme-specific data belongs in `data/` or `config.yaml` params; avoid duplicating content in templates.
+- Layout overrides should live in `themes/camerasrj/layouts/`; only add new layouts when reusing existing ones is not possible.
+- Shared assets should go in `themes/camerasrj/static/` and referenced with Hugo `relURL`/`absURL` helpers to keep paths consistent.
+- Use Hugo partials for repeatable sections and keep partial names short, lowercase, and hyphenated.
+
 ## Build, Test, and Development Commands
 - `hugo server -D` runs the local dev server and includes drafts.
 - `hugo --gc --minify` builds the production site into `public/`.
@@ -23,10 +30,13 @@
 ## Testing Guidelines
 - There are no automated tests in this repository.
 - Always verify changes by running `hugo --gc --minify`.
+- Always rerun `hugo --gc --minify` after making changes, even for small updates.
 - For manual QA, run `hugo server -D` and review the generated pages under `public/`.
 
 ## Commit & Pull Request Guidelines
 - Commit history mixes short, descriptive messages and Conventional Commit-style prefixes (e.g., `chore:`, `fix:`, `feat:`). Prefer concise present-tense messages under ~72 characters and avoid noisy commits.
+- Commit messages should be detailed but concise, focusing on the intent of the change.
+- When drafting commit messages, keep them detailed but concise.
 - PRs should include: a clear summary, linked issue (if applicable), and screenshots for any visual/layout changes. Note any data source updates (CSV or JSON) explicitly.
 
 ## Data & Content Updates

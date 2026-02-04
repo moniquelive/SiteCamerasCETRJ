@@ -1,8 +1,11 @@
-<section id='google-ads-horizontal'>
-  <div style='width:728px; height:90px; overflow:hidden; margin:0 auto;'>
-    <ins class='adsbygoogle' data-ad-client='ca-pub-7232537493483974' data-ad-format='auto' data-ad-slot='5213106864' style='display:block;width:728px;height:90px'></ins>
+{{- $account := .Site.Params.adsenseAccount -}}
+{{- if $account }}
+<section id="google-ads-horizontal">
+  <div style="width:728px; height:90px; overflow:hidden; margin:0 auto;">
+    <ins class="adsbygoogle" data-ad-client="{{ $account }}" data-ad-format="auto" data-ad-slot="5213106864" style="display:block;width:728px;height:90px"></ins>
     <script>
       (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
   </div>
 </section>
+{{- end }}

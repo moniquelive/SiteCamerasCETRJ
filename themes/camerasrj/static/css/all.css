@@ -59,8 +59,23 @@ main {
 }
 
 .google-ads-responsive {
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin: 10px 0;
+}
+
+.google-ads-responsive .adsbygoogle {
+  min-height: 90px;
+}
+
+@media (max-width: 480px) {
+  .google-ads-responsive {
+    margin: 6px 0;
+  }
+  .google-ads-responsive .adsbygoogle {
+    min-height: 60px;
+  }
+  .google-ads-responsive.ads-top {
+    display: none;
+  }
 }
 
 .camera-item .thumbnail {

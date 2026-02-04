@@ -1,6 +1,24 @@
 baseURL: https://www.camerasrj.com.br/
 languageCode: pt-br
 defaultContentLanguage: pt-br
+defaultContentLanguageInSubdir: false
+timeZone: America/Sao_Paulo
+enableRobotsTXT: true
 title: Cameras da CET RJ
 
 theme: camerasrj
+
+params:
+  description: Cameras da CET-RIO (CET-RJ) em tempo real. Condicoes do transito ao vivo gratuitamente.
+  keywords: cameras,cet-rio,cetrj,cet rj,cet rio,ao vivo,cameras cet rio ao vivo,transito,linha vermelha,avenida brasil,linha amarela
+  googleSiteVerification: GPn-fQ7G3lPrvSTDtUtrRpkhz_O4S68K7Bmjm_FgxMA
+  fbAdmins: 506596308
+  adsenseAccount: ca-pub-7232537493483974
+  analytics:
+    ga4: G-JRDDE5DRX8
+    ua: UA-10270235-3
+
+languages:
+  pt-br:
+    languageName: Portugues (Brasil)
+    weight: 1
