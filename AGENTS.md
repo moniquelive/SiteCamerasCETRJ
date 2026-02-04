@@ -16,7 +16,7 @@
 
 ## Coding Style & Naming Conventions
 - HTML/Hugo templates use 2-space indentation; keep the existing spacing and line breaks for diffs.
-- JavaScript follows the style in `themes/camerasrj/static/js/` (2-space indent, semicolons).
+- JavaScript follows the style in `themes/camerasrj/static/js/` (2-space indent, semicolons) and always uses modern JavaScript syntax (ES6+).
 - YAML files use 2-space indentation; avoid tabs.
 - Prefer lowercase, hyphenated filenames for new content or assets (e.g., `content/cameras-ao-vivo.md`).
 

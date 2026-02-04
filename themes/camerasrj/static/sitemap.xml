@@ -2,12 +2,12 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.camerasrj.com.br/</loc>
+    <loc>/</loc>
   </url><url>
-    <loc>https://www.camerasrj.com.br/categories/</loc>
+    <loc>/categories/</loc>
   </url><url>
-    <loc>https://www.camerasrj.com.br/tags/</loc>
+    <loc>/tags/</loc>
   </url><url>
-    <loc>https://www.camerasrj.com.br/home/</loc>
+    <loc>/home/</loc>
   </url>
 </urlset>

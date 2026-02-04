@@ -19,3 +19,26 @@ div.addthis_toolbox {
 main {
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
+
+.camera-item .thumbnail {
+  position: relative;
+  overflow: visible;
+}
+
+.camera-item .camera-image,
+.camera-item .camera-video {
+  transition: box-shadow 180ms ease;
+  box-shadow: none;
+  display: block;
+  max-width: 100%;
+}
+
+.camera-item--expanded .camera-image,
+.camera-item--expanded .camera-video {
+  position: relative;
+  z-index: 5;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.25);
+}
+.camera-item {
+  transition: width 180ms ease;
+}
