@@ -2,19 +2,18 @@
 <main class="site-main">
   <div class="layout-grid">
     <article class="layout-main">
-      <div class="time-banner">
-        <span>Atualizado em tempo real</span>
-      </div>
-      {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
-      <div class="cameras-ui"></div>
       <section class="share-panel">
-        <h2 class="share-title">DIVULGUE</h2>
+        <h2 class="section-title">Divulgue</h2>
         <div class="share-actions">
           {{- partial "add-this.html" . -}}
         </div>
       </section>
+      {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
+      <h2 class="section-title">Câmeras ao vivo</h2>
+      <div class="cameras-ui"></div>
       {{/* - partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") - */}}
       <section class="waze-panel">
+        <h2 class="section-title">Waze</h2>
         {{- partial "waze.html" . -}}
       </section>
       <hr class="section-divider">

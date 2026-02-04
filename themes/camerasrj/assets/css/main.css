@@ -162,8 +162,8 @@
     @apply mt-4 text-center;
   }
 
-  .share-title {
-    @apply text-sm font-semibold uppercase text-slate-700;
+  .section-title {
+    @apply mt-6 text-base font-semibold text-slate-700;
   }
 
   .share-actions {
