@@ -21,11 +21,13 @@
 - `hugo server -D` runs the local dev server and includes drafts.
 - `hugo --gc --minify` builds the production site into `public/`.
 - `./build.sh` installs pinned toolchain versions (Dart Sass, Go, Hugo, Node) and builds the site; this is the command Cloudflare Workers use via `wrangler.toml`.
+- Tailwind styles compile via Hugo PostCSS using `themes/camerasrj/assets/css/main.css`; ensure Node deps are installed.
 
 ## Coding Style & Naming Conventions
 - HTML/Hugo templates use 2-space indentation; keep the existing spacing and line breaks for diffs.
 - JavaScript follows the style in `themes/camerasrj/static/js/` (2-space indent, semicolons) and always uses modern JavaScript syntax (ES6+).
 - Always use semantic CSS class names in templates and define them with Tailwind's `@apply` directive in theme styles.
+- Avoid jQuery; use vanilla DOM APIs in theme scripts.
 - YAML files use 2-space indentation; avoid tabs.
 - Prefer lowercase, hyphenated filenames for new content or assets (e.g., `content/cameras-ao-vivo.md`).
 

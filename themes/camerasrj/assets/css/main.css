@@ -174,18 +174,6 @@
     @apply flex flex-wrap items-center justify-center gap-3;
   }
 
-  .chrome-note {
-    @apply mt-2 text-center text-sm text-slate-600;
-  }
-
-  .chrome-note a {
-    @apply font-semibold text-blue-600 underline;
-  }
-
-  .chrome-only {
-    @apply hidden;
-  }
-
   .waze-panel {
     @apply mt-4;
   }

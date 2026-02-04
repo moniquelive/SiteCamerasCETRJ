@@ -1,22 +1,9 @@
 <script>
-    var addthis_config = {
+    window.addthis_config = {
         data_track_clickback: true,
         data_ga_property: "UA-10270235-3",
         data_ga_social: true,
     };
-    window.getScript(
-        "//s7.addthis.com/js/300/addthis_widget.js#pubid=lccro",
-        function () {},
-    );
-    window.getScript(
-        "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",
-        function () {},
-    );
-    window.getScript("//code.jquery.com/jquery-1.11.2.min.js", function () {
-        window.getScript("/js/js.js", function () {
-            init();
-        });
-    });
 
     (function () {
         const menu = document.querySelector(".nav-menu");
@@ -36,4 +23,16 @@
             mediaQuery.addListener(syncMenu);
         }
     })();
+</script>
+<script async src="//s7.addthis.com/js/300/addthis_widget.js#pubid=lccro"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script defer src="/js/js.js"></script>
+<script>
+    if (window.init) {
+        window.init();
+    } else {
+        window.addEventListener("DOMContentLoaded", function () {
+            if (window.init) window.init();
+        });
+    }
 </script>
