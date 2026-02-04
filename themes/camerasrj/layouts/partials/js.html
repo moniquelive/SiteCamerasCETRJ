@@ -17,4 +17,23 @@
             init();
         });
     });
+
+    (function () {
+        const menu = document.querySelector(".nav-menu");
+        if (!menu) return;
+        const mediaQuery = window.matchMedia("(min-width: 768px)");
+        const syncMenu = function () {
+            if (mediaQuery.matches) {
+                menu.setAttribute("open", "");
+            } else {
+                menu.removeAttribute("open");
+            }
+        };
+        syncMenu();
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener("change", syncMenu);
+        } else if (mediaQuery.addListener) {
+            mediaQuery.addListener(syncMenu);
+        }
+    })();
 </script>
