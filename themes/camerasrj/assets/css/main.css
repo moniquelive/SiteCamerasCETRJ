@@ -150,13 +150,6 @@
     @apply hidden lg:col-span-3 lg:block;
   }
 
-  .time-banner {
-    @apply mb-2 text-center text-sm text-slate-600;
-  }
-
-  .time-banner span {
-    @apply block;
-  }
 
   .share-panel {
     @apply mt-0 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 text-center shadow-sm;
@@ -198,17 +191,6 @@
     @apply mt-3;
   }
 
-  .timeline-panel {
-    @apply rounded-2xl border border-slate-200 bg-white px-6 pb-6 pt-4 shadow-sm;
-  }
-
-  .timeline-embed {
-    @apply mt-4 overflow-hidden rounded-2xl border border-slate-200;
-  }
-
-  .timeline-frame {
-    @apply h-[600px] w-full;
-  }
 
   .cameras-ui {
     @apply mt-6;
