@@ -1,6 +1,6 @@
 (function () {
   window.init = function () {
-    const bairrosUrl = "/js/cor-bairros.json";
+    const bairrosUrl = window.CAMERAS_RJ_ASSETS.bairrosUrl;
     const storageKeys = {
       bairro: "camerasrj.bairro",
       camera: "camerasrj.camera",
@@ -246,7 +246,7 @@
                       ? "Remover dos favoritos"
                       : "Adicionar aos favoritos"
                   }"
-                >${isFavorite ? "⭐" : "✨"}</button>
+                >${isFavorite ? "🗑️" : "✅"}</button>
                 <img class="camera-image" alt="" data-src="${src}">
               </div>
               <div class="camera-caption" data-caption="${escapeHtml(
