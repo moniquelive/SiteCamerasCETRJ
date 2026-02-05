@@ -5,6 +5,15 @@
 @layer base {
   :root {
     color-scheme: light;
+    --radius-sm: 0.5rem;
+    --radius-md: 0.75rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
   }
 
   body {
@@ -54,6 +63,7 @@
 @layer components {
   .site-header {
     @apply sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur;
+    contain: layout style;
   }
 
   .nav-shell {
@@ -98,7 +108,7 @@
     @apply inline-flex flex-col gap-1;
   }
 
-  .nav-toggle-icon span {
+  .nav-toggle-bar {
     @apply block h-0.5 w-5 bg-slate-700;
   }
 
@@ -194,6 +204,7 @@
 
   .cameras-ui {
     @apply mt-6;
+    contain: layout;
   }
 
   .cameras-panel {
@@ -258,6 +269,9 @@
 
   .camera-card {
     @apply w-full rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-200 md:w-full;
+    contain: layout style;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 300px;
   }
 
   .camera-card.is-expanded .camera-image {
@@ -265,19 +279,46 @@
   }
 
   .camera-media {
-    @apply relative flex items-center justify-center;
+    @apply relative;
+    display: grid;
+    place-items: center;
+    background-color: #f8fafc;
+    border-radius: 0.5rem;
+  }
+
+  .camera-media.is-loading {
   }
 
   .camera-favorite {
     @apply absolute right-3 top-3 rounded-full border border-white/70 bg-white/90 px-2.5 py-1.5 text-sm shadow-lg backdrop-blur transition hover:border-white hover:bg-white hover:shadow-xl;
+    z-index: 10;
   }
 
   .camera-image {
-    @apply mx-auto block w-full max-w-full rounded-lg transition-shadow duration-200;
+    @apply mx-auto block w-full max-w-full rounded-lg;
+    will-change: transform, opacity;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    grid-area: 1 / 1;
   }
 
   .camera-caption {
-    @apply mt-3 px-1 text-sm text-slate-600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-area: 1 / 1;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
+    z-index: 5;
+    pointer-events: none;
+    text-align: center;
+    padding: 0 0.75rem;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .camera-caption.camera-caption--loaded {
+    display: none !important;
   }
 
   .camera-empty {
@@ -364,6 +405,7 @@
 
   .site-footer {
     @apply mt-auto border-t border-slate-200 bg-white/90 py-8;
+    contain: layout;
   }
 
   .footer-shell {
@@ -400,5 +442,17 @@
 
   .statcounter {
     @apply opacity-80;
+  }
+}
+
+/* Performance: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

@@ -1,7 +1,6 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   {{- $description := .Site.Params.description | default .Site.Title -}}
   <meta name="description" content="{{ $description }}">
   {{- with .Site.Params.keywords }}
@@ -12,6 +11,7 @@
   {{- end }}
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-touch-fullscreen" content="yes">
+  <meta name="theme-color" content="#0ea5e9">
   {{- with .Site.Params.fbAdmins }}
   <meta property="fb:admins" content="{{ . }}">
   {{- end }}
@@ -20,6 +20,7 @@
   {{- end }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" as="style">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap">
   {{- $css := resources.Get "css/main.css" | postCSS | minify | fingerprint -}}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
@@ -27,16 +28,10 @@
   {{- partial "fb-headers.html" . -}}
 
   <link rel="canonical" href="{{ .Permalink }}">
-  <!--[if lt IE 9]>
-  <script src='//html5shiv.googlecode.com/svn/trunk/html5.js'></script>
-  <![endif]-->
+  
   {{- with .Site.Params.adsenseAccount }}
-  <script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-      google_ad_client: "{{ . }}",
-      enable_page_level_ads: true
-    });
-  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ . }}" crossorigin="anonymous"></script>
   {{- end }}
+  
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 </head>

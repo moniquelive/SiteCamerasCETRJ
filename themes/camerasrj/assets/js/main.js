@@ -1,27 +1,80 @@
 (function () {
+  'use strict';
+
   window.init = function () {
-    const bairrosUrl = window.CAMERAS_RJ_ASSETS.bairrosUrl;
+    const bairrosUrl = window.CAMERAS_RJ_ASSETS && window.CAMERAS_RJ_ASSETS.bairrosUrl;
+    if (!bairrosUrl) {
+      console.error('CAMERAS_RJ_ASSETS.bairrosUrl not defined');
+      return;
+    }
+
     const storageKeys = {
       bairro: "camerasrj.bairro",
       camera: "camerasrj.camera",
       favorites: "camerasrj.favorites",
     };
-    fetch(bairrosUrl)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Falha ao carregar dados de bairros.");
-        }
-        return response.json();
-      })
-      .then((bairrosData) => createCameras(bairrosData))
-      .catch(() => console.warn("Falha ao carregar dados de bairros."));
 
-    // https://aplicativo.cocr.com.br/cameras_api
-    // https://aplicativo.cocr.com.br/camera/325
-    // https://aplicativo.cocr.com.br/radar_emb_app
+    // Offline detection
+    let isOnline = navigator.onLine;
+    window.addEventListener('online', () => { isOnline = true; });
+    window.addEventListener('offline', () => { isOnline = false; });
+
+    // Retry logic with exponential backoff
+    const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
+      for (let i = 0; i < maxRetries; i++) {
+        try {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 10000);
+          const response = await fetch(url, { 
+            ...options, 
+            signal: controller.signal 
+          });
+          clearTimeout(timeoutId);
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          return response;
+        } catch (error) {
+          if (i === maxRetries - 1) throw error;
+          await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+        }
+      }
+    };
+
+    fetchWithRetry(bairrosUrl)
+      .then((response) => response.json())
+      .then((bairrosData) => createCameras(bairrosData))
+      .catch((error) => {
+        console.warn("Falha ao carregar dados de bairros:", error);
+        showOfflineMessage();
+      });
+
+    function showOfflineMessage() {
+      const host = document.querySelector(".cameras-ui") || document.body;
+      const msg = document.createElement('div');
+      msg.className = 'camera-empty';
+      msg.textContent = isOnline 
+        ? 'Não foi possível carregar os dados. Tente novamente mais tarde.'
+        : 'Você está offline. Verifique sua conexão.';
+      host.appendChild(msg);
+    }
+
     function createCameras(bairrosData) {
       const CAM_URL = "https://aplicativo.cocr.com.br/camera/";
-      const imageControllers = new WeakMap();
+      const imageControllers = new Map();
+      const imageObservers = new WeakMap();
+
+      // Cleanup function for image resources
+      const cleanupImage = (img) => {
+        const controller = imageControllers.get(img);
+        if (controller) {
+          controller.abort();
+          imageControllers.delete(img);
+        }
+        const observer = imageObservers.get(img);
+        if (observer) {
+          observer.disconnect();
+          imageObservers.delete(img);
+        }
+      };
 
       function createElement(tag, options) {
         const element = document.createElement(tag);
@@ -41,12 +94,9 @@
       }
 
       function escapeHtml(text) {
-        return String(text)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/\"/g, "&quot;")
-          .replace(/'/g, "&#039;");
+        const div = document.createElement('div');
+        div.textContent = String(text);
+        return div.innerHTML;
       }
 
       const ensureHost = () => {
@@ -76,10 +126,14 @@
       };
 
       const saveFavorites = (favorites) => {
-        window.localStorage.setItem(
-          storageKeys.favorites,
-          JSON.stringify(favorites),
-        );
+        try {
+          window.localStorage.setItem(
+            storageKeys.favorites,
+            JSON.stringify(favorites),
+          );
+        } catch (error) {
+          console.warn('Failed to save favorites:', error);
+        }
       };
 
       const getFavoriteIndex = (favorites, cameraId) =>
@@ -88,10 +142,12 @@
       const bairroSelect = createElement("select", {
         id: "bairro-select",
         className: "form-select",
+        attributes: { "aria-label": "Selecionar bairro" }
       });
       const cameraSelect = createElement("select", {
         id: "camera-select",
         className: "form-select",
+        attributes: { "aria-label": "Selecionar câmera" }
       });
       const bairroField = createElement("div", {
         className: "form-field",
@@ -129,6 +185,10 @@
       });
       const favoritesList = createElement("ul", {
         className: "favorites-list",
+        attributes: { 
+          role: "list",
+          "aria-label": "Lista de câmeras favoritas"
+        }
       });
       const favoritesEmpty = createElement("p", {
         className: "favorites-empty",
@@ -136,9 +196,16 @@
       });
       const favoritesPanel = createElement("section", {
         className: "favorites-panel",
+        attributes: { 
+          "aria-live": "polite",
+          "aria-atomic": "false"
+        },
         children: [favoritesHeader, favoritesEmpty, favoritesList],
       });
-      const grid = createElement("div", { className: "camera-grid" });
+      const grid = createElement("div", { 
+        className: "camera-grid",
+        attributes: { role: "list" }
+      });
       const listWrapper = createElement("div", {
         className: "cameras-list",
         children: [grid],
@@ -157,21 +224,20 @@
         return acc;
       }, {});
 
+      // Use DOM methods instead of innerHTML for options
       Object.keys(grouped)
         .sort()
         .forEach((letter) => {
-          const options = grouped[letter]
-            .map(
-              (bairro) =>
-                `<option value="${escapeHtml(bairro)}">${escapeHtml(
-                  bairro,
-                )}</option>`,
-            )
-            .join("");
           const optgroup = createElement("optgroup", {
             attributes: { label: letter },
           });
-          optgroup.innerHTML = options;
+          grouped[letter].forEach((bairro) => {
+            const option = createElement("option", {
+              attributes: { value: bairro },
+              text: bairro,
+            });
+            optgroup.appendChild(option);
+          });
           bairroSelect.appendChild(optgroup);
         });
 
@@ -183,30 +249,80 @@
         cameraId: savedCamera,
       };
 
-      const bindImageEvents = (imgs) => {
-        imgs.forEach((img) => {
-          const caption = img
-            .closest(".camera-card")
-            .querySelector(".camera-caption");
-          const onLoad = () => {
-            if (caption) caption.style.display = "none";
-            img.dataset.failed = "false";
-          };
-          const onError = () => {
-            const detail = img.naturalWidth === 0 ? "sem imagem" : "";
-            const message = detail
-              ? `Erro ao carregar (${detail})`
-              : "Erro ao carregar";
-            if (caption) {
-              caption.textContent = "Erro ao carregar";
-              caption.title = message;
-              caption.style.display = "block";
-            }
-            img.dataset.failed = "true";
-          };
-          img.addEventListener("load", onLoad);
-          img.addEventListener("error", onError);
+      // IntersectionObserver for lazy loading
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            loadImage(img);
+            imageObserver.unobserve(img);
+          }
         });
+      }, { rootMargin: '50px' });
+
+      const loadImage = (img) => {
+        const url = img.dataset.src;
+        if (!url) return;
+        
+        cleanupImage(img);
+        
+        const controller = new AbortController();
+        imageControllers.set(img, controller);
+        
+        fetch(url, { signal: controller.signal })
+          .then((response) => {
+            if (!response.ok) throw new Error("Falha ao carregar camera.");
+            return response.blob();
+          })
+          .then((blob) => {
+            if (controller.signal.aborted) return;
+            const objectUrl = URL.createObjectURL(blob);
+            img.src = objectUrl;
+            img.dataset.objectUrl = objectUrl;
+          })
+          .catch(() => {
+            if (controller.signal.aborted) return;
+            img.src = url;
+          });
+      };
+
+      const bindImageEvents = (img) => {
+        const card = img.closest(".camera-card");
+        const media = img.closest(".camera-media");
+        const caption = card?.querySelector(".camera-caption");
+        
+        const onLoad = () => {
+          // Hide caption completely when image loads
+          if (caption) {
+            caption.classList.add("camera-caption--loaded");
+          }
+          if (media) {
+            media.classList.remove("is-loading");
+          }
+          img.style.visibility = "visible";
+          img.style.opacity = "1";
+          img.dataset.failed = "false";
+        };
+        
+        const onError = () => {
+          const detail = img.naturalWidth === 0 ? "sem imagem" : "";
+          const message = detail
+            ? `Erro ao carregar (${detail})`
+            : "Erro ao carregar";
+          
+          // Show error in caption, keep image hidden
+          if (caption) {
+            caption.textContent = "Erro ao carregar";
+            caption.title = message;
+            caption.classList.remove("camera-caption--loaded");
+          }
+          img.style.visibility = "hidden";
+          img.style.opacity = "0";
+          img.dataset.failed = "true";
+        };
+        
+        img.addEventListener("load", onLoad, { once: true });
+        img.addEventListener("error", onError, { once: true });
       };
 
       const renderCamera = () => {
@@ -217,70 +333,73 @@
           state.cameraId = cameras[0].id;
         }
 
+        // Cleanup all existing images
         grid.querySelectorAll("img.camera-image").forEach((img) => {
-          const current = imageControllers.get(img);
-          if (current && current.controller) current.controller.abort();
-          if (current && current.objectUrl)
-            URL.revokeObjectURL(current.objectUrl);
-          imageControllers.delete(img);
+          cleanupImage(img);
+          if (img.dataset.objectUrl) {
+            URL.revokeObjectURL(img.dataset.objectUrl);
+          }
         });
 
-        const html = selected
-          .map((cam) => {
-            const id = cam.id;
-            const caption = cam.caption || "";
-            const src = CAM_URL + encodeURIComponent(id);
-            const isFavorite = getFavoriteIndex(favorites, id) !== -1;
-            return `
-            <div class="camera-card is-expanded" data-camera-id="${escapeHtml(
-              id,
-            )}">
-              <div class="camera-media">
-                <button
-                  class="camera-favorite"
-                  type="button"
-                  data-action="toggle-favorite"
-                  aria-pressed="${isFavorite}"
-                  aria-label="${
-                    isFavorite
-                      ? "Remover dos favoritos"
-                      : "Adicionar aos favoritos"
-                  }"
-                >${isFavorite ? "🗑️" : "✅"}</button>
-                <img class="camera-image" alt="" data-src="${src}">
-              </div>
-              <div class="camera-caption" data-caption="${escapeHtml(
-                caption,
-              )}">Carregando...</div>
-            </div>
-          `;
-          })
-          .join("");
-        grid.innerHTML = html;
-        const images = Array.from(grid.querySelectorAll("img.camera-image"));
-        bindImageEvents(images);
-        images.forEach((img) => {
-          const url = img.dataset.src;
-          if (!url) return;
-          const controller = new AbortController();
-          imageControllers.set(img, { controller, objectUrl: null });
-          fetch(url, { signal: controller.signal })
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error("Falha ao carregar camera.");
-              }
-              return response.blob();
-            })
-            .then((blob) => {
-              if (controller.signal.aborted) return;
-              const objectUrl = URL.createObjectURL(blob);
-              imageControllers.set(img, { controller, objectUrl });
-              img.src = objectUrl;
-            })
-            .catch(() => {
-              if (controller.signal.aborted) return;
-              img.src = url;
-            });
+        // Use DOM methods instead of innerHTML for camera cards
+        grid.innerHTML = "";
+        
+        selected.forEach((cam) => {
+          const id = cam.id;
+          const captionText = cam.caption || "";
+          const src = CAM_URL + encodeURIComponent(id);
+          const isFavorite = getFavoriteIndex(favorites, id) !== -1;
+          
+          const card = createElement("div", {
+            className: "camera-card is-expanded",
+            attributes: { 
+              "data-camera-id": id,
+              role: "listitem"
+            },
+          });
+          
+          const media = createElement("div", { className: "camera-media is-loading" });
+          
+          const favButton = createElement("button", {
+            className: "camera-favorite",
+            attributes: {
+              type: "button",
+              "data-action": "toggle-favorite",
+              "aria-pressed": String(isFavorite),
+              "aria-label": isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos",
+            },
+            text: isFavorite ? "🗑️" : "✅",
+          });
+          
+          const img = createElement("img", {
+            className: "camera-image",
+            attributes: {
+              alt: `Câmera ${captionText || id}`,
+              "data-src": src,
+              loading: "lazy",
+            },
+          });
+          // Initially hide image visually but keep layout space for IntersectionObserver
+          img.style.visibility = "hidden";
+          img.style.opacity = "0";
+          img.style.transition = "opacity 0.3s ease";
+          
+          const captionDiv = createElement("div", {
+            className: "camera-caption",
+            attributes: { "data-caption": captionText },
+            text: "Carregando...",
+          });
+          captionDiv.style.display = "block";
+          
+          media.append(favButton, img, captionDiv);
+          card.append(media);
+          grid.appendChild(card);
+          
+          // Bind events BEFORE observing to ensure handlers are ready
+          bindImageEvents(img);
+          
+          // Observe for lazy loading
+          imageObserver.observe(img);
         });
       };
 
@@ -292,7 +411,10 @@
         }
         favoritesEmpty.style.display = "none";
         favorites.forEach((item) => {
-          const row = createElement("li", { className: "favorites-row" });
+          const row = createElement("li", { 
+            className: "favorites-row",
+            attributes: { role: "listitem" }
+          });
           const link = createElement("button", {
             className: "favorites-link",
             text: `${item.bairro} — ${item.caption}`,
@@ -300,6 +422,7 @@
               type: "button",
               "data-bairro": item.bairro,
               "data-camera": item.id,
+              "aria-label": `Ver câmera ${item.caption} em ${item.bairro}`,
             },
           });
           const remove = createElement("button", {
@@ -309,6 +432,7 @@
               type: "button",
               "data-action": "remove-favorite",
               "data-camera": item.id,
+              "aria-label": `Remover ${item.caption} dos favoritos`,
             },
           });
           row.append(link, remove);
@@ -353,6 +477,21 @@
             : "";
         if (state.cameraId) cameraSelect.value = state.cameraId;
       };
+
+      // Keyboard navigation
+      bairroSelect.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+          cameraSelect.focus();
+          e.preventDefault();
+        }
+      });
+
+      cameraSelect.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") {
+          bairroSelect.focus();
+          e.preventDefault();
+        }
+      });
 
       bairroSelect.value = state.bairro;
       bairroSelect.addEventListener("change", (event) => {
@@ -410,14 +549,28 @@
       });
 
       if (!state.bairro) {
-        grid.innerHTML =
-          '<p class="camera-empty">Nenhum bairro disponível.</p>';
+        grid.innerHTML = "";
+        const emptyMsg = createElement("p", {
+          className: "camera-empty",
+          text: "Nenhum bairro disponível.",
+        });
+        grid.appendChild(emptyMsg);
         return;
       }
 
       updateCameraSelect();
       renderCamera();
       renderFavorites();
+
+      // Cleanup on page unload
+      window.addEventListener('beforeunload', () => {
+        grid.querySelectorAll("img.camera-image").forEach((img) => {
+          cleanupImage(img);
+          if (img.dataset.objectUrl) {
+            URL.revokeObjectURL(img.dataset.objectUrl);
+          }
+        });
+      });
     }
   };
 })();

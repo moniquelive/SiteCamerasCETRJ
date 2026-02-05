@@ -1,32 +1,32 @@
 <header class="site-header">
   <div class="nav-shell">
     <div class="nav-branding">
-      <span class="visually-hidden">
-        <h1><a href="/">Câmeras da CET-RIO (CET-RJ) em tempo real</a></h1>
-        <h2>Condições do trânsito ao vivo e de graça!</h2>
-      </span>
-      <a class="nav-brand" href="/">Câmeras da CET-RIO</a>
+      <div class="visually-hidden">
+        <h1>Câmeras da CET-RIO (CET-RJ) em tempo real</h1>
+        <p>Condições do trânsito ao vivo e de graça!</p>
+      </div>
+      <a class="nav-brand" href="/" aria-label="Câmeras da CET-RIO - Página inicial">Câmeras da CET-RIO</a>
     </div>
     <details class="nav-menu">
-      <summary class="nav-toggle" aria-controls="nav-panel" aria-expanded="false">
-        <span class="visually-hidden">Toggle navigation</span>
+      <summary class="nav-toggle" aria-controls="nav-panel" aria-expanded="false" aria-label="Abrir menu de navegação">
+        <span class="visually-hidden">Menu</span>
         <span class="nav-toggle-icon" aria-hidden="true">
-          <span></span>
-          <span></span>
-          <span></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
         </span>
       </summary>
       <div class="nav-panel" id="nav-panel">
-        <nav class="nav-links" aria-label="Principal">
+        <nav class="nav-links" aria-label="Navegação principal">
           <a class="nav-link" href="/">Home</a>
-          <a class="nav-link" href="https://monique.dev/">Sobre</a>
-          <a class="nav-link" href="https://x.com/moniquelive">Contato</a>
+          <a class="nav-link" href="https://monique.dev/" target="_blank" rel="noopener noreferrer">Sobre</a>
+          <a class="nav-link" href="https://x.com/moniquelive" target="_blank" rel="noopener noreferrer">Contato</a>
         </nav>
-        <form action="https://www.google.com.br" class="nav-search" id="cse-search-box" target="_blank">
+        <form action="https://www.google.com.br" class="nav-search" id="cse-search-box" target="_blank" role="search" aria-label="Busca no Google">
           <input name="cx" type="hidden" value="partner-pub-7232537493483974:4174415669">
           <input name="ie" type="hidden" value="UTF-8">
-          <label class="visually-hidden" for="google-search">Buscar</label>
-          <input class="nav-input" id="google-search" name="q" placeholder="Google" type="search">
+          <label class="visually-hidden" for="google-search">Buscar no site</label>
+          <input class="nav-input" id="google-search" name="q" placeholder="Buscar no Google..." type="search" autocomplete="off">
           <button class="nav-button" name="sa" type="submit">Buscar</button>
         </form>
       </div>

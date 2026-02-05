@@ -8,6 +8,8 @@ title: Cameras da CET RJ
 
 theme: camerasrj
 
+# Default values - can be overridden via environment variables at build time
+# Use: HUGO_PARAMS_GOOGLESITEVERIFICATION=value hugo --gc --minify
 params:
   description: Cameras da CET-RIO (CET-RJ) em tempo real. Condicoes do transito ao vivo gratuitamente.
   keywords: cameras,cet-rio,cetrj,cet rj,cet rio,ao vivo,cameras cet rio ao vivo,transito,linha vermelha,avenida brasil,linha amarela
