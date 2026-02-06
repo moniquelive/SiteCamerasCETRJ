@@ -5,15 +5,6 @@
 @layer base {
   :root {
     color-scheme: light;
-    --radius-sm: 0.5rem;
-    --radius-md: 0.75rem;
-    --radius-lg: 1rem;
-    --radius-xl: 1.5rem;
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
   }
 
   body {
@@ -142,6 +133,10 @@
 
   .visually-hidden {
     @apply sr-only;
+  }
+
+  .is-hidden {
+    @apply hidden;
   }
 
   .site-main {
@@ -274,7 +269,7 @@
     contain-intrinsic-size: 0 300px;
   }
 
-  .camera-card.is-expanded .camera-image {
+  .camera-card .camera-image {
     @apply shadow-lg;
   }
 
@@ -283,6 +278,7 @@
   }
 
   .camera-media.is-loading {
+    @apply bg-slate-100 ring-1 ring-slate-200;
   }
 
   .camera-favorite {

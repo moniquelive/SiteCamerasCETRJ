@@ -2,7 +2,7 @@ module.exports = {
   content: [
     "./themes/camerasrj/layouts/**/*.html",
     "./themes/camerasrj/assets/**/*.css",
-    "./themes/camerasrj/static/js/**/*.js",
+    "./themes/camerasrj/assets/js/**/*.js",
     "./content/**/*.md",
   ],
   theme: {

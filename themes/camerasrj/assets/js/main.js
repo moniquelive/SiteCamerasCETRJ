@@ -22,19 +22,21 @@
     // Retry logic with exponential backoff
     const fetchWithRetry = async (url, options = {}, maxRetries = 3) => {
       for (let i = 0; i < maxRetries; i++) {
+        let timeoutId;
         try {
           const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), 10000);
-          const response = await fetch(url, { 
-            ...options, 
-            signal: controller.signal 
+          timeoutId = setTimeout(() => controller.abort(), 10000);
+          const response = await fetch(url, {
+            ...options,
+            signal: controller.signal
           });
-          clearTimeout(timeoutId);
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           return response;
         } catch (error) {
           if (i === maxRetries - 1) throw error;
           await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+        } finally {
+          if (timeoutId) clearTimeout(timeoutId);
         }
       }
     };
@@ -59,8 +61,8 @@
 
     function createCameras(bairrosData) {
       const CAM_URL = "https://aplicativo.cocr.com.br/camera/";
+      let imageObserver;
       const imageControllers = new Map();
-      const imageObservers = new WeakMap();
 
       // Cleanup function for image resources
       const cleanupImage = (img) => {
@@ -69,10 +71,8 @@
           controller.abort();
           imageControllers.delete(img);
         }
-        const observer = imageObservers.get(img);
-        if (observer) {
-          observer.disconnect();
-          imageObservers.delete(img);
+        if (imageObserver) {
+          imageObserver.unobserve(img);
         }
       };
 
@@ -91,12 +91,6 @@
         }
         if (children && children.length) element.append(...children);
         return element;
-      }
-
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = String(text);
-        return div.innerHTML;
       }
 
       const ensureHost = () => {
@@ -250,7 +244,7 @@
       };
 
       // IntersectionObserver for lazy loading
-      const imageObserver = new IntersectionObserver((entries) => {
+      imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             const img = entry.target;
@@ -351,7 +345,7 @@
           const isFavorite = getFavoriteIndex(favorites, id) !== -1;
           
           const card = createElement("div", {
-            className: "camera-card is-expanded",
+            className: "camera-card",
             attributes: { 
               "data-camera-id": id,
               role: "listitem"
@@ -382,7 +376,6 @@
           
           const captionDiv = createElement("div", {
             className: "camera-caption",
-            attributes: { "data-caption": captionText },
             text: "Carregando...",
           });
           
@@ -401,10 +394,10 @@
       const renderFavorites = () => {
         favoritesList.innerHTML = "";
         if (!favorites.length) {
-          favoritesEmpty.style.display = "block";
+          favoritesEmpty.classList.remove("is-hidden");
           return;
         }
-        favoritesEmpty.style.display = "none";
+        favoritesEmpty.classList.add("is-hidden");
         favorites.forEach((item) => {
           const row = createElement("li", { 
             className: "favorites-row",
