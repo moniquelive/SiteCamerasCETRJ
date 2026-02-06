@@ -428,9 +428,27 @@
         });
       };
 
+      const updateFavoriteButton = (cameraId, isFavorite) => {
+        if (!cameraId) return;
+        const safeId = window.CSS && CSS.escape
+          ? CSS.escape(cameraId)
+          : cameraId.replace(/"/g, '\\"');
+        const card = grid.querySelector(`.camera-card[data-camera-id="${safeId}"]`);
+        if (!card) return;
+        const button = card.querySelector("[data-action='toggle-favorite']");
+        if (!button) return;
+        button.setAttribute("aria-pressed", String(isFavorite));
+        button.setAttribute(
+          "aria-label",
+          isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos",
+        );
+        button.textContent = isFavorite ? "🗑️" : "✅";
+      };
+
       const toggleFavorite = (cam, bairroName) => {
         const index = getFavoriteIndex(favorites, cam.id);
-        if (index === -1) {
+        const isNowFavorite = index === -1;
+        if (isNowFavorite) {
           favorites = [
             {
               id: cam.id,
@@ -444,7 +462,7 @@
         }
         saveFavorites(favorites);
         renderFavorites();
-        renderCamera();
+        updateFavoriteButton(cam.id, isNowFavorite);
       };
 
       const updateCameraSelect = () => {
@@ -483,14 +501,20 @@
 
       bairroSelect.value = state.bairro;
       bairroSelect.addEventListener("change", (event) => {
+        const prevBairro = state.bairro;
+        const prevCameraId = state.cameraId;
         state.bairro = event.target.value;
         window.localStorage.setItem(storageKeys.bairro, state.bairro);
         updateCameraSelect();
-        renderCamera();
+        if (state.bairro !== prevBairro || state.cameraId !== prevCameraId) {
+          renderCamera();
+        }
       });
 
       cameraSelect.addEventListener("change", (event) => {
-        state.cameraId = event.target.value;
+        const nextCameraId = event.target.value;
+        if (nextCameraId === state.cameraId) return;
+        state.cameraId = nextCameraId;
         window.localStorage.setItem(storageKeys.camera, state.cameraId);
         renderCamera();
       });
@@ -504,7 +528,9 @@
           favorites = favorites.filter((item) => item.id !== cameraId);
           saveFavorites(favorites);
           renderFavorites();
-          renderCamera();
+          if (cameraId && cameraId === state.cameraId) {
+            updateFavoriteButton(cameraId, false);
+          }
           return;
         }
         const link = target.closest("[data-bairro][data-camera]");
@@ -512,6 +538,8 @@
         const bairro = link.getAttribute("data-bairro") || "";
         const cameraId = link.getAttribute("data-camera") || "";
         if (!bairro || !cameraId) return;
+        const prevBairro = state.bairro;
+        const prevCameraId = state.cameraId;
         state.bairro = bairro;
         state.cameraId = cameraId;
         window.localStorage.setItem(storageKeys.bairro, state.bairro);
@@ -519,7 +547,9 @@
         bairroSelect.value = state.bairro;
         updateCameraSelect();
         cameraSelect.value = state.cameraId;
-        renderCamera();
+        if (state.bairro !== prevBairro || state.cameraId !== prevCameraId) {
+          renderCamera();
+        }
       });
 
       grid.addEventListener("click", (event) => {

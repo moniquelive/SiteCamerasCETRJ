@@ -223,15 +223,15 @@
   }
 
   .favorites-row {
-    @apply flex items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm;
+    @apply grid grid-cols-[1fr_auto] items-center rounded-xl border border-slate-200 bg-white text-sm;
   }
 
   .favorites-link {
-    @apply text-left text-sm text-slate-700 no-underline hover:text-slate-900;
+    @apply flex items-center px-3 py-2 text-left text-sm text-slate-700 no-underline hover:text-slate-900;
   }
 
   .favorites-remove {
-    @apply rounded-full border border-slate-200 bg-white px-2 py-1 text-xs shadow-sm hover:border-slate-300;
+    @apply mr-2 rounded-full border border-slate-200 bg-white px-2 py-1 text-xs shadow-sm hover:border-slate-300;
   }
 
   .favorites-empty {
