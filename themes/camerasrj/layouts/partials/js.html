@@ -2,15 +2,22 @@
     (function () {
         const menu = document.querySelector(".nav-menu");
         if (!menu) return;
+        const summary = menu.querySelector(".nav-toggle");
         const mediaQuery = window.matchMedia("(min-width: 768px)");
+        const syncAria = function () {
+            if (!summary) return;
+            summary.setAttribute("aria-expanded", menu.hasAttribute("open") ? "true" : "false");
+        };
         const syncMenu = function () {
             if (mediaQuery.matches) {
                 menu.setAttribute("open", "");
             } else {
                 menu.removeAttribute("open");
             }
+            syncAria();
         };
         syncMenu();
+        menu.addEventListener("toggle", syncAria);
         if (mediaQuery.addEventListener) {
             mediaQuery.addEventListener("change", syncMenu);
         } else if (mediaQuery.addListener) {
@@ -42,7 +49,7 @@
  <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-            navigator.serviceWorker.register('/sw.js')
+            navigator.serviceWorker.register('{{ "sw.js" | relURL }}')
                 .then(function(registration) {
                     console.log('ServiceWorker registered:', registration.scope);
                 })

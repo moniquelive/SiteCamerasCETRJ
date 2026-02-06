@@ -299,8 +299,8 @@
           if (media) {
             media.classList.remove("is-loading");
           }
-          img.style.visibility = "visible";
-          img.style.opacity = "1";
+          img.classList.remove("camera-image--hidden");
+          img.classList.add("camera-image--shown");
           img.dataset.failed = "false";
         };
         
@@ -316,8 +316,8 @@
             caption.title = message;
             caption.classList.remove("camera-caption--loaded");
           }
-          img.style.visibility = "hidden";
-          img.style.opacity = "0";
+          img.classList.remove("camera-image--shown");
+          img.classList.add("camera-image--hidden");
           img.dataset.failed = "true";
         };
         
@@ -372,24 +372,19 @@
           });
           
           const img = createElement("img", {
-            className: "camera-image",
+            className: "camera-image camera-image--hidden",
             attributes: {
               alt: `Câmera ${captionText || id}`,
               "data-src": src,
               loading: "lazy",
             },
           });
-          // Initially hide image visually but keep layout space for IntersectionObserver
-          img.style.visibility = "hidden";
-          img.style.opacity = "0";
-          img.style.transition = "opacity 0.3s ease";
           
           const captionDiv = createElement("div", {
             className: "camera-caption",
             attributes: { "data-caption": captionText },
             text: "Carregando...",
           });
-          captionDiv.style.display = "block";
           
           media.append(favButton, img, captionDiv);
           card.append(media);

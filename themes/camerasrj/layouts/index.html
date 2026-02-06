@@ -2,22 +2,24 @@
 <main class="site-main">
   <div class="layout-grid">
     <article class="layout-main">
-      <section class="share-panel">
+      <section class="panel share-panel">
         <h2 class="section-title">Divulgue</h2>
         <div class="share-actions">
           {{- partial "add-this.html" . -}}
         </div>
       </section>
       {{/* - partial "google-ads-responsive.html" (dict "slot" "6989275983" "class" "ads-top") - */}}
-      <section class="cameras-panel">
+      <section class="panel cameras-panel">
         <h2 class="section-title">Câmeras ao vivo</h2>
         <div class="cameras-ui"></div>
       </section>
       {{/* - partial "google-ads-responsive.html" (dict "slot" "5676194318" "class" "ads-mid") - */}}
-      <!-- <section class="waze-panel"> -->
-      <!--   <h2 class="section-title">Waze</h2> -->
-      <!--   {{/* - partial "waze.html" . - */}} -->
-      <!-- </section> -->
+      {{/*
+      <section class="panel waze-panel">
+        <h2 class="section-title">Waze</h2>
+        {{ partial "waze.html" . }}
+      </section>
+      */}}
       <hr class="section-divider">
     </article>
     <aside class="layout-aside">

@@ -161,8 +161,12 @@
   }
 
 
+  .panel {
+    @apply rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
+  }
+
   .share-panel {
-    @apply mt-0 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 text-center shadow-sm;
+    @apply mt-0 text-center;
   }
 
   .section-title {
@@ -178,7 +182,7 @@
   }
 
   .waze-panel {
-    @apply mt-8 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
+    @apply mt-8;
   }
 
   .waze-embed {
@@ -193,10 +197,6 @@
     @apply my-8 border-slate-200;
   }
 
-  .twitter-panel {
-    @apply rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
-  }
-
   .twitter-embed {
     @apply mt-3;
   }
@@ -208,7 +208,7 @@
   }
 
   .cameras-panel {
-    @apply mt-8 rounded-2xl border border-slate-200 bg-white/90 px-6 pb-6 pt-4 shadow-sm;
+    @apply mt-8;
   }
 
   .favorites-panel {
@@ -279,11 +279,7 @@
   }
 
   .camera-media {
-    @apply relative;
-    display: grid;
-    place-items: center;
-    background-color: #f8fafc;
-    border-radius: 0.5rem;
+    @apply relative grid place-items-center rounded-lg bg-slate-50;
   }
 
   .camera-media.is-loading {
@@ -295,30 +291,25 @@
   }
 
   .camera-image {
-    @apply mx-auto block w-full max-w-full rounded-lg;
+    @apply col-start-1 row-start-1 mx-auto block w-full max-w-full rounded-lg;
     will-change: transform, opacity;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    grid-area: 1 / 1;
+  }
+
+  .camera-image--hidden {
+    @apply invisible opacity-0;
+  }
+
+  .camera-image--shown {
+    @apply visible opacity-100;
   }
 
   .camera-caption {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    grid-area: 1 / 1;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: #475569;
-    z-index: 5;
-    pointer-events: none;
-    text-align: center;
-    padding: 0 0.75rem;
-    justify-self: center;
-    align-self: center;
+    @apply col-start-1 row-start-1 flex items-center justify-center px-3 text-center text-sm font-medium text-slate-600 pointer-events-none z-10;
   }
 
   .camera-caption.camera-caption--loaded {
-    display: none !important;
+    @apply hidden;
   }
 
   .camera-empty {
